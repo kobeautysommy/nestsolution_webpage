@@ -5,17 +5,13 @@ import { Menu, X } from 'lucide-react';
 import logoImg from 'figma:asset/e62d0c0eb70f7e416137072101b312f32e6e19db.png';
 
 /* ─── Brand Mark ───────────────────────────────────────────────────────── */
-function Logo({ dark = true }: { dark?: boolean }) {
+function Logo() {
   return (
     <Link to="/" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center' }}>
-      <img 
-        src={logoImg} 
-        alt="Nests Solution" 
-        style={{ 
-          height: '48px',
-          width: 'auto',
-          display: 'block'
-        }} 
+      <img
+        src={logoImg}
+        alt="NestSolution 병원 컨설팅 마케팅"
+        style={{ height: '40px', width: 'auto', display: 'block' }}
       />
     </Link>
   );
@@ -51,22 +47,27 @@ export function Nav() {
   useEffect(() => { setOpen(false); }, [pathname]);
 
   return (
-    <nav style={{
-      position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
-      background: scrolled
-        ? 'rgba(238, 245, 255, 0.97)'
-        : 'rgba(238, 245, 255, 0.90)',
-      backdropFilter: 'blur(20px)',
-      borderBottom: `1px solid ${BORDER.light}`,
-      transition: 'background 0.3s',
-    }}>
+    <nav
+      aria-label="메인 내비게이션"
+      style={{
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
+        background: scrolled
+          ? 'rgba(238, 245, 255, 0.97)'
+          : 'rgba(238, 245, 255, 0.90)',
+        backdropFilter: 'blur(20px)',
+        borderBottom: `1px solid ${BORDER.light}`,
+        transition: 'background 0.3s',
+        /* body 섹션과 동일한 패딩을 outer에 적용 */
+        padding: '0 5vw',
+      }}
+    >
+      {/* body와 동일: maxWidth + margin auto on inner, 패딩 없음 */}
       <div style={{
         maxWidth: 1280, margin: '0 auto',
-        padding: '0 5vw',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         height: 64,
       }}>
-        <Logo dark />
+        <Logo />
 
         {/* Desktop links */}
         {!isMobile && (
@@ -92,14 +93,12 @@ export function Nav() {
               <Link to="/contact" style={{
                 display: 'inline-flex', alignItems: 'center',
                 background: `linear-gradient(135deg, ${BLUE._500}, ${BLUE._400})`,
-                color: '#FFFFFF',
-                fontWeight: 700,
+                color: '#FFFFFF', fontWeight: 700,
                 marginLeft: '0.8rem',
                 padding: '0.48rem 1.4rem',
                 fontSize: 'clamp(0.7rem, 1.8vw, 0.82rem)',
                 letterSpacing: '0.04em',
-                textDecoration: 'none',
-                fontFamily: F.sans,
+                textDecoration: 'none', fontFamily: F.sans,
                 borderRadius: '4px',
                 transition: 'opacity 0.2s, transform 0.2s',
                 boxShadow: `0 2px 12px rgba(37,99,235,0.35)`,
@@ -116,34 +115,43 @@ export function Nav() {
           <button
             onClick={() => setOpen(!open)}
             style={{ background: 'none', border: 'none', color: TEXT.onLight, cursor: 'pointer', padding: '0.5rem' }}
-            aria-label="메뉴 열기"
+            aria-label={open ? '메뉴 닫기' : '메뉴 열기'}
+            aria-expanded={open}
           >
-            {open ? <X size={24} /> : <Menu size={24} />}
+            {open ? <X size={22} /> : <Menu size={22} />}
           </button>
         )}
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile menu — margin: 0 -5vw 으로 nav의 패딩 상쇄, 풀 너비 배경 유지 */}
       {open && (
-        <div style={{ background: DARK.bg2, borderTop: `1px solid ${BORDER.bw}`, padding: '1rem 5vw 1.5rem' }}>
-          {navLinks.map((l) => (
-            <Link key={l.to} to={l.to} style={{
-              display: 'block',
-              color: pathname === l.to ? BLUE._300 : TEXT.mutedDark,
-              textDecoration: 'none',
-              fontSize: '0.9rem',
-              padding: '0.75rem 0',
-              borderBottom: `1px solid ${BORDER.bw}`,
-              fontFamily: F.sans,
-            }}>{l.label}</Link>
-          ))}
-          <Link to="/contact" style={{
-            display: 'block', marginTop: '1rem',
-            background: `linear-gradient(135deg, ${BLUE._500}, ${BLUE._400})`,
-            color: '#FFFFFF', fontWeight: 700,
-            padding: '0.75rem 1.5rem', textDecoration: 'none',
-            textAlign: 'center', fontFamily: F.sans, borderRadius: '4px',
-          }}>무료 상담 신청</Link>
+        <div style={{
+          margin: '0 -5vw',
+          padding: '0.75rem 5vw 1.5rem',
+          background: DARK.bg2,
+          borderTop: `1px solid ${BORDER.bw}`,
+        }}>
+          {/* 모바일 내부도 body와 동일하게 maxWidth 정렬 */}
+          <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+            {navLinks.map((l) => (
+              <Link key={l.to} to={l.to} style={{
+                display: 'block',
+                color: pathname === l.to ? BLUE._300 : TEXT.mutedDark,
+                textDecoration: 'none',
+                fontSize: '0.9rem',
+                padding: '0.75rem 0',
+                borderBottom: `1px solid ${BORDER.bw}`,
+                fontFamily: F.sans,
+              }}>{l.label}</Link>
+            ))}
+            <Link to="/contact" style={{
+              display: 'block', marginTop: '1rem',
+              background: `linear-gradient(135deg, ${BLUE._500}, ${BLUE._400})`,
+              color: '#FFFFFF', fontWeight: 700,
+              padding: '0.75rem 1.5rem', textDecoration: 'none',
+              textAlign: 'center', fontFamily: F.sans, borderRadius: '4px',
+            }}>무료 상담 신청</Link>
+          </div>
         </div>
       )}
     </nav>
