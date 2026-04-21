@@ -1,3 +1,16 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [
+    {
+      "source": "/blog",
+      "destination": "http://172.104.82.74/blog"
+    },
+    {
+      "source": "/blog/:path*",
+      "destination": "http://172.104.82.74/blog/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }

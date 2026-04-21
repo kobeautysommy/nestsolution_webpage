@@ -25,6 +25,9 @@ const navLinks = [
   { label: '대표 소개',   to: '/about' },
 ];
 
+/* Blog는 WordPress(별도 서버) → React Router Link 대신 <a> 사용 */
+const BLOG_URL = '/blog';
+
 export function Nav() {
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
@@ -89,6 +92,22 @@ export function Nav() {
                 >{l.label}</Link>
               </li>
             ))}
+            {/* Blog — 풀 페이지 이동 (WordPress 별도 서버) */}
+            <li>
+              <a href={BLOG_URL} style={{
+                color: TEXT.onLight,
+                textDecoration: 'none',
+                fontSize: 'clamp(0.7rem, 1.8vw, 0.82rem)',
+                letterSpacing: '0.05em',
+                padding: '0.5rem 1rem',
+                display: 'block',
+                fontFamily: F.sans,
+                transition: 'color 0.2s',
+              }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = BLUE._500; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = TEXT.onLight; }}
+              >블로그</a>
+            </li>
             <li>
               <Link to="/contact" style={{
                 display: 'inline-flex', alignItems: 'center',
@@ -144,6 +163,16 @@ export function Nav() {
                 fontFamily: F.sans,
               }}>{l.label}</Link>
             ))}
+            {/* Blog 모바일 — 풀 페이지 이동 */}
+            <a href={BLOG_URL} style={{
+              display: 'block',
+              color: TEXT.mutedDark,
+              textDecoration: 'none',
+              fontSize: '0.9rem',
+              padding: '0.75rem 0',
+              borderBottom: `1px solid ${BORDER.bw}`,
+              fontFamily: F.sans,
+            }}>블로그</a>
             <Link to="/contact" style={{
               display: 'block', marginTop: '1rem',
               background: `linear-gradient(135deg, ${BLUE._500}, ${BLUE._400})`,
