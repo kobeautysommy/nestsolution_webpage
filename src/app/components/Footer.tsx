@@ -1,50 +1,75 @@
 import { Link } from 'react-router';
-import { BLUE, TEXT, BORDER, DARK, LIGHT, F } from '../utils/colors';
+import { BLUE, TEXT, BORDER, LIGHT, F } from '../utils/colors';
 import { Logo } from './Nav';
 
 export function Footer() {
   return (
-    <footer style={{ background: LIGHT.bg1, borderTop: `1px solid ${BORDER.light}`, padding: '4rem 5vw', fontFamily: F.sans }}>
+    <footer
+      itemScope
+      itemType="https://schema.org/WPFooter"
+      style={{ background: LIGHT.bg1, borderTop: `1px solid ${BORDER.light}`, padding: '4rem 5vw', fontFamily: F.sans }}
+    >
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: '3rem', marginBottom: '2.5rem' }}>
-          {/* Brand */}
-          <div>
+
+          {/* Brand + E-E-A-T 신뢰 신호 */}
+          <div itemScope itemType="https://schema.org/Organization">
             <Logo />
             <p style={{ color: TEXT.mutedLight, fontSize: '0.78rem', marginTop: '0.8rem', lineHeight: 1.7 }}>
-              병·의원 컨설팅 전문 기업<br />17년+ 임상 경험 기반 솔루션
+              <span itemProp="description">병·의원 컨설팅 전문 기업<br />17년+ 임상 경험 기반 솔루션</span>
             </p>
+            {/* E-E-A-T: 전문성/경험 뱃지 */}
+            <div style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+              {[
+                '✔ 17년+ 임상 현장 경험',
+                '✔ 병·의원 전문 컨설팅',
+                '✔ 1:1 맞춤 솔루션',
+              ].map(t => (
+                <span key={t} style={{ fontSize: '0.72rem', color: BLUE._400, letterSpacing: '0.01em' }}>{t}</span>
+              ))}
+            </div>
           </div>
 
-          {/* Info */}
+          {/* Info - 사업자 정보 (E-E-A-T: 신뢰성) */}
           <div>
             <div style={{ fontSize: '0.68rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: BLUE._400, marginBottom: '1rem' }}>Contact</div>
-            <div style={{ color: TEXT.mutedLight, fontSize: '0.78rem', lineHeight: 2 }}>
-              <p><span style={{ color: TEXT.grayDark }}>회사</span> 큐렛 주식회사</p>
-              <p><span style={{ color: TEXT.grayDark }}>대표</span> 김상연</p>
+            <address
+              itemScope
+              itemType="https://schema.org/Organization"
+              style={{ fontStyle: 'normal', color: TEXT.mutedLight, fontSize: '0.78rem', lineHeight: 2 }}
+            >
+              <p><span style={{ color: TEXT.grayDark }}>회사</span>{' '}<span itemProp="legalName">큐렛 주식회사</span></p>
+              <p><span style={{ color: TEXT.grayDark }}>대표</span>{' '}
+                <span itemProp="founder" itemScope itemType="https://schema.org/Person">
+                  <span itemProp="name">김상연</span>
+                </span>
+              </p>
               <p><span style={{ color: TEXT.grayDark }}>전화</span>{' '}
-                <a href="tel:010-3129-8248" style={{ color: TEXT.mutedLight, textDecoration: 'none' }}>010-3129-8248</a>
+                <a href="tel:010-3129-8248" itemProp="telephone" style={{ color: TEXT.mutedLight, textDecoration: 'none' }}>010-3129-8248</a>
                 {' / '}
                 <a href="tel:010-9470-8248" style={{ color: TEXT.mutedLight, textDecoration: 'none' }}>010-9470-8248</a>
               </p>
               <p><span style={{ color: TEXT.grayDark }}>이메일</span>{' '}
-                <a href="mailto:nestsadvice@gmail.com" style={{ color: TEXT.mutedLight, textDecoration: 'none' }}>nestsadvice@gmail.com</a>
+                <a href="mailto:nestsadvice@gmail.com" itemProp="email" style={{ color: TEXT.mutedLight, textDecoration: 'none' }}>nestsadvice@gmail.com</a>
               </p>
               <p><span style={{ color: TEXT.grayDark }}>운영</span> 평일 09:00 – 20:00</p>
-              <p><span style={{ color: TEXT.grayDark }}>사업자</span> 850-87-01502</p>
-            </div>
+              <p><span style={{ color: TEXT.grayDark }}>사업자등록번호</span>{' '}
+                <span itemProp="taxID">850-87-01502</span>
+              </p>
+            </address>
           </div>
 
           {/* Navigation */}
-          <div>
+          <nav aria-label="푸터 메뉴">
             <div style={{ fontSize: '0.68rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: BLUE._400, marginBottom: '1rem' }}>Menu</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               {[
-                { label: '고민', to: '/pain' },
-                { label: '서비스', to: '/services' },
+                { label: '병원 경영 고민', to: '/pain' },
+                { label: '컨설팅 서비스', to: '/services' },
                 { label: '컨설팅 과정', to: '/process' },
                 { label: '성공 사례', to: '/cases' },
                 { label: '대표 소개', to: '/about' },
-                { label: '무료 상담', to: '/contact' },
+                { label: '무료 상담 신청', to: '/contact' },
               ].map(l => (
                 <Link key={l.to} to={l.to} style={{ color: TEXT.mutedLight, fontSize: '0.8rem', textDecoration: 'none', transition: 'color 0.2s' }}
                   onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = BLUE._500; }}
@@ -52,13 +77,13 @@ export function Footer() {
                 >{l.label}</Link>
               ))}
             </div>
-          </div>
+          </nav>
 
           {/* CTA */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', justifyContent: 'flex-start' }}>
             <div style={{ fontSize: '0.68rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: BLUE._400, marginBottom: '0.2rem' }}>Quick Contact</div>
             <div style={{ display: 'flex', gap: '0.8rem', flexWrap: 'nowrap' }}>
-              <a href="tel:010-3129-8248" style={{
+              <a href="tel:010-3129-8248" aria-label="NestSolution 전화 상담 010-3129-8248" style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
                 padding: '0.9rem 1rem', background: BLUE.dim,
                 border: `1px solid ${BORDER.light}`, textDecoration: 'none',
@@ -67,7 +92,7 @@ export function Footer() {
               }}>
                 📞 010-3129-8248
               </a>
-              <a href="tel:010-9470-8248" style={{
+              <a href="tel:010-9470-8248" aria-label="NestSolution 전화 상담 010-9470-8248" style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
                 padding: '0.9rem 1rem', background: BLUE.dim,
                 border: `1px solid ${BORDER.light}`, textDecoration: 'none',
@@ -76,7 +101,7 @@ export function Footer() {
               }}>
                 📞 010-9470-8248
               </a>
-              <a href="http://pf.kakao.com/_HStBn" target="_blank" rel="noreferrer" style={{
+              <a href="http://pf.kakao.com/_HStBn" target="_blank" rel="noreferrer noopener" aria-label="NestSolution 카카오톡 상담" style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
                 padding: '0.9rem 1rem', background: 'rgba(254,229,0,0.1)',
                 border: '1px solid rgba(254,229,0,0.3)', textDecoration: 'none',
@@ -90,8 +115,12 @@ export function Footer() {
         </div>
 
         <div style={{ borderTop: `1px solid ${BORDER.light}`, paddingTop: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-          <p style={{ color: TEXT.mutedLight, fontSize: '0.73rem' }}>© 2025 NestSolution. All rights reserved.</p>
-          <p style={{ color: TEXT.mutedLight, fontSize: '0.73rem' }}>병·의원 경영 컨설팅 전문 기업</p>
+          <p style={{ color: TEXT.mutedLight, fontSize: '0.73rem' }}>
+            © 2025 NestSolution (큐렛 주식회사). All rights reserved.
+          </p>
+          <p style={{ color: TEXT.mutedLight, fontSize: '0.73rem' }}>
+            병·의원 컨설팅 마케팅 전문 기업 | 사업자등록번호 850-87-01502
+          </p>
         </div>
       </div>
     </footer>

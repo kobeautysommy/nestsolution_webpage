@@ -1,0 +1,31 @@
+# NestSolution - 병원 컨설팅 마케팅 전문 기업
+# https://nestsolution.co.kr
+
+User-agent: *
+Allow: /
+Disallow: /404
+Disallow: /*?*
+Crawl-delay: 1
+
+# Google 검색 봇
+User-agent: Googlebot
+Allow: /
+Disallow: /404
+
+# Google 이미지 봇
+User-agent: Googlebot-Image
+Allow: /
+
+# 네이버 크롤러 (Yeti)
+User-agent: Yeti
+Allow: /
+Disallow: /404
+Crawl-delay: 1
+
+# Bing 봇
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+# 사이트맵
+Sitemap: https://nestsolution.co.kr/sitemap.xml

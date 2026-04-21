@@ -1,17 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!DOCTYPE html>
-  <html lang="ko">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta name="robots" content="index, follow" />
-      <title>Nest Solutiuon</title>
-      <style>html, body { height: 100%; margin: 0; } #root { height: 100%; }</style>
-    </head>
+    <!-- 기본 SEO -->
+    <title>NestSolution | 병원 컨설팅 마케팅 전문 기업</title>
+    <meta name="description" content="NestSolution은 17년 임상 경험을 바탕으로 병·의원 마케팅, CS 관리, 경영 개선, 인력 관리를 지원하는 병원 컨설팅 전문 기업입니다. 매출 향상과 운영 효율화를 함께 설계합니다." />
+    <meta name="keywords" content="병원 컨설팅 마케팅, 병원 컨설팅, 의원 컨설팅, 병원 마케팅, 의원 마케팅, 병원 경영 컨설팅, CS 관리, 병원 인력 관리, NestSolution, 넥스트솔루션" />
+    <meta name="author" content="NestSolution (큐렛 주식회사)" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="Yeti" content="index, follow" />
 
-    <body>
-      <div id="root"></div>
-      <script type="module" src="/src/main.tsx"></script>
-    </body>
-  </html>
-  
+    <!-- Canonical (React에서 페이지별로 덮어씀) -->
+    <link rel="canonical" href="https://nestsolution.co.kr/" />
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="ko" href="https://nestsolution.co.kr/" />
+    <link rel="alternate" hreflang="x-default" href="https://nestsolution.co.kr/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:site_name" content="NestSolution" />
+    <meta property="og:title" content="NestSolution | 병원 컨설팅 마케팅 전문 기업" />
+    <meta property="og:description" content="17년 임상 경험 기반의 병원 컨설팅 전문 기업. 병원 마케팅, CS 관리, 경영 개선, 인력 관리 토탈 솔루션을 제공합니다." />
+    <meta property="og:url" content="https://nestsolution.co.kr/" />
+    <meta property="og:image" content="https://nestsolution.co.kr/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="NestSolution 병원 컨설팅 마케팅" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="NestSolution | 병원 컨설팅 마케팅 전문 기업" />
+    <meta name="twitter:description" content="17년 임상 경험 기반의 병원 컨설팅 전문 기업. 병원 마케팅, CS 관리, 경영 개선 토탈 솔루션." />
+    <meta name="twitter:image" content="https://nestsolution.co.kr/og-image.png" />
+
+    <!-- 네이버 사이트 소유 확인 -->
+    <meta name="naver-site-verification" content="930311f2339c80c19127df25b854460858d85e27" />
+
+    <!-- 지역 비즈니스 -->
+    <meta name="geo.region" content="KR" />
+    <meta name="geo.placename" content="대한민국" />
+
+    <!-- 성능: DNS-prefetch / preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+
+    <!-- 구조화 데이터: Organization + LocalBusiness (정적 기본값) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": ["Organization", "LocalBusiness"],
+          "@id": "https://nestsolution.co.kr/#organization",
+          "name": "NestSolution",
+          "alternateName": "넥스트솔루션",
+          "legalName": "큐렛 주식회사",
+          "url": "https://nestsolution.co.kr",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://nestsolution.co.kr/og-image.png",
+            "width": 1200,
+            "height": 630
+          },
+          "description": "17년 임상 경험을 바탕으로 병·의원 마케팅, CS 관리, 경영 개선, 인력 관리를 지원하는 병원 컨설팅 전문 기업",
+          "founder": {
+            "@type": "Person",
+            "name": "김상연",
+            "jobTitle": "대표이사"
+          },
+          "contactPoint": [
+            {
+              "@type": "ContactPoint",
+              "telephone": "+82-10-3129-8248",
+              "contactType": "customer service",
+              "availableLanguage": "Korean",
+              "hoursAvailable": {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+                "opens": "09:00",
+                "closes": "20:00"
+              }
+            }
+          ],
+          "email": "nestsadvice@gmail.com",
+          "areaServed": {
+            "@type": "Country",
+            "name": "대한민국"
+          },
+          "serviceType": ["병원 컨설팅", "병원 마케팅", "의원 CS 관리", "병원 경영 개선", "병원 인력 관리"],
+          "knowsAbout": ["병원 컨설팅 마케팅", "의원 경영", "병원 CS 관리", "병원 마케팅 전략"],
+          "sameAs": []
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://nestsolution.co.kr/#website",
+          "url": "https://nestsolution.co.kr",
+          "name": "NestSolution",
+          "description": "병원 컨설팅 마케팅 전문 기업 NestSolution",
+          "publisher": {
+            "@id": "https://nestsolution.co.kr/#organization"
+          },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://nestsolution.co.kr/?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          },
+          "inLanguage": "ko-KR"
+        }
+      ]
+    }
+    </script>
+
+    <style>html, body { height: 100%; margin: 0; } #root { height: 100%; }</style>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

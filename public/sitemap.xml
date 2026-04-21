@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- 홈 -->
+  <url>
+    <loc>https://nestsolution.co.kr/</loc>
+    <lastmod>2026-04-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://nestsolution.co.kr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nestsolution.co.kr/"/>
+  </url>
+
+  <!-- 병원 경영 고민 -->
+  <url>
+    <loc>https://nestsolution.co.kr/pain</loc>
+    <lastmod>2026-04-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://nestsolution.co.kr/pain"/>
+  </url>
+
+  <!-- 서비스 -->
+  <url>
+    <loc>https://nestsolution.co.kr/services</loc>
+    <lastmod>2026-04-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://nestsolution.co.kr/services"/>
+  </url>
+
+  <!-- 컨설팅 과정 -->
+  <url>
+    <loc>https://nestsolution.co.kr/process</loc>
+    <lastmod>2026-04-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://nestsolution.co.kr/process"/>
+  </url>
+
+  <!-- 성공 사례 -->
+  <url>
+    <loc>https://nestsolution.co.kr/cases</loc>
+    <lastmod>2026-04-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://nestsolution.co.kr/cases"/>
+  </url>
+
+  <!-- 대표 소개 -->
+  <url>
+    <loc>https://nestsolution.co.kr/about</loc>
+    <lastmod>2026-04-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://nestsolution.co.kr/about"/>
+  </url>
+
+  <!-- 무료 상담 -->
+  <url>
+    <loc>https://nestsolution.co.kr/contact</loc>
+    <lastmod>2026-04-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://nestsolution.co.kr/contact"/>
+  </url>
+
+</urlset>
