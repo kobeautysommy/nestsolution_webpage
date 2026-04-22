@@ -5,12 +5,18 @@ User-agent: *
 Allow: /
 Disallow: /404
 Disallow: /*?*
+Disallow: /blog/wp-admin/
+Disallow: /blog/wp-login.php
+Allow: /blog/wp-admin/admin-ajax.php
 Crawl-delay: 1
 
 # Google 검색 봇
 User-agent: Googlebot
 Allow: /
 Disallow: /404
+Disallow: /blog/wp-admin/
+Disallow: /blog/wp-login.php
+Allow: /blog/wp-admin/admin-ajax.php
 
 # Google 이미지 봇
 User-agent: Googlebot-Image
@@ -20,17 +26,18 @@ Allow: /
 User-agent: Yeti
 Allow: /
 Disallow: /404
+Disallow: /blog/wp-admin/
+Disallow: /blog/wp-login.php
+Allow: /blog/wp-admin/admin-ajax.php
 Crawl-delay: 1
 
 # Bing 봇
 User-agent: Bingbot
 Allow: /
-Crawl-delay: 2
-
-# WordPress 관리 경로 크롤링 차단
 Disallow: /blog/wp-admin/
 Disallow: /blog/wp-login.php
 Allow: /blog/wp-admin/admin-ajax.php
+Crawl-delay: 2
 
 # 사이트맵
 Sitemap: https://nestsolution.co.kr/sitemap.xml
