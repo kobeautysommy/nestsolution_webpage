@@ -2,11 +2,11 @@
   "rewrites": [
     {
       "source": "/blog",
-      "destination": "http://nestsolu.jp4.fcomet.com/blog"
+      "destination": "https://nestsolu.jp4.fcomet.com/blog"
     },
     {
       "source": "/blog/:path*",
-      "destination": "http://nestsolu.jp4.fcomet.com/blog/:path*"
+      "destination": "https://nestsolu.jp4.fcomet.com/blog/:path*"
     },
     {
       "source": "/(.*)",
