@@ -16,17 +16,17 @@ import { Cases } from './pages/Cases';
 
 const SEO_MAP: Record<string, PageSEO> = {
   '/': {
-    title: 'NestSolution | 병원 컨설팅 마케팅 전문 기업',
-    description: 'NestSolution은 17년 임상 경험을 바탕으로 병·의원 마케팅, CS 관리, 경영 개선, 인력 관리를 지원하는 병원 컨설팅 전문 기업입니다. 매출 향상과 운영 효율화를 함께 설계합니다.',
-    keywords: '병원 컨설팅 마케팅, 병원 컨설팅, 의원 컨설팅, 병원 마케팅, 의원 마케팅, 병원 경영 컨설팅, CS 관리, 병원 인력 관리, NestSolution',
+    title: '병원 컨설팅·의원 컨설팅 전문 | 네스트솔루션',
+    description: '병원컨설팅·의원컨설팅 전문 기업 네스트솔루션. 17년 임상 경험을 바탕으로 병원 마케팅, CS 관리, 경영 개선, 인력 관리까지 1:1 맞춤 솔루션을 제공합니다. 매출 향상과 운영 효율화를 함께 설계합니다.',
+    keywords: '병원컨설팅, 의원컨설팅, 네스트솔루션, 병원 컨설팅 마케팅, 병원 마케팅, 의원 마케팅, 병원 경영 컨설팅, CS 관리, 병원 인력 관리, NestSolution',
     canonical: `${SITE_URL}/`,
     jsonLd: [
       {
         '@type': 'WebPage',
         '@id': `${SITE_URL}/#webpage`,
         url: `${SITE_URL}/`,
-        name: 'NestSolution | 병원 컨설팅 마케팅 전문 기업',
-        description: 'NestSolution은 17년 임상 경험을 바탕으로 병·의원 마케팅, CS 관리, 경영 개선, 인력 관리를 지원하는 병원 컨설팅 전문 기업입니다.',
+        name: '네스트솔루션 | 병원 컨설팅 마케팅 전문 기업',
+        description: '네스트솔루션은 17년 임상 경험을 바탕으로 병·의원 마케팅, CS 관리, 경영 개선, 인력 관리를 지원하는 병원 컨설팅 전문 기업입니다.',
         publisher: { '@id': `${SITE_URL}/#organization` },
         inLanguage: 'ko-KR',
         isPartOf: { '@id': `${SITE_URL}/#website` },
@@ -42,8 +42,8 @@ const SEO_MAP: Record<string, PageSEO> = {
   },
 
   '/pain': {
-    title: '병원 경영 고민 해결 | NestSolution 병원 컨설팅',
-    description: '환자 감소, 직원 이직, 매출 정체… 병·의원 원장님의 고민을 NestSolution이 17년 경험으로 해결합니다. 병원 컨설팅 전문가와 무료 상담을 시작하세요.',
+    title: '병원 경영 고민 해결 | 네스트솔루션 병원 컨설팅',
+    description: '환자 감소, 직원 이직, 매출 정체… 병·의원 원장님의 고민을 네스트솔루션이 17년 경험으로 해결합니다. 병원 컨설팅 전문가와 무료 상담을 시작하세요.',
     keywords: '병원 경영 고민, 병원 매출 감소, 병원 직원 관리, 의원 운영 어려움, 병원 컨설팅 필요, 병원 마케팅 어려움',
     canonical: `${SITE_URL}/pain`,
     jsonLd: [
@@ -52,7 +52,7 @@ const SEO_MAP: Record<string, PageSEO> = {
         '@id': `${SITE_URL}/pain#webpage`,
         url: `${SITE_URL}/pain`,
         name: '병원 경영 고민 해결 | NestSolution',
-        description: '병·의원 원장님의 경영 고민을 NestSolution이 함께 해결합니다.',
+        description: '병·의원 원장님의 경영 고민을 네스트솔루션이 함께 해결합니다.',
         inLanguage: 'ko-KR',
         isPartOf: { '@id': `${SITE_URL}/#website` },
       },
@@ -67,8 +67,8 @@ const SEO_MAP: Record<string, PageSEO> = {
   },
 
   '/services': {
-    title: '병원 컨설팅 서비스 | CS관리·마케팅·경영개선·인력관리 | NestSolution',
-    description: 'NestSolution의 4대 병원 컨설팅 서비스: CS 관리, 병원 마케팅, 경영 개선, 인력 관리. 17년 임상 경험 기반의 맞춤형 컨설팅으로 실질적인 매출 향상을 경험하세요.',
+    title: '병원 컨설팅 서비스 | CS관리·마케팅·경영개선·인력관리 | 네스트솔루션',
+    description: '네스트솔루션의 4대 병원 컨설팅 서비스: CS 관리, 병원 마케팅, 경영 개선, 인력 관리. 17년 임상 경험 기반의 맞춤형 컨설팅으로 실질적인 매출 향상을 경험하세요.',
     keywords: '병원 CS 관리, 병원 마케팅 서비스, 병원 경영 개선, 병원 인력 관리, 의원 컨설팅 서비스, 병원 컨설팅 마케팅 전문',
     canonical: `${SITE_URL}/services`,
     jsonLd: [
@@ -76,7 +76,7 @@ const SEO_MAP: Record<string, PageSEO> = {
         '@type': 'WebPage',
         '@id': `${SITE_URL}/services#webpage`,
         url: `${SITE_URL}/services`,
-        name: '병원 컨설팅 서비스 | NestSolution',
+        name: '병원 컨설팅 서비스 | 네스트솔루션',
         inLanguage: 'ko-KR',
         isPartOf: { '@id': `${SITE_URL}/#website` },
       },
@@ -127,8 +127,8 @@ const SEO_MAP: Record<string, PageSEO> = {
   },
 
   '/process': {
-    title: '병원 컨설팅 과정 | NestSolution 컨설팅 프로세스',
-    description: 'NestSolution의 체계적인 병원 컨설팅 프로세스를 확인하세요. 진단 → 전략 수립 → 실행 → 성과 측정까지 단계별로 함께합니다.',
+    title: '병원 컨설팅 과정 | 네스트솔루션 컨설팅 프로세스',
+    description: '네스트솔루션의 체계적인 병원 컨설팅 프로세스를 확인하세요. 진단 → 전략 수립 → 실행 → 성과 측정까지 단계별로 함께합니다.',
     keywords: '병원 컨설팅 과정, 병원 컨설팅 절차, 의원 컨설팅 프로세스, 병원 컨설팅 단계, 컨설팅 방법론',
     canonical: `${SITE_URL}/process`,
     jsonLd: [
@@ -136,7 +136,7 @@ const SEO_MAP: Record<string, PageSEO> = {
         '@type': 'WebPage',
         '@id': `${SITE_URL}/process#webpage`,
         url: `${SITE_URL}/process`,
-        name: '병원 컨설팅 과정 | NestSolution',
+        name: '병원 컨설팅 과정 | 네스트솔루션',
         inLanguage: 'ko-KR',
         isPartOf: { '@id': `${SITE_URL}/#website` },
       },
@@ -149,8 +149,8 @@ const SEO_MAP: Record<string, PageSEO> = {
       },
       {
         '@type': 'HowTo',
-        name: 'NestSolution 병원 컨설팅 프로세스',
-        description: 'NestSolution의 단계별 병원 컨설팅 진행 과정',
+        name: '네스트솔루션 병원 컨설팅 프로세스',
+        description: '네스트솔루션의 단계별 병원 컨설팅 진행 과정',
         step: [
           { '@type': 'HowToStep', position: 1, name: '현황 진단', text: '병·의원의 현황을 정밀 분석하여 문제점을 파악합니다.' },
           { '@type': 'HowToStep', position: 2, name: '전략 수립', text: '진단 결과를 바탕으로 맞춤형 개선 전략을 수립합니다.' },
@@ -162,8 +162,8 @@ const SEO_MAP: Record<string, PageSEO> = {
   },
 
   '/cases': {
-    title: '병원 컨설팅 성공 사례 | NestSolution 실적',
-    description: '실제 병·의원 컨설팅 성공 사례를 확인하세요. NestSolution과 함께 매출 향상, 환자 증가, 운영 효율화를 이룬 병원들의 이야기.',
+    title: '병원 컨설팅 성공 사례 | 네스트솔루션 실적',
+    description: '실제 병·의원 컨설팅 성공 사례를 확인하세요. 네스트솔루션과 함께 매출 향상, 환자 증가, 운영 효율화를 이룬 병원들의 이야기.',
     keywords: '병원 컨설팅 성공 사례, 병원 매출 향상 사례, 의원 경영 개선 사례, 병원 마케팅 성과, 컨설팅 효과',
     canonical: `${SITE_URL}/cases`,
     jsonLd: [
@@ -171,7 +171,7 @@ const SEO_MAP: Record<string, PageSEO> = {
         '@type': 'WebPage',
         '@id': `${SITE_URL}/cases#webpage`,
         url: `${SITE_URL}/cases`,
-        name: '병원 컨설팅 성공 사례 | NestSolution',
+        name: '병원 컨설팅 성공 사례 | 네스트솔루션',
         inLanguage: 'ko-KR',
         isPartOf: { '@id': `${SITE_URL}/#website` },
       },
@@ -186,16 +186,16 @@ const SEO_MAP: Record<string, PageSEO> = {
   },
 
   '/about': {
-    title: '대표 소개 | NestSolution 병원 컨설팅 전문가',
-    description: '17년 임상 경험의 병원 컨설팅 전문가 김상연 대표. 직접 경험한 병원 현장 지식으로 실질적인 컨설팅을 제공합니다. NestSolution의 전문성을 확인하세요.',
-    keywords: '병원 컨설턴트, 병원 경영 전문가, 김상연 대표, NestSolution 대표, 17년 임상 경험, 병원 컨설팅 전문가',
+    title: '대표 소개 | 네스트솔루션 병원 컨설팅 전문가',
+    description: '17년 임상 경험의 병원 컨설팅 전문가 김상연 대표. 직접 경험한 병원 현장 지식으로 실질적인 컨설팅을 제공합니다. 네스트솔루션의 전문성을 확인하세요.',
+    keywords: '네스트솔루션 대표, 병원 컨설턴트, 병원 경영 전문가, 김상연 대표, 17년 임상 경험, 병원 컨설팅 전문가',
     canonical: `${SITE_URL}/about`,
     jsonLd: [
       {
         '@type': 'WebPage',
         '@id': `${SITE_URL}/about#webpage`,
         url: `${SITE_URL}/about`,
-        name: '대표 소개 | NestSolution',
+        name: '대표 소개 | 네스트솔루션',
         inLanguage: 'ko-KR',
         isPartOf: { '@id': `${SITE_URL}/#website` },
       },
@@ -216,7 +216,7 @@ const SEO_MAP: Record<string, PageSEO> = {
           name: '김상연',
           jobTitle: '대표이사',
           worksFor: { '@id': `${SITE_URL}/#organization` },
-          description: '17년 임상 경험을 바탕으로 병·의원 컨설팅을 전문으로 하는 NestSolution 대표이사',
+          description: '17년 임상 경험을 바탕으로 병·의원 컨설팅을 전문으로 하는 네스트솔루션 대표이사',
           knowsAbout: ['병원 컨설팅', '병원 마케팅', '의원 경영', 'CS 관리'],
         },
       },
@@ -224,16 +224,16 @@ const SEO_MAP: Record<string, PageSEO> = {
   },
 
   '/contact': {
-    title: '병원 컨설팅 무료 상담 신청 | NestSolution',
-    description: 'NestSolution 병원 컨설팅 무료 상담을 신청하세요. 17년 임상 경험의 전문가가 병원 마케팅, CS 관리, 경영 개선 방안을 직접 진단해 드립니다.',
-    keywords: '병원 컨설팅 상담, 무료 컨설팅 신청, 병원 마케팅 상담, 의원 컨설팅 문의, NestSolution 연락처',
+    title: '병원 컨설팅 무료 상담 신청 | 네스트솔루션',
+    description: '네스트솔루션 병원 컨설팅 무료 상담을 신청하세요. 17년 임상 경험의 전문가가 병원 마케팅, CS 관리, 경영 개선 방안을 직접 진단해 드립니다.',
+    keywords: '네스트솔루션 상담, 병원 컨설팅 상담, 무료 컨설팅 신청, 병원 마케팅 상담, 의원 컨설팅 문의',
     canonical: `${SITE_URL}/contact`,
     jsonLd: [
       {
         '@type': 'WebPage',
         '@id': `${SITE_URL}/contact#webpage`,
         url: `${SITE_URL}/contact`,
-        name: '병원 컨설팅 무료 상담 신청 | NestSolution',
+        name: '병원 컨설팅 무료 상담 신청 | 네스트솔루션',
         inLanguage: 'ko-KR',
         isPartOf: { '@id': `${SITE_URL}/#website` },
       },
@@ -249,7 +249,7 @@ const SEO_MAP: Record<string, PageSEO> = {
         '@id': `${SITE_URL}/contact#contactpage`,
         url: `${SITE_URL}/contact`,
         name: '무료 상담 신청',
-        description: 'NestSolution 병원 컨설팅 무료 상담 신청 페이지',
+        description: '네스트솔루션 병원 컨설팅 무료 상담 신청 페이지',
       },
     ],
   },
