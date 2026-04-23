@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { BLUE, TEXT, BORDER, DARK, LIGHT, F, accentGrad } from '../utils/colors';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
@@ -39,6 +39,38 @@ const CtaBand = ({ title, desc }: { title: string; desc: string }) => (
     </div>
   </div>
 );
+
+const faqItems = [
+  { q: '병원 컨설팅 비용이 얼마인가요?', a: '네스트솔루션은 초기 상담을 무료로 진행합니다. 컨설팅 비용은 병원 규모와 서비스 범위에 따라 맞춤 산정되며, 무료 상담 후 정확한 견적을 안내해드립니다.' },
+  { q: '컨설팅 효과는 얼마나 빨리 나타나나요?', a: 'CS 개선은 1~2개월, 마케팅 성과는 2~3개월, 경영 구조 개선은 3~6개월 내 가시적인 변화가 나타납니다. 실제 사례에서 4~5개월 만에 매출이 150% 이상 성장한 병원도 있습니다.' },
+  { q: '소규모 의원도 컨설팅 효과가 있나요?', a: '네스트솔루션은 의원급(소규모) 병원을 전문으로 합니다. 원장 2인 체제 정형외과, 개원 3년차 내과 등 소규모 의원에서 매출 153~185% 성장 사례가 있습니다.' },
+  { q: '컨설팅 기간은 얼마나 되나요?', a: '기본 컨설팅은 3~6개월 과정입니다. 서비스 범위에 따라 조정되며, 단기 집중 컨설팅(1~2개월)도 운영합니다.' },
+];
+
+function FaqAccordion({ items }: { items: typeof faqItems }) {
+  const [open, setOpen] = useState<number | null>(null);
+  return (
+    <dl style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+      {items.map((item, i) => (
+        <div key={i} style={{ background: '#FFFFFF', border: `1px solid ${open === i ? BLUE._500 : BORDER.light}`, borderRadius: '8px', overflow: 'hidden', transition: 'border-color 0.2s' }}>
+          <dt>
+            <button
+              onClick={() => setOpen(open === i ? null : i)}
+              aria-expanded={open === i}
+              style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.2rem 1.5rem', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', gap: '1rem' }}
+            >
+              <span style={{ fontFamily: F.sans, fontWeight: 700, fontSize: '0.92rem', color: TEXT.onLight, lineHeight: 1.4 }}>{item.q}</span>
+              <span style={{ color: BLUE._500, fontSize: '1.1rem', flexShrink: 0, transform: open === i ? 'rotate(45deg)' : 'rotate(0deg)', transition: 'transform 0.25s', display: 'inline-block' }}>+</span>
+            </button>
+          </dt>
+          <dd style={{ margin: 0, maxHeight: open === i ? '10rem' : 0, overflow: 'hidden', transition: 'max-height 0.3s ease' }}>
+            <p style={{ fontFamily: F.sans, fontSize: '0.87rem', color: TEXT.mutedLight, lineHeight: 1.8, padding: '0 1.5rem 1.3rem', margin: 0 }}>{item.a}</p>
+          </dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
 
 const painCards = [
   { icon: '📉', title: '환자가 계속 줄고 있어요', desc: '신규 환자 유입이 눈에 띄게 줄었습니다. 마케팅에 돈도 써봤는데 효과가 없고, 기존 환자들의 재방문율도 점점 낮아지고 있어요.', solution: '네스트솔루션의 마케팅 & CS 솔루션으로 해결' },
@@ -107,6 +139,21 @@ export function Pain() {
         </div>
       </section>
 
+      {/* Service Links */}
+      <section style={{ background: LIGHT.bg1, padding: '2.5rem 5vw' }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.2rem' }}>
+          <div>
+            <p style={{ fontFamily: F.serif, fontSize: '1rem', fontWeight: 700, color: TEXT.onLight, marginBottom: '0.2rem' }}>어떤 서비스로 해결할 수 있을까요?</p>
+            <p style={{ fontSize: '0.8rem', color: TEXT.mutedLight, fontFamily: F.sans }}>고민에 맞는 서비스를 바로 확인하세요</p>
+          </div>
+          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+            {[{ label: 'CS 관리', to: '/services' }, { label: '마케팅', to: '/services' }, { label: '경영 개선', to: '/services' }, { label: '인력 관리', to: '/services' }].map(s => (
+              <Link key={s.label} to={s.to} style={{ fontSize: '0.78rem', border: `1px solid ${BLUE._500}`, color: BLUE._500, padding: '0.35rem 0.9rem', borderRadius: '20px', textDecoration: 'none', fontFamily: F.sans, whiteSpace: 'nowrap' }}>{s.label} →</Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials */}
       <section style={{ background: LIGHT.bg1, padding: '6rem 5vw' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
@@ -122,6 +169,17 @@ export function Pain() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section style={{ background: LIGHT.bg0, padding: '6rem 5vw' }}>
+        <div style={{ maxWidth: 760, margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+            <SecLabel center>FAQ</SecLabel>
+            <h2 style={{ fontFamily: F.serif, fontSize: 'clamp(1.4rem,3vw,2rem)', fontWeight: 700, color: TEXT.onLight }}>자주 묻는 질문</h2>
+          </div>
+          <FaqAccordion items={faqItems} />
         </div>
       </section>
 

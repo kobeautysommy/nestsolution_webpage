@@ -28,7 +28,7 @@ export function Cases() {
       </div>
 
       {/* Case 01 */}
-      <section style={{ padding: '6rem 5vw', background: LIGHT.bg0 }}>
+      <section id="case01" style={{ padding: '6rem 5vw', background: LIGHT.bg0 }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
           <div className="fu" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
             <div style={{ fontFamily: F.bebas, fontSize: '5rem', lineHeight: 1, color: BLUE.dim }}>01</div>
@@ -137,7 +137,7 @@ export function Cases() {
       </section>
 
       {/* Case 02 — 정형외과 추가 사례 */}
-      <section style={{ padding: '6rem 5vw', background: LIGHT.bg0 }}>
+      <section id="case02" style={{ padding: '6rem 5vw', background: LIGHT.bg0 }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
           <div className="fu" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
             <div style={{ fontFamily: F.bebas, fontSize: '5rem', lineHeight: 1, color: BLUE.dim }}>02</div>
@@ -245,7 +245,7 @@ export function Cases() {
       </section>
 
       {/* Case 03 — 내과 */}
-      <section style={{ padding: '6rem 5vw', background: LIGHT.bg1 }}>
+      <section id="case03" style={{ padding: '6rem 5vw', background: LIGHT.bg1 }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
           <div className="fu" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
             <div style={{ fontFamily: F.bebas, fontSize: '5rem', lineHeight: 1, color: BLUE.dim }}>03</div>

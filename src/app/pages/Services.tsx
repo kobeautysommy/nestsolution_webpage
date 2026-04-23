@@ -13,6 +13,38 @@ const SecLabel = ({ children, center }: { children: string; center?: boolean }) 
   </div>
 );
 
+const serviceFaqItems = [
+  { q: '여러 서비스를 동시에 받을 수 있나요?', a: '가능합니다. CS 관리, 마케팅, 경영 개선, 인력 관리는 통합 패키지로 제공되며, 우선순위에 따라 단계적으로 또는 동시에 진행할 수 있습니다.' },
+  { q: '병원 마케팅은 어떤 채널 중심으로 하나요?', a: '네이버 플레이스 최적화, 블로그 SEO, 네이버 파워링크 광고, 인스타그램 콘텐츠를 중심으로 진행합니다. 각 병원의 지역·진료과목에 맞춰 채널을 선택합니다.' },
+  { q: 'CS 교육은 어떤 방식으로 진행되나요?', a: '현장 암행 진단 → 맞춤 매뉴얼 제작 → 롤플레이 기반 직원 교육(월 2~4회) → 지속 모니터링 순으로 진행됩니다. 단순 강의가 아닌 실전 체화 방식입니다.' },
+  { q: '인력 관리 컨설팅에서 채용도 도와주나요?', a: '채용 기준 수립과 면접 프로세스 설계까지 지원합니다. 채용 후 온보딩·직무 교육 전 과정을 함께하며, 조직 문화 구축까지 지원합니다.' },
+];
+
+function ServiceFaqAccordion({ items }: { items: typeof serviceFaqItems }) {
+  const [open, setOpen] = useState<number | null>(null);
+  return (
+    <dl style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+      {items.map((item, i) => (
+        <div key={i} style={{ background: '#FFFFFF', border: `1px solid ${open === i ? BLUE._500 : BORDER.light}`, borderRadius: '8px', overflow: 'hidden', transition: 'border-color 0.2s' }}>
+          <dt>
+            <button
+              onClick={() => setOpen(open === i ? null : i)}
+              aria-expanded={open === i}
+              style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.2rem 1.5rem', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', gap: '1rem' }}
+            >
+              <span style={{ fontFamily: F.sans, fontWeight: 700, fontSize: '0.92rem', color: TEXT.onLight, lineHeight: 1.4 }}>{item.q}</span>
+              <span style={{ color: BLUE._500, fontSize: '1.1rem', flexShrink: 0, transform: open === i ? 'rotate(45deg)' : 'rotate(0deg)', transition: 'transform 0.25s', display: 'inline-block' }}>+</span>
+            </button>
+          </dt>
+          <dd style={{ margin: 0, maxHeight: open === i ? '10rem' : 0, overflow: 'hidden', transition: 'max-height 0.3s ease' }}>
+            <p style={{ fontFamily: F.sans, fontSize: '0.87rem', color: TEXT.mutedLight, lineHeight: 1.8, padding: '0 1.5rem 1.3rem', margin: 0 }}>{item.a}</p>
+          </dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
 const services = [
   {
     id: 'cs', label: 'CS 관리', secLabel: 'Service 01',
@@ -183,6 +215,17 @@ export function Services() {
 
       {/* Registered Trademarks */}
       <ServiceShowcase />
+
+      {/* FAQ */}
+      <section style={{ background: LIGHT.bg0, padding: '6rem 5vw' }}>
+        <div style={{ maxWidth: 760, margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+            <SecLabel center>FAQ</SecLabel>
+            <h2 style={{ fontFamily: F.serif, fontSize: 'clamp(1.4rem,3vw,2rem)', fontWeight: 700, color: TEXT.onLight }}>자주 묻는 질문</h2>
+          </div>
+          <ServiceFaqAccordion items={serviceFaqItems} />
+        </div>
+      </section>
 
       {/* CTA */}
       <div style={{ padding: '6rem 5vw', background: `linear-gradient(135deg,${BLUE.ctaBg},#1E40AF)`, textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
