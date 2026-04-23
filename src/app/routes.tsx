@@ -17,8 +17,8 @@ import { Cases } from './pages/Cases';
 const SEO_MAP: Record<string, PageSEO> = {
   '/': {
     title: '병원 컨설팅·의원 컨설팅 전문 | 네스트솔루션',
-    description: '병원컨설팅·의원컨설팅 전문 기업 네스트솔루션. 17년 임상 경험을 바탕으로 병원 마케팅, CS 관리, 경영 개선, 인력 관리까지 1:1 맞춤 솔루션을 제공합니다. 매출 향상과 운영 효율화를 함께 설계합니다.',
-    keywords: '병원컨설팅, 의원컨설팅, 네스트솔루션, 병원 컨설팅 마케팅, 병원 마케팅, 의원 마케팅, 병원 경영 컨설팅, CS 관리, 병원 인력 관리, NestSolution',
+    description: '개원·병원컨설팅·의원컨설팅 전문 기업 네스트솔루션. 17년 임상 경험 기반 마케팅·경영전략·CS·CRM.',
+    keywords: '병원컨설팅, 의원컨설팅, 개원컨설팅, 네스트솔루션, 병원마케팅, 병원경영전략, 병원CS, 병원CRM컨설팅, 병원인사조직관리, NestSolution',
     canonical: `${SITE_URL}/`,
     jsonLd: [
       {
@@ -43,7 +43,7 @@ const SEO_MAP: Record<string, PageSEO> = {
 
   '/pain': {
     title: '병원 경영 고민 해결 | 네스트솔루션 병원 컨설팅',
-    description: '환자 감소, 직원 이직, 매출 정체… 병·의원 원장님의 고민을 네스트솔루션이 17년 경험으로 해결합니다. 병원 컨설팅 전문가와 무료 상담을 시작하세요.',
+    description: '환자 감소·직원 이직·매출 정체, 병·의원 고민을 17년 경험으로 해결합니다. 무료 상담 신청.',
     keywords: '병원 경영 고민, 병원 매출 감소, 병원 직원 관리, 의원 운영 어려움, 병원 컨설팅 필요, 병원 마케팅 어려움',
     canonical: `${SITE_URL}/pain`,
     jsonLd: [
@@ -68,8 +68,8 @@ const SEO_MAP: Record<string, PageSEO> = {
 
   '/services': {
     title: '병원 컨설팅 서비스 | CS관리·마케팅·경영개선·인력관리 | 네스트솔루션',
-    description: '네스트솔루션의 4대 병원 컨설팅 서비스: CS 관리, 병원 마케팅, 경영 개선, 인력 관리. 17년 임상 경험 기반의 맞춤형 컨설팅으로 실질적인 매출 향상을 경험하세요.',
-    keywords: '병원 CS 관리, 병원 마케팅 서비스, 병원 경영 개선, 병원 인력 관리, 의원 컨설팅 서비스, 병원 컨설팅 마케팅 전문',
+    description: '개원컨설팅·병원컨설팅·병원마케팅·경영전략·인사조직관리·병원CS·CRM. 17년 임상 경험 기반.',
+    keywords: '개원컨설팅, 병원컨설팅, 병원마케팅, 병원경영전략, 병원인사조직관리, 병원CS, 병원CRM컨설팅, 의원컨설팅, 네스트솔루션',
     canonical: `${SITE_URL}/services`,
     jsonLd: [
       {
@@ -187,7 +187,7 @@ const SEO_MAP: Record<string, PageSEO> = {
 
   '/about': {
     title: '대표 소개 | 네스트솔루션 병원 컨설팅 전문가',
-    description: '17년 임상 경험의 병원 컨설팅 전문가 김상연 대표. 직접 경험한 병원 현장 지식으로 실질적인 컨설팅을 제공합니다. 네스트솔루션의 전문성을 확인하세요.',
+    description: '17년 임상 경험 병원 컨설팅 전문가 김상연 대표. 현장 지식 기반 실질적 컨설팅을 제공합니다.',
     keywords: '네스트솔루션 대표, 병원 컨설턴트, 병원 경영 전문가, 김상연 대표, 17년 임상 경험, 병원 컨설팅 전문가',
     canonical: `${SITE_URL}/about`,
     jsonLd: [
@@ -225,7 +225,7 @@ const SEO_MAP: Record<string, PageSEO> = {
 
   '/contact': {
     title: '병원 컨설팅 무료 상담 신청 | 네스트솔루션',
-    description: '네스트솔루션 병원 컨설팅 무료 상담을 신청하세요. 17년 임상 경험의 전문가가 병원 마케팅, CS 관리, 경영 개선 방안을 직접 진단해 드립니다.',
+    description: '네스트솔루션 병원 컨설팅 무료 상담 신청. 17년 임상 경험 전문가가 마케팅·CS·경영 개선을 진단합니다.',
     keywords: '네스트솔루션 상담, 병원 컨설팅 상담, 무료 컨설팅 신청, 병원 마케팅 상담, 의원 컨설팅 문의',
     canonical: `${SITE_URL}/contact`,
     jsonLd: [

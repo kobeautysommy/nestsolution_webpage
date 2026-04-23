@@ -109,7 +109,7 @@ export function SEOHead({ seo }: { seo: PageSEO }) {
     // Open Graph
     setMeta({ property: 'og:type', content: 'website' });
     setMeta({ property: 'og:locale', content: 'ko_KR' });
-    setMeta({ property: 'og:site_name', content: 'NestSolution' });
+    setMeta({ property: 'og:site_name', content: '네스트솔루션' });
     setMeta({ property: 'og:title', content: title });
     setMeta({ property: 'og:description', content: description });
     setMeta({ property: 'og:url', content: canonicalUrl });
