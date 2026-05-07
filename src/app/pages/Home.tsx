@@ -86,12 +86,12 @@ function HeroSection() {
           원장님은 <span className="text-grad-dark">연기자</span>,<br />
           저희는 <span className="text-grad-dark">연출자</span>입니다
         </h1>
-        <p style={{ fontFamily: F.serif, fontSize: 'clamp(0.9rem,1.7vw,1.15rem)', color: '#FFFFFF', fontWeight: 300, letterSpacing: '0.05em', marginBottom: '0.8rem' }}>
+        <p className="speakable" style={{ fontFamily: F.serif, fontSize: 'clamp(0.9rem,1.7vw,1.15rem)', color: '#FFFFFF', fontWeight: 300, letterSpacing: '0.05em', marginBottom: '0.8rem' }}>
           현장을 아는 사람만이 줄 수 있는 컨설팅
         </p>
-        <p style={{ color: '#FFFFFF', lineHeight: 1.9, fontSize: '0.92rem', maxWidth: 510, marginBottom: '1.6rem', fontFamily: F.sans }}>
-          CS 관리부터 마케팅, 경영 개선, 인력 관리까지<br />
-          — 이론이 아닌 <strong style={{ color: '#FFFFFF' }}>17년 임상 실전</strong>으로 원장님의 병원을 함께 설계합니다.
+        <p className="speakable" style={{ color: '#FFFFFF', lineHeight: 1.9, fontSize: '0.92rem', maxWidth: 510, marginBottom: '1.6rem', fontFamily: F.sans }}>
+          CS 관리부터 마케팅, 경영 개선, 인력 관리까지
+          — 이론이 아닌 17년 임상 실전으로 원장님의 병원을 함께 설계합니다.
         </p>
         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
           <Link to="/contact" style={{
@@ -219,7 +219,7 @@ function Overview() {
           <h2 style={{ fontFamily: F.serif, fontSize: 'clamp(1.6rem,3vw,2.5rem)', fontWeight: 700, lineHeight: 1.35, marginBottom: '0.9rem', color: TEXT.onLight }}>
             목표 달성형 컨설팅으로<br />장기적 성장곡선을<br />만들어드립니다
           </h2>
-          <p style={{ color: TEXT.mutedLight, lineHeight: 1.85, fontSize: '0.92rem', fontFamily: F.sans }}>
+          <p className="speakable" style={{ color: TEXT.mutedLight, lineHeight: 1.85, fontSize: '0.92rem', fontFamily: F.sans }}>
             네스트솔루션은 병원의 니즈와 현황을 정밀하게 파악하여, 원장님의 병원에만 맞는 완전 맞춤 전략을 수립합니다.
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', marginTop: '1.8rem' }}>

@@ -247,11 +247,10 @@ export function About() {
                   {/* 대표 철학 */}
                   <div style={{ marginBottom: '2rem' }}>
                     {sectionLabel('대표 철학')}
-                    <p style={{ color: TEXT.mutedLight, fontSize: '0.88rem', lineHeight: 1.9, fontFamily: F.sans }}>
+                    <p className="speakable" style={{ color: TEXT.mutedLight, fontSize: '0.88rem', lineHeight: 1.9, fontFamily: F.sans }}>
                       물리치료사로 17년 이상 의료 현장 최전선에서 일하며 깨달은 것이 있습니다.
                       좋은 진료를 하는 병원이 반드시 잘 되는 게 아니라는 것.
                       환자가 느끼는 병원의 가치는 진료실 밖에서도 만들어진다는 것입니다.
-                      <br /><br />
                       네스트솔루션은 단순히 컨설팅 보고서를 납품하는 회사가 아닙니다.
                       원장님과 함께 고민하고, 현장에서 직접 실행하며, 결과가 나올 때까지 함께하는 파트너입니다.
                     </p>

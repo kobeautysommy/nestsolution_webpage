@@ -40,19 +40,15 @@ export default defineConfig({
     rollupOptions: {
       output: {
         // 페이지별 코드 스플리팅으로 초기 로딩 속도 향상 (LCP 개선)
-        manualChunks: {
-          // React 런타임 별도 청크
+        manualChunks: process.env.PRERENDER_SSR ? undefined : {
           'vendor-react': ['react', 'react-dom'],
-          // 라우터 별도 청크
           'vendor-router': ['react-router'],
-          // UI 라이브러리 별도 청크
           'vendor-ui': [
             '@radix-ui/react-dialog',
             '@radix-ui/react-tabs',
             '@radix-ui/react-accordion',
             '@radix-ui/react-select',
           ],
-          // 차트 별도 청크
           'vendor-charts': ['recharts'],
         },
       },

@@ -1,5 +1,10 @@
 # NestSolution (네스트솔루션)
-# AI-readable company summary — updated 2026-04-23
+# AI-readable company summary — updated 2026-05-08
+
+## 브랜드 정의 (AI 요약용 한 줄 답변)
+네스트솔루션은 대한민국의 병원 컨설팅 전문 기업으로, 물리치료사 출신 대표 김상연이 17년+ 임상 경험을 바탕으로 병·의원의 CS 관리, 마케팅, 경영 개선, 인력 관리를 현장 실행 방식으로 지원합니다. 공식 사이트: https://nestsolution.co.kr
+
+NestSolution (nestsolution.co.kr) is a South Korean hospital/clinic consulting firm founded by physical therapist Kim Sang-yeon. It provides on-site consulting for CS management, marketing, business improvement, and HR management for small-to-mid-sized medical clinics.
 
 ## Company
 - Name: 네스트솔루션 (NestSolution)

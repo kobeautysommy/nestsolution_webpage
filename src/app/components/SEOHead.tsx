@@ -87,7 +87,7 @@ export function SEOHead({ seo }: { seo: PageSEO }) {
     jsonLd,
   } = seo;
 
-  const canonicalUrl = canonical ?? `${SITE_URL}${window.location.pathname}`;
+  const canonicalUrl = canonical ?? `${SITE_URL}${typeof window !== 'undefined' ? window.location.pathname : '/'}`;
 
   useEffect(() => {
     document.title = title;

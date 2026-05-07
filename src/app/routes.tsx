@@ -14,7 +14,7 @@ import { Cases } from './pages/Cases';
 
 /* ─── 페이지별 SEO 설정 ──────────────────────────────────────────────────── */
 
-const SEO_MAP: Record<string, PageSEO> = {
+export const SEO_MAP: Record<string, PageSEO> = {
   '/': {
     title: '병원 컨설팅·의원 컨설팅 전문 | 네스트솔루션',
     description: '개원·병원컨설팅·의원컨설팅 전문 기업 네스트솔루션. 17년 임상 경험 기반 마케팅·경영전략·CS·CRM.',
@@ -30,6 +30,10 @@ const SEO_MAP: Record<string, PageSEO> = {
         publisher: { '@id': `${SITE_URL}/#organization` },
         inLanguage: 'ko-KR',
         isPartOf: { '@id': `${SITE_URL}/#website` },
+        speakable: {
+          '@type': 'SpeakableSpecification',
+          cssSelector: ['h1', 'h2', '.speakable'],
+        },
       },
       {
         '@type': 'BreadcrumbList',
@@ -37,17 +41,6 @@ const SEO_MAP: Record<string, PageSEO> = {
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE_URL}/` },
         ],
-      },
-      {
-        '@type': 'WebPage',
-        '@id': `${SITE_URL}/#webpage`,
-        url: `${SITE_URL}/`,
-        name: '네스트솔루션 | 병원 컨설팅 마케팅 전문 기업',
-        speakable: {
-          '@type': 'SpeakableSpecification',
-          cssSelector: ['h1', 'h2', '.speakable'],
-        },
-        inLanguage: 'ko-KR',
       },
     ],
   },
@@ -66,6 +59,7 @@ const SEO_MAP: Record<string, PageSEO> = {
         description: '병·의원 원장님의 경영 고민을 네스트솔루션이 함께 해결합니다.',
         inLanguage: 'ko-KR',
         isPartOf: { '@id': `${SITE_URL}/#website` },
+        speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', 'h2', '.speakable'] },
       },
       {
         '@type': 'BreadcrumbList',
@@ -100,6 +94,7 @@ const SEO_MAP: Record<string, PageSEO> = {
         name: '병원 컨설팅 서비스 | 네스트솔루션',
         inLanguage: 'ko-KR',
         isPartOf: { '@id': `${SITE_URL}/#website` },
+        speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', 'h2', '.speakable'] },
       },
       {
         '@type': 'BreadcrumbList',
@@ -170,6 +165,7 @@ const SEO_MAP: Record<string, PageSEO> = {
         name: '병원 컨설팅 과정 | 네스트솔루션',
         inLanguage: 'ko-KR',
         isPartOf: { '@id': `${SITE_URL}/#website` },
+        speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', 'h2', '.speakable'] },
       },
       {
         '@type': 'BreadcrumbList',
@@ -205,6 +201,7 @@ const SEO_MAP: Record<string, PageSEO> = {
         name: '병원 컨설팅 성공 사례 | 네스트솔루션',
         inLanguage: 'ko-KR',
         isPartOf: { '@id': `${SITE_URL}/#website` },
+        speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', 'h2', '.speakable'] },
       },
       {
         '@type': 'BreadcrumbList',
@@ -265,6 +262,7 @@ const SEO_MAP: Record<string, PageSEO> = {
         name: '대표 소개 | 네스트솔루션',
         inLanguage: 'ko-KR',
         isPartOf: { '@id': `${SITE_URL}/#website` },
+        speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', 'h2', '.speakable'] },
       },
       {
         '@type': 'BreadcrumbList',
@@ -303,6 +301,7 @@ const SEO_MAP: Record<string, PageSEO> = {
         name: '병원 컨설팅 무료 상담 신청 | 네스트솔루션',
         inLanguage: 'ko-KR',
         isPartOf: { '@id': `${SITE_URL}/#website` },
+        speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', 'h2', '.speakable'] },
       },
       {
         '@type': 'BreadcrumbList',
@@ -351,7 +350,7 @@ function NotFound() {
   );
 }
 
-export const router = createBrowserRouter([
+export const routeDefs = [
   {
     path: '/',
     Component: Root,
@@ -366,4 +365,6 @@ export const router = createBrowserRouter([
       { path: '*',           Component: NotFound },
     ],
   },
-]);
+];
+
+export const router = typeof document !== 'undefined' ? createBrowserRouter(routeDefs) : null as any;
