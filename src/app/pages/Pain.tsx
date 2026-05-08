@@ -1,76 +1,12 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router';
-import { BLUE, TEXT, BORDER, DARK, LIGHT, F, accentGrad } from '../utils/colors';
+import { BLUE, TEXT, BORDER, LIGHT, F } from '../utils/colors';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
-
-const BtnPrimary = ({ children, to }: { children: React.ReactNode; to: string }) => (
-  <Link to={to} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: `linear-gradient(135deg,${BLUE._500},${BLUE._400})`, color: '#fff', padding: '0.85rem 2rem', fontWeight: 700, fontSize: '0.87rem', textDecoration: 'none', fontFamily: F.sans, borderRadius: '4px', boxShadow: '0 4px 18px rgba(37,99,235,0.35)' }}>{children}</Link>
-);
-const BtnOutline = ({ children, to }: { children: React.ReactNode; to: string }) => (
-  <Link to={to} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', border: `1.5px solid ${BLUE._500}`, color: BLUE._500, padding: '0.85rem 2rem', fontSize: '0.87rem', textDecoration: 'none', fontFamily: F.sans, borderRadius: '4px', background: 'none' }}>{children}</Link>
-);
-const SecLabel = ({ children, center }: { children: string; center?: boolean }) => (
-  <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', fontSize: '0.68rem', letterSpacing: '0.22em', textTransform: 'uppercase', color: BLUE._500, marginBottom: '0.9rem', justifyContent: center ? 'center' : undefined }}>
-    <span style={{ width: 20, height: 1, background: BLUE._500, display: 'inline-block' }} />{children}
-  </div>
-);
-
-const PageBanner = ({ label, title, desc, bg }: { label: string; title: React.ReactNode; desc: string; bg?: string }) => (
-  <div style={{ padding: '9rem 5vw 5rem', position: 'relative', overflow: 'hidden', background: `linear-gradient(155deg, ${DARK.bg1}, ${DARK.bg0})`, borderBottom: `1px solid ${BORDER.bw}` }}>
-    <div style={{ position: 'absolute', inset: '-50%', backgroundImage: `linear-gradient(rgba(59,130,246,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.04) 1px,transparent 1px)`, backgroundSize: '70px 70px', animation: 'gMove 28s linear infinite' }} />
-    <div style={{ position: 'relative', zIndex: 1, maxWidth: 1280, margin: '0 auto' }}>
-      <SecLabel>{label}</SecLabel>
-      <h1 style={{ fontFamily: F.serif, fontSize: 'clamp(2rem,4vw,3.5rem)', fontWeight: 700, lineHeight: 1.25, marginBottom: '1rem', color: TEXT.onDark }}>{title}</h1>
-      <p style={{ color: TEXT.mutedDark, fontSize: '0.95rem', lineHeight: 1.8, maxWidth: 560, fontFamily: F.sans }}>{desc}</p>
-    </div>
-  </div>
-);
-
-const CtaBand = ({ title, desc }: { title: string; desc: string }) => (
-  <div style={{ padding: '6rem 5vw', background: `linear-gradient(135deg,${BLUE.ctaBg},#1E40AF)`, textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
-    <div style={{ position: 'absolute', inset: 0, backgroundImage: `linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px)`, backgroundSize: '60px 60px' }} />
-    <div style={{ position: 'relative' }}>
-      <h2 className="fu" style={{ fontFamily: F.serif, fontSize: 'clamp(1.7rem,3.2vw,2.8rem)', fontWeight: 700, marginBottom: '0.9rem', color: '#FFFFFF' }}>{title}</h2>
-      <p className="fu" style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '2.5rem', fontSize: '0.92rem', fontFamily: F.sans }}>{desc}</p>
-      <div className="fu" style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-        <Link to="/contact" style={{ display: 'inline-flex', background: '#FFFFFF', color: BLUE._500, padding: '0.85rem 2rem', fontWeight: 700, fontSize: '0.87rem', textDecoration: 'none', borderRadius: '4px', fontFamily: F.sans }}>무료 상담 신청 →</Link>
-        <Link to="/services" style={{ display: 'inline-flex', border: '1.5px solid rgba(255,255,255,0.4)', color: '#FFFFFF', padding: '0.85rem 2rem', fontSize: '0.87rem', textDecoration: 'none', borderRadius: '4px', background: 'none', fontFamily: F.sans }}>서비스 보기</Link>
-      </div>
-    </div>
-  </div>
-);
-
-const faqItems = [
-  { q: '병원 컨설팅 비용이 얼마인가요?', a: '네스트솔루션은 초기 상담을 무료로 진행합니다. 컨설팅 비용은 병원 규모와 서비스 범위에 따라 맞춤 산정되며, 무료 상담 후 정확한 견적을 안내해드립니다.' },
-  { q: '컨설팅 효과는 얼마나 빨리 나타나나요?', a: 'CS 개선은 1~2개월, 마케팅 성과는 2~3개월, 경영 구조 개선은 3~6개월 내 가시적인 변화가 나타납니다. 실제 사례에서 4~5개월 만에 매출이 150% 이상 성장한 병원도 있습니다.' },
-  { q: '소규모 의원도 컨설팅 효과가 있나요?', a: '네스트솔루션은 의원급(소규모) 병원을 전문으로 합니다. 원장 2인 체제 정형외과, 개원 3년차 내과 등 소규모 의원에서 매출 153~185% 성장 사례가 있습니다.' },
-  { q: '컨설팅 기간은 얼마나 되나요?', a: '기본 컨설팅은 3~6개월 과정입니다. 서비스 범위에 따라 조정되며, 단기 집중 컨설팅(1~2개월)도 운영합니다.' },
-];
-
-function FaqAccordion({ items }: { items: typeof faqItems }) {
-  const [open, setOpen] = useState<number | null>(null);
-  return (
-    <dl style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-      {items.map((item, i) => (
-        <div key={i} style={{ background: '#FFFFFF', border: `1px solid ${open === i ? BLUE._500 : BORDER.light}`, borderRadius: '8px', overflow: 'hidden', transition: 'border-color 0.2s' }}>
-          <dt>
-            <button
-              onClick={() => setOpen(open === i ? null : i)}
-              aria-expanded={open === i}
-              style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.2rem 1.5rem', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', gap: '1rem' }}
-            >
-              <span style={{ fontFamily: F.sans, fontWeight: 700, fontSize: '0.92rem', color: TEXT.onLight, lineHeight: 1.4 }}>{item.q}</span>
-              <span style={{ color: BLUE._500, fontSize: '1.1rem', flexShrink: 0, transform: open === i ? 'rotate(45deg)' : 'rotate(0deg)', transition: 'transform 0.25s', display: 'inline-block' }}>+</span>
-            </button>
-          </dt>
-          <dd style={{ margin: 0, maxHeight: open === i ? '10rem' : 0, overflow: 'hidden', transition: 'max-height 0.3s ease' }}>
-            <p style={{ fontFamily: F.sans, fontSize: '0.87rem', color: TEXT.mutedLight, lineHeight: 1.8, padding: '0 1.5rem 1.3rem', margin: 0 }}>{item.a}</p>
-          </dd>
-        </div>
-      ))}
-    </dl>
-  );
-}
+import { SecLabel } from '../components/shared/SecLabel';
+import { PageBanner } from '../components/shared/PageBanner';
+import { CtaBand } from '../components/shared/CtaBand';
+import { FaqAccordion } from '../components/shared/FaqAccordion';
+import { BtnPrimary, BtnOutline } from '../components/shared/Buttons';
+import { painFaq } from '../data/faq';
+import { Link } from 'react-router';
 
 const painCards = [
   { icon: '📉', title: '환자가 계속 줄고 있어요', desc: '신규 환자 유입이 눈에 띄게 줄었습니다. 마케팅에 돈도 써봤는데 효과가 없고, 기존 환자들의 재방문율도 점점 낮아지고 있어요.', solution: '네스트솔루션의 마케팅 & CS 솔루션으로 해결' },
@@ -89,13 +25,15 @@ const testimonials = [
 
 export function Pain() {
   useScrollAnimation();
-  useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
     <div style={{ background: LIGHT.bg0 }}>
-      <PageBanner label="Pain Point" title={<>원장님,<br />이런 <span className="text-grad">고민</span> 있으신가요?</>} desc="혼자 해결하려 하지 마세요. 네스트솔루션이 함께 고민하고 함께 해결합니다. 17년 임상 경험으로 쌓은 현장의 지혜로, 원장님의 문제를 정확히 이해합니다." />
+      <PageBanner
+        label="Pain Point"
+        title={<>원장님,<br />이런 <span className="text-grad">고민</span> 있으신가요?</>}
+        desc="혼자 해결하려 하지 마세요. 네스트솔루션이 함께 고민하고 함께 해결합니다. 17년 임상 경험으로 쌓은 현장의 지혜로, 원장님의 문제를 정확히 이해합니다."
+      />
 
-      {/* Pain Cards */}
       <section style={{ background: LIGHT.bg0, padding: '6rem 5vw' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '1.5rem' }}>
           {painCards.map((c, i) => (
@@ -105,7 +43,6 @@ export function Pain() {
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'rotateY(180deg)'; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'rotateY(0deg)'; }}
               >
-                {/* 앞면 — 고민 */}
                 <div style={{
                   position: 'absolute', inset: 0, backfaceVisibility: 'hidden',
                   background: '#FFFFFF', border: `1px solid ${BORDER.light}`, padding: '1.8rem 2.2rem 2.8rem',
@@ -117,12 +54,10 @@ export function Pain() {
                   <h3 style={{ fontSize: '20px', fontWeight: 700, marginBottom: '0.8rem', color: TEXT.onLight, fontFamily: F.sans, whiteSpace: 'pre-line' }}>{c.title}</h3>
                   <p style={{ color: TEXT.mutedLight, fontSize: '0.86rem', lineHeight: 1.8, fontFamily: F.sans }}>{c.desc}</p>
                 </div>
-
-                {/* 뒷면 — 해결 방안 */}
                 <div style={{
                   position: 'absolute', inset: 0, backfaceVisibility: 'hidden',
                   transform: 'rotateY(180deg)',
-                  background: `linear-gradient(135deg,${BLUE._600 ?? '#2563EB'},${BLUE._400})`,
+                  background: `linear-gradient(135deg,${BLUE._600},${BLUE._400})`,
                   border: `1px solid ${BLUE._400}`, borderRadius: '8px', padding: '1.8rem 2.2rem 3.2rem',
                   display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start',
                   boxShadow: '0 12px 36px rgba(37,99,235,0.25)',
@@ -139,7 +74,6 @@ export function Pain() {
         </div>
       </section>
 
-      {/* Service Links */}
       <section style={{ background: LIGHT.bg1, padding: '2.5rem 5vw' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.2rem' }}>
           <div>
@@ -147,14 +81,13 @@ export function Pain() {
             <p style={{ fontSize: '0.8rem', color: TEXT.mutedLight, fontFamily: F.sans }}>고민에 맞는 서비스를 바로 확인하세요</p>
           </div>
           <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-            {[{ label: 'CS 관리', to: '/services' }, { label: '마케팅', to: '/services' }, { label: '경영 개선', to: '/services' }, { label: '인력 관리', to: '/services' }].map(s => (
-              <Link key={s.label} to={s.to} style={{ fontSize: '0.78rem', border: `1px solid ${BLUE._500}`, color: BLUE._500, padding: '0.35rem 0.9rem', borderRadius: '20px', textDecoration: 'none', fontFamily: F.sans, whiteSpace: 'nowrap' }}>{s.label} →</Link>
+            {['CS 관리', '마케팅', '경영 개선', '인력 관리'].map(s => (
+              <Link key={s} to="/services" style={{ fontSize: '0.78rem', border: `1px solid ${BLUE._500}`, color: BLUE._500, padding: '0.35rem 0.9rem', borderRadius: '20px', textDecoration: 'none', fontFamily: F.sans, whiteSpace: 'nowrap' }}>{s} →</Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
       <section style={{ background: LIGHT.bg1, padding: '6rem 5vw' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
           <div className="fu" style={{ textAlign: 'center', marginBottom: '3rem' }}>
@@ -172,18 +105,17 @@ export function Pain() {
         </div>
       </section>
 
-      {/* FAQ */}
       <section style={{ background: LIGHT.bg0, padding: '6rem 5vw' }}>
         <div style={{ maxWidth: 760, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
             <SecLabel center>FAQ</SecLabel>
             <h2 style={{ fontFamily: F.serif, fontSize: 'clamp(1.4rem,3vw,2rem)', fontWeight: 700, color: TEXT.onLight }}>자주 묻는 질문</h2>
           </div>
-          <FaqAccordion items={faqItems} />
+          <FaqAccordion items={painFaq} />
         </div>
       </section>
 
-      <CtaBand title="지금 바로 해결할 수 있습니다" desc="상담은 항상 무료입니다. 원장님의 고민을 들려주세요." />
+      <CtaBand title="지금 바로 해결할 수 있습니다" desc="상담은 항상 무료입니다. 원장님의 고민을 들려주세요." secondaryCta={{ label: '서비스 보기', to: '/services' }} />
     </div>
   );
 }

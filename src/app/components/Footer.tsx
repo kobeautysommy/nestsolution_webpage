@@ -1,17 +1,10 @@
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import { BLUE, TEXT, BORDER, LIGHT, F } from '../utils/colors';
+import { useBreakpoint } from '../hooks/useBreakpoint';
 import { Logo } from './Nav';
 
 export function Footer() {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 640);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, []);
+  const { isMobile } = useBreakpoint();
 
   return (
     <footer

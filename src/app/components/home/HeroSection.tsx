@@ -1,0 +1,103 @@
+import { Link } from 'react-router';
+import { BLUE, TEXT, F } from '../../utils/colors';
+
+export function HeroSection() {
+  return (
+    <section style={{
+      minHeight: 'auto', display: 'flex', alignItems: 'center',
+      padding: '5cm 5vw', position: 'relative', overflow: 'hidden',
+    }}>
+      <div style={{
+        position: 'absolute', inset: 0,
+        background: `
+          radial-gradient(ellipse 60% 70% at 75% 45%, rgba(96,165,250,0.18) 0%, transparent 55%),
+          radial-gradient(ellipse 45% 55% at 5% 85%, rgba(147,197,253,0.12) 0%, transparent 50%),
+          linear-gradient(155deg, #3B5998 0%, #4A6FBD 45%, #5B8CE8 100%)`,
+      }} />
+      <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
+        <div style={{
+          position: 'absolute', inset: '-50%',
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.05) 1px,transparent 1px)`,
+          backgroundSize: '70px 70px', animation: 'gMove 28s linear infinite',
+        }} />
+      </div>
+
+      <div style={{ position: 'relative', zIndex: 2, maxWidth: 740 }}>
+        <div style={{
+          display: 'inline-flex', alignItems: 'center', gap: '0.7rem',
+          fontSize: '0.7rem', letterSpacing: '0.22em', textTransform: 'uppercase',
+          color: '#FFFFFF', marginBottom: '1rem',
+        }}>
+          <span style={{ width: 28, height: 1, background: '#FFFFFF', display: 'inline-block' }} />
+          병·의원 컨설팅 전문 기업 · 임상경험 17년+
+        </div>
+        <h1 style={{
+          fontFamily: F.serif, fontSize: 'clamp(2.4rem,5vw,4.8rem)',
+          fontWeight: 700, lineHeight: 1.2, marginBottom: '0.7rem', color: '#FFFFFF',
+        }}>
+          원장님은 <span className="text-grad-dark">연기자</span>,<br />
+          저희는 <span className="text-grad-dark">연출자</span>입니다
+        </h1>
+        <p className="speakable" style={{ fontFamily: F.serif, fontSize: 'clamp(0.9rem,1.7vw,1.15rem)', color: '#FFFFFF', fontWeight: 300, letterSpacing: '0.05em', marginBottom: '0.8rem' }}>
+          현장을 아는 사람만이 줄 수 있는 컨설팅
+        </p>
+        <p className="speakable" style={{ color: '#FFFFFF', lineHeight: 1.9, fontSize: '0.92rem', maxWidth: 510, marginBottom: '1.6rem', fontFamily: F.sans }}>
+          CS 관리부터 마케팅, 경영 개선, 인력 관리까지
+          — 이론이 아닌 17년 임상 실전으로 원장님의 병원을 함께 설계합니다.
+        </p>
+        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
+          <Link to="/contact" style={{
+            display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+            background: `linear-gradient(135deg,${BLUE._500},${BLUE._400})`,
+            color: '#fff', padding: '0.7rem 1.5rem',
+            fontWeight: 700, fontSize: '0.87rem', letterSpacing: '0.05em',
+            textDecoration: 'none', fontFamily: F.sans, borderRadius: '4px',
+            boxShadow: `0 4px 18px rgba(37,99,235,0.35)`, transition: 'all 0.25s',
+          }}>무료 상담 신청 →</Link>
+          <a href="http://pf.kakao.com/_HStBn" target="_blank" rel="noreferrer" style={{
+            display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+            border: `1.5px solid #FFFFFF`, color: '#FFFFFF',
+            padding: '0.85rem 2rem', fontSize: '0.87rem', letterSpacing: '0.05em',
+            textDecoration: 'none', fontFamily: F.sans,
+            borderRadius: '4px', background: 'none', transition: 'all 0.25s',
+          }}>카카오 상담</a>
+          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+            <a href="tel:010-3129-8248" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#FFFFFF', fontSize: '0.85rem', textDecoration: 'none', fontFamily: F.sans }}>📞 010-3129-8248</a>
+            <a href="tel:010-9470-8248" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#FFFFFF', fontSize: '0.85rem', textDecoration: 'none', fontFamily: F.sans }}>📞 010-9470-8248</a>
+          </div>
+        </div>
+      </div>
+
+      <div className="hidden lg:flex" style={{
+        position: 'absolute', right: '5vw', top: '50%', transform: 'translateY(-50%)',
+        zIndex: 2, flexDirection: 'column', gap: '1rem',
+      }}>
+        {[
+          { big: '17+', lbl: 'Years Clinical Exp.' },
+          { big: '4+',  lbl: 'Core Services' },
+          { big: '100%',lbl: 'Customized' },
+        ].map(s => (
+          <div key={s.lbl} style={{
+            background: 'rgba(15,40,90,0.55)', backdropFilter: 'blur(12px)',
+            border: `1px solid rgba(147,197,253,0.25)`, padding: '1.2rem 1.8rem',
+            borderLeft: `3px solid ${BLUE._300}`, textAlign: 'right', minWidth: 155,
+          }}>
+            <div className="text-grad-dark" style={{ fontFamily: F.bebas, fontSize: '2.4rem', lineHeight: 1 }}>{s.big}</div>
+            <div style={{ fontSize: '0.65rem', color: TEXT.grayDark, letterSpacing: '0.12em', textTransform: 'uppercase', marginTop: '0.2rem', fontFamily: F.sans }}>{s.lbl}</div>
+          </div>
+        ))}
+      </div>
+
+      <div style={{
+        position: 'absolute', bottom: '3rem', left: '50%',
+        transform: 'translateX(-50%)', zIndex: 2,
+        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem',
+        color: TEXT.grayDark, fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase',
+        animation: 'nestBounce 2s ease-in-out infinite', fontFamily: F.sans,
+      }}>
+        <span style={{ width: 1, height: 36, background: `linear-gradient(${BLUE._400},transparent)`, display: 'block' }} />
+        scroll
+      </div>
+    </section>
+  );
+}

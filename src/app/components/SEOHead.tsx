@@ -116,7 +116,7 @@ export function SEOHead({ seo }: { seo: PageSEO }) {
     setMeta({ property: 'og:image', content: ogImage });
     setMeta({ property: 'og:image:width', content: '1200' });
     setMeta({ property: 'og:image:height', content: '630' });
-    setMeta({ property: 'og:image:alt', content: title });
+    setMeta({ property: 'og:image:alt', content: `네스트솔루션 ${title}` });
 
     // Twitter Card
     setMeta({ name: 'twitter:card', content: 'summary_large_image' });

@@ -17,6 +17,7 @@ export const LIGHT = {
 
 // Blue accent palette
 export const BLUE = {
+  _600: '#1E40AF',            // deep blue (CTA band gradient end)
   _500: '#2563EB',            // primary blue
   _400: '#3B82F6',            // medium blue
   _300: '#60A5FA',            // light blue

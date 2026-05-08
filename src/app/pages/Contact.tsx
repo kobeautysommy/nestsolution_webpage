@@ -1,12 +1,7 @@
-import { useEffect } from 'react';
-import { BLUE, TEXT, BORDER, DARK, LIGHT, F, accentGrad } from '../utils/colors';
+import { BLUE, TEXT, BORDER, LIGHT, F } from '../utils/colors';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
-
-const SecLabel = ({ children }: { children: string }) => (
-  <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', fontSize: '0.68rem', letterSpacing: '0.22em', textTransform: 'uppercase', color: BLUE._500, marginBottom: '0.9rem' }}>
-    <span style={{ width: 20, height: 1, background: BLUE._500, display: 'inline-block' }} />{children}
-  </div>
-);
+import { SecLabel } from '../components/shared/SecLabel';
+import { PageBanner } from '../components/shared/PageBanner';
 
 const topics = [
   '🩺 CS 관리 및 직원 교육이 필요해요',
@@ -18,21 +13,15 @@ const topics = [
 
 export function Contact() {
   useScrollAnimation();
-  useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
     <div style={{ background: LIGHT.bg0 }}>
-      {/* Banner */}
-      <div style={{ padding: '9rem 5vw 5rem', position: 'relative', overflow: 'hidden', background: LIGHT.bg1, borderBottom: `1px solid ${BORDER.light}` }}>
-        <div style={{ position: 'absolute', inset: '-50%', backgroundImage: `linear-gradient(rgba(37,99,235,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,0.08) 1px,transparent 1px)`, backgroundSize: '70px 70px', animation: 'gMove 28s linear infinite' }} />
-        <div style={{ position: 'relative', zIndex: 1, maxWidth: 1280, margin: '0 auto' }}>
-          <SecLabel>Contact</SecLabel>
-          <h1 style={{ fontFamily: F.serif, fontSize: 'clamp(2rem,4vw,3.5rem)', fontWeight: 700, lineHeight: 1.25, marginBottom: '1rem', color: TEXT.onLight }}>
-            무료 상담<br /><span className="text-grad">신청하기</span>
-          </h1>
-          <p style={{ color: TEXT.mutedLight, fontSize: '0.95rem', lineHeight: 1.8, maxWidth: 560, fontFamily: F.sans }}>원장님의 고민을 들려주세요. 17년 임상 경험으로 함께 해결책을 찾겠습니다. 상담은 항상 무료입니다.</p>
-        </div>
-      </div>
+      <PageBanner
+        label="Contact"
+        title={<>무료 상담<br /><span className="text-grad">신청하기</span></>}
+        desc="원장님의 고민을 들려주세요. 17년 임상 경험으로 함께 해결책을 찾겠습니다. 상담은 항상 무료입니다."
+        theme="light"
+      />
 
       {/* Contact Body */}
       <section style={{ padding: '6rem 5vw', background: LIGHT.bg0 }}>

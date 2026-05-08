@@ -1,16 +1,17 @@
 import { createBrowserRouter, Outlet, useLocation } from 'react-router';
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { Nav } from './components/Nav';
 import { Footer } from './components/Footer';
 import { ScrollToTop } from './components/ScrollToTop';
 import { SEOHead, SITE_URL, type PageSEO } from './components/SEOHead';
-import { Home } from './pages/Home';
-import { Pain } from './pages/Pain';
-import { Services } from './pages/Services';
-import { Process } from './pages/Process';
-import { About } from './pages/About';
-import { Contact } from './pages/Contact';
-import { Cases } from './pages/Cases';
+
+const Home     = lazy(() => import('./pages/Home').then(m => ({ default: m.Home })));
+const Pain     = lazy(() => import('./pages/Pain').then(m => ({ default: m.Pain })));
+const Services = lazy(() => import('./pages/Services').then(m => ({ default: m.Services })));
+const Process  = lazy(() => import('./pages/Process').then(m => ({ default: m.Process })));
+const About    = lazy(() => import('./pages/About').then(m => ({ default: m.About })));
+const Contact  = lazy(() => import('./pages/Contact').then(m => ({ default: m.Contact })));
+const Cases    = lazy(() => import('./pages/Cases').then(m => ({ default: m.Cases })));
 
 /* ─── 페이지별 SEO 설정 ──────────────────────────────────────────────────── */
 
@@ -333,7 +334,9 @@ function Root() {
       <SEOHead seo={seo} />
       <Nav />
       <main style={{ paddingTop: 64 }}>
-        <Outlet />
+        <Suspense fallback={<div style={{ minHeight: '60vh' }} />}>
+          <Outlet />
+        </Suspense>
       </main>
       <Footer />
       <ScrollToTop />

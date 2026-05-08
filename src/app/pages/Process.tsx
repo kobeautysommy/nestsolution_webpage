@@ -1,13 +1,9 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router';
-import { BLUE, TEXT, BORDER, DARK, LIGHT, F, accentGrad } from '../utils/colors';
+import { useState } from 'react';
+import { BLUE, TEXT, BORDER, LIGHT, F } from '../utils/colors';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
-
-const SecLabel = ({ children, center }: { children: string; center?: boolean }) => (
-  <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', fontSize: '0.68rem', letterSpacing: '0.22em', textTransform: 'uppercase', color: BLUE._500, marginBottom: '0.9rem', justifyContent: center ? 'center' : undefined }}>
-    <span style={{ width: 20, height: 1, background: BLUE._500, display: 'inline-block' }} />{children}
-  </div>
-);
+import { SecLabel } from '../components/shared/SecLabel';
+import { PageBanner } from '../components/shared/PageBanner';
+import { CtaBand } from '../components/shared/CtaBand';
 
 const steps = [
   { n: '01', t: '심층 분석 & 진단', d: '현장 방문, 직원 인터뷰, 데이터 분석으로 병원의 현재 상태를 정확히 파악합니다.' },
@@ -35,23 +31,15 @@ const faqs = [
 export function Process() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   useScrollAnimation();
-  useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
     <div style={{ background: LIGHT.bg0 }}>
-      {/* Banner */}
-      <div style={{ padding: '9rem 5vw 5rem', position: 'relative', overflow: 'hidden', background: `linear-gradient(155deg,${DARK.bg1},${DARK.bg0})`, borderBottom: `1px solid ${BORDER.bw}` }}>
-        <div style={{ position: 'absolute', inset: '-50%', backgroundImage: `linear-gradient(rgba(59,130,246,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.04) 1px,transparent 1px)`, backgroundSize: '70px 70px', animation: 'gMove 28s linear infinite' }} />
-        <div style={{ position: 'relative', zIndex: 1, maxWidth: 1280, margin: '0 auto' }}>
-          <SecLabel>Process</SecLabel>
-          <h1 style={{ fontFamily: F.serif, fontSize: 'clamp(2rem,4vw,3.5rem)', fontWeight: 700, lineHeight: 1.25, marginBottom: '1rem', color: TEXT.onDark }}>
-            네스트솔루션의<br /><span className="text-grad">컨설팅 과정</span>
-          </h1>
-          <p style={{ color: TEXT.mutedDark, fontSize: '0.95rem', lineHeight: 1.8, maxWidth: 560, fontFamily: F.sans }}>체계적인 단계별 접근으로 확실한 변화를 만들어냅니다.<br />진단부터 실행, 모니터링까지 함께합니다.</p>
-        </div>
-      </div>
+      <PageBanner
+        label="Process"
+        title={<>네스트솔루션의<br /><span className="text-grad">컨설팅 과정</span></>}
+        desc="체계적인 단계별 접근으로 확실한 변화를 만들어냅니다. 진단부터 실행, 모니터링까지 함께합니다."
+      />
 
-      {/* 4 Steps */}
       <section style={{ background: LIGHT.bg0, padding: '6rem 5vw' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
           <div className="fu" style={{ textAlign: 'center', marginBottom: '3rem' }}>
@@ -78,7 +66,6 @@ export function Process() {
         </div>
       </section>
 
-      {/* Timeline */}
       <section style={{ background: LIGHT.bg1, padding: '6rem 5vw' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
           <div className="fu" style={{ textAlign: 'center', marginBottom: '4rem' }}>
@@ -89,7 +76,6 @@ export function Process() {
             <div style={{ position: 'absolute', left: '50%', top: 0, bottom: 0, width: 1, background: BORDER.light, transform: 'translateX(-50%)' }} className="hidden md:block" />
             {timeline.map((t, i) => (
               <div key={i} className={`fu d${(i % 3) + 1}`}>
-                {/* 모바일 레이아웃 */}
                 <div className="md:hidden" style={{ marginBottom: '2rem' }}>
                   <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '0.8rem' }}>
                     <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#FFFFFF', border: `2px solid ${BLUE._500}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: F.bebas, fontSize: '1rem', color: BLUE._500, boxShadow: `0 0 0 4px ${BLUE.dim}`, flexShrink: 0 }}>{t.n}</div>
@@ -100,8 +86,6 @@ export function Process() {
                     </div>
                   </div>
                 </div>
-                
-                {/* 데스크탑 레이아웃 */}
                 <div className="hidden md:grid" style={{ gridTemplateColumns: '1fr 52px 1fr', alignItems: 'start', marginBottom: '2.5rem' }}>
                   <div style={{ paddingRight: '2.5rem', textAlign: 'right' }}>
                     {t.side === 'L' && (
@@ -129,7 +113,6 @@ export function Process() {
         </div>
       </section>
 
-      {/* FAQ */}
       <section style={{ background: LIGHT.bg0, padding: '6rem 5vw' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
           <div className="fu" style={{ textAlign: 'center', marginBottom: '3rem' }}>
@@ -157,17 +140,7 @@ export function Process() {
         </div>
       </section>
 
-      {/* CTA */}
-      <div style={{ padding: '6rem 5vw', background: `linear-gradient(135deg,${BLUE.ctaBg},#1E40AF)`, textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: `linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px)`, backgroundSize: '60px 60px' }} />
-        <div style={{ position: 'relative' }}>
-          <h2 className="fu" style={{ fontFamily: F.serif, fontSize: 'clamp(1.7rem,3.2vw,2.8rem)', fontWeight: 700, marginBottom: '0.9rem', color: '#FFFFFF' }}>지금 시작하세요</h2>
-          <p className="fu" style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '2.5rem', fontSize: '0.92rem', fontFamily: F.sans }}>상담은 항상 무료입니다. 부담 없이 연락주세요.</p>
-          <div className="fu">
-            <Link to="/contact" style={{ display: 'inline-flex', background: '#FFFFFF', color: BLUE._500, padding: '0.85rem 2rem', fontWeight: 700, fontSize: '0.87rem', textDecoration: 'none', borderRadius: '4px', fontFamily: F.sans }}>무료 상담 신청 →</Link>
-          </div>
-        </div>
-      </div>
+      <CtaBand title="지금 시작하세요" desc="상담은 항상 무료입니다. 부담 없이 연락주세요." />
     </div>
   );
 }

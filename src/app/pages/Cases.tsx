@@ -1,31 +1,19 @@
-import { useEffect } from 'react';
-import { Link } from 'react-router';
-import { BLUE, TEXT, BORDER, DARK, LIGHT, F, accentGrad } from '../utils/colors';
+import { BLUE, TEXT, BORDER, LIGHT, F } from '../utils/colors';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
-
-const SecLabel = ({ children, center }: { children: string; center?: boolean }) => (
-  <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', fontSize: '0.68rem', letterSpacing: '0.22em', textTransform: 'uppercase', color: BLUE._500, marginBottom: '0.9rem', justifyContent: center ? 'center' : undefined }}>
-    <span style={{ width: 20, height: 1, background: BLUE._500, display: 'inline-block' }} />{children}
-  </div>
-);
+import { SecLabel } from '../components/shared/SecLabel';
+import { PageBanner } from '../components/shared/PageBanner';
+import { CtaBand } from '../components/shared/CtaBand';
 
 export function Cases() {
   useScrollAnimation();
-  useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
     <div style={{ background: LIGHT.bg0 }}>
-      {/* Banner */}
-      <div style={{ padding: '9rem 5vw 5rem', position: 'relative', overflow: 'hidden', background: `linear-gradient(155deg,${DARK.bg1},${DARK.bg0})`, borderBottom: `1px solid ${BORDER.bw}` }}>
-        <div style={{ position: 'absolute', inset: '-50%', backgroundImage: `linear-gradient(rgba(59,130,246,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.04) 1px,transparent 1px)`, backgroundSize: '70px 70px', animation: 'gMove 28s linear infinite' }} />
-        <div style={{ position: 'relative', zIndex: 1, maxWidth: 1280, margin: '0 auto' }}>
-          <SecLabel>Success Cases</SecLabel>
-          <h1 style={{ fontFamily: F.serif, fontSize: 'clamp(2rem,4vw,3.5rem)', fontWeight: 700, lineHeight: 1.25, marginBottom: '1rem', color: TEXT.onDark }}>
-            실제 사례로<br /><span className="text-grad">증명합니다</span>
-          </h1>
-          <p style={{ color: TEXT.mutedDark, fontSize: '0.95rem', lineHeight: 1.8, fontFamily: F.sans, whiteSpace: 'nowrap' }}>정형외과, 내과 — 진료과목과 관계없이 네스트솔루션의 컨설팅은 실질적인 성장을 만들어냅니다.</p>
-        </div>
-      </div>
+      <PageBanner
+        label="Success Cases"
+        title={<>실제 사례로<br /><span className="text-grad">증명합니다</span></>}
+        desc="정형외과, 내과 — 진료과목과 관계없이 네스트솔루션의 컨설팅은 실질적인 성장을 만들어냅니다."
+      />
 
       {/* Case 01 */}
       <section id="case01" style={{ padding: '6rem 5vw', background: LIGHT.bg0 }}>
@@ -341,18 +329,11 @@ export function Cases() {
         </div>
       </section>
 
-      {/* CTA */}
-      <div style={{ padding: '6rem 5vw', background: `linear-gradient(135deg,${BLUE.ctaBg},#1E40AF)`, textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: `linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px)`, backgroundSize: '60px 60px' }} />
-        <div style={{ position: 'relative' }}>
-          <SecLabel center>Next Story</SecLabel>
-          <h2 className="fu" style={{ fontFamily: F.serif, fontSize: 'clamp(1.7rem,3.2vw,2.8rem)', fontWeight: 700, marginBottom: '0.9rem', color: '#FFFFFF' }}>다음 성공 사례의<br />주인공이 되세요</h2>
-          <p className="fu" style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '2.5rem', fontSize: '0.92rem', fontFamily: F.sans }}>진료과목, 규모 관계없이 성장시킵니다. 상담은 항상 무료입니다.</p>
-          <div className="fu">
-            <Link to="/contact" style={{ display: 'inline-flex', background: '#FFFFFF', color: BLUE._500, padding: '0.85rem 2rem', fontWeight: 700, fontSize: '0.87rem', textDecoration: 'none', borderRadius: '4px', fontFamily: F.sans }}>무료 상담 신청 →</Link>
-          </div>
-        </div>
-      </div>
+      <CtaBand
+        label="Next Story"
+        title={<>다음 성공 사례의<br />주인공이 되세요</>}
+        desc="진료과목, 규모 관계없이 성장시킵니다. 상담은 항상 무료입니다."
+      />
     </div>
   );
 }

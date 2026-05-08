@@ -1,21 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router';
 import { BLUE, TEXT, BORDER, DARK, LIGHT, F } from '../utils/colors';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import { useBreakpoint } from '../hooks/useBreakpoint';
+import { SecLabel } from '../components/shared/SecLabel';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import ceoImage from 'figma:asset/ae62b28424d5b4822b9943783b07e5feda5f99cc.png';
-
-const SecLabel = ({ children, center }: { children: string; center?: boolean }) => (
-  <div style={{
-    display: 'inline-flex', alignItems: 'center', gap: '0.6rem',
-    fontSize: '0.68rem', letterSpacing: '0.22em', textTransform: 'uppercase',
-    color: BLUE._500, marginBottom: '0.9rem',
-    justifyContent: center ? 'center' : undefined,
-  }}>
-    <span style={{ width: 20, height: 1, background: BLUE._500, display: 'inline-block' }} />
-    {children}
-  </div>
-);
 
 const team = [
   { emoji: '💼', name: '행정 청구 전문가',  role: 'Admin & Billing Specialist',    desc: '병·의원 행정 및 운영 관리 전문가. 의료보험 청구·수익 최적화, 병원 마케팅 전략 수립 및 실행 경험 보유. "체계적인 운영이 곧 의료 서비스의 질을 결정한다."' },
@@ -24,17 +14,6 @@ const team = [
   { emoji: '💉', name: '간호 전문가',        role: 'Nursing Specialist · 환자 케어', desc: '간호사 출신 전문가로, 병·의원 환자 관리 프로세스 및 간호 업무 효율화를 지원합니다. 환자 안전과 만족도 향상에 집중합니다.' },
   { emoji: '📡', name: '방사선 전문가',      role: 'Radiology Specialist · 영상 관리', desc: '방사선사 출신으로 영상 검사 프로세스 최적화 및 장비 운영 효율화를 담당합니다. 정확한 검사와 환자 응대를 교육합니다.' },
 ];
-
-/* ─── 반응형 훅 ─────────────────────────────────────────────────────────── */
-function useBreakpoint() {
-  const [w, setW] = useState(() => (typeof window !== 'undefined' ? window.innerWidth : 1024));
-  useEffect(() => {
-    const fn = () => setW(window.innerWidth);
-    window.addEventListener('resize', fn);
-    return () => window.removeEventListener('resize', fn);
-  }, []);
-  return { isMobile: w < 640, isTablet: w >= 640 && w < 1024 };
-}
 
 /* ─── 팀 카드 (터치·마우스 모두 지원 플립) ─────────────────────────────── */
 function TeamCard({ t, delay }: { t: typeof team[0]; delay: number }) {
