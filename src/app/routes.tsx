@@ -12,6 +12,7 @@ const Process  = lazy(() => import('./pages/Process').then(m => ({ default: m.Pr
 const About    = lazy(() => import('./pages/About').then(m => ({ default: m.About })));
 const Contact  = lazy(() => import('./pages/Contact').then(m => ({ default: m.Contact })));
 const Cases    = lazy(() => import('./pages/Cases').then(m => ({ default: m.Cases })));
+const Profile  = lazy(() => import('./pages/Profile').then(m => ({ default: m.Profile })));
 
 /* ─── 페이지별 SEO 설정 ──────────────────────────────────────────────────── */
 
@@ -289,6 +290,40 @@ export const SEO_MAP: Record<string, PageSEO> = {
     ],
   },
 
+  '/profile': {
+    title: '김상연 대표 프로필 | 네스트솔루션 병원 컨설팅',
+    description: '18년 임상 경력의 네스트솔루션 대표 김상연. CS·마케팅·경영개선·인력관리 전문 병원 컨설턴트 프로필.',
+    keywords: '김상연, 네스트솔루션 대표, 병원 컨설턴트, 병원 컨설팅 전문가, 18년 임상 경력, 병원 CS 마케팅',
+    canonical: `${SITE_URL}/profile`,
+    jsonLd: [
+      {
+        '@type': 'ProfilePage',
+        '@id': `${SITE_URL}/profile#webpage`,
+        url: `${SITE_URL}/profile`,
+        name: '김상연 대표 프로필 | 네스트솔루션',
+        inLanguage: 'ko-KR',
+        isPartOf: { '@id': `${SITE_URL}/#website` },
+        mainEntity: {
+          '@type': 'Person',
+          '@id': `${SITE_URL}/#founder`,
+          name: '김상연',
+          jobTitle: '대표이사',
+          worksFor: { '@id': `${SITE_URL}/#organization` },
+          telephone: '010-3129-8248',
+          email: 'nestsadvice@gmail.com',
+          description: '18년 임상 경험 기반 병원 CS·마케팅·경영개선·인력관리 전문 컨설턴트',
+        },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE_URL}/` },
+          { '@type': 'ListItem', position: 2, name: '대표 프로필', item: `${SITE_URL}/profile` },
+        ],
+      },
+    ],
+  },
+
   '/contact': {
     title: '병원 컨설팅 무료 상담 신청 | 네스트솔루션',
     description: '네스트솔루션 병원 컨설팅 무료 상담 신청. 17년 임상 경험 전문가가 마케팅·CS·경영 개선을 진단합니다.',
@@ -365,6 +400,7 @@ export const routeDefs = [
       { path: 'about',       Component: About },
       { path: 'contact',     Component: Contact },
       { path: 'cases',       Component: Cases },
+      { path: 'profile',     Component: Profile },
       { path: '*',           Component: NotFound },
     ],
   },
