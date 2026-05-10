@@ -1,0 +1,377 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+
+/* 네스트솔루션 디지털 명함 스타일 */
+
+/* 전체 컨테이너 */
+.business-card-container {
+  min-height: 100vh;
+  background-color: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.business-card-wrapper {
+  width: 100%;
+  max-width: 430px;
+  min-height: 100vh;
+}
+
+/* 프로필 헤더 섹션 */
+.profile-header {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(149.98deg, rgb(241, 245, 249) 7.9439%, rgb(239, 246, 255) 50%, rgb(241, 245, 249) 92.056%);
+}
+
+.profile-image-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 400px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.profile-image {
+  height: 402.079px;
+  width: 340.051px;
+  position: relative;
+}
+
+.profile-image img {
+  position: absolute;
+  height: 167.32%;
+  left: 0;
+  max-width: none;
+  top: 0;
+  width: 111.36%;
+  object-fit: cover;
+}
+
+/* Nests 로고 */
+.profile-logo {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  height: 26px;
+  z-index: 2;
+  opacity: 0.95;
+}
+
+/* 프로필 정보 오버레이 */
+.profile-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+  padding-top: 80px;
+  padding-bottom: 32px;
+}
+
+.profile-info {
+  position: absolute;
+  left: 24px;
+  top: 7px;
+  height: 77.995px;
+  width: 95.26px;
+}
+
+.profile-name {
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  color: white;
+  margin: 0;
+}
+
+.profile-experience,
+.profile-company {
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+}
+
+/* 버튼 그룹 */
+.button-group {
+  display: flex;
+  gap: 8px;
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+}
+
+.service-button {
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(4px);
+  height: 36.992px;
+  border-radius: 10px;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+  padding: 0 12px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.service-button:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.service-button-text {
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #314158;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* 연락처 섹션 */
+.contact-section {
+  position: relative;
+  padding: 24px 16px;
+  background-color: #ffffff;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  border-bottom: 0.833px solid #e5e7eb;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.contact-link:hover {
+  background-color: #f8fafc;
+}
+
+.contact-label {
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #45556c;
+  min-width: 56px;
+  flex-shrink: 0;
+}
+
+.contact-value {
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #1d293d;
+  flex: 1;
+  text-align: right;
+  margin-right: 8px;
+}
+
+.contact-arrow {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* 소개 섹션 */
+.intro-section {
+  padding: 24px 16px;
+  background-color: #ffffff;
+}
+
+.intro-heading {
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+  color: #1d293d;
+  margin: 0 0 16px 0;
+}
+
+.intro-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+}
+
+.intro-list-item {
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #314158;
+  margin-bottom: 8px;
+  padding-left: 14px;
+  position: relative;
+}
+
+.intro-list-item::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #62748e;
+}
+
+/* 카카오톡 버튼 */
+.kakao-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 51.992px;
+  background-color: #1d293d;
+  border-radius: 10px;
+  box-shadow: 0px 1px 1.5px rgba(0, 0, 0, 0.1), 0px 1px 1px rgba(0, 0, 0, 0.1);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-decoration: none;
+  margin-bottom: 24px;
+  box-sizing: border-box;
+}
+
+.kakao-button:hover {
+  background-color: #2d3d4d;
+}
+
+.kakao-icon {
+  width: 24px;
+  height: 24px;
+  background-color: #fee500;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.kakao-button-text {
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: white;
+}
+
+/* 회사 소개 */
+.company-description {
+  margin-bottom: 24px;
+}
+
+.company-heading {
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+  color: #1d293d;
+  margin: 0 0 16px 0;
+}
+
+.company-paragraph {
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22.75px;
+  color: #314158;
+  margin: 0 0 16px 0;
+}
+
+/* 서비스 섹션 */
+.services-section {
+  margin-bottom: 24px;
+}
+
+.services-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.services-icon {
+  width: 16px;
+  height: 16px;
+  background-color: #2b7fff;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.services-title {
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #1d293d;
+}
+
+.services-list {
+  list-style: none;
+  padding: 0 0 0 24px;
+  margin: 0;
+}
+
+.services-list-item {
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #314158;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.services-list-item::before {
+  content: "•";
+  position: absolute;
+  left: -14px;
+  color: #62748e;
+}
+
+/* 비디오 섹션 */
+.video-section {
+  position: relative;
+  width: 100%;
+  height: 479.987px;
+  overflow: hidden;
+}
+
+.video-section img,
+.video-section video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 반응형 */
+@media (max-width: 430px) {
+  .business-card-wrapper {
+    max-width: 100%;
+  }
+}
+
+/* 유틸리티 */
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+
+.break-all {
+  word-break: break-all;
+}
