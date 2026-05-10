@@ -295,6 +295,7 @@ export const SEO_MAP: Record<string, PageSEO> = {
     description: '18년 임상 경력의 네스트솔루션 대표 김상연. CS·마케팅·경영개선·인력관리 전문 병원 컨설턴트 프로필.',
     keywords: '김상연, 네스트솔루션 대표, 병원 컨설턴트, 병원 컨설팅 전문가, 18년 임상 경력, 병원 CS 마케팅',
     canonical: `${SITE_URL}/profile`,
+    ogImage: `${SITE_URL}/assets/OG-IMAGE.png`,
     jsonLd: [
       {
         '@type': 'ProfilePage',
