@@ -3,7 +3,7 @@ import { readFileSync, mkdirSync, writeFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-const ROUTES = ['/', '/pain', '/services', '/process', '/about', '/contact', '/cases'];
+const ROUTES = ['/', '/pain', '/services', '/process', '/about', '/contact', '/cases', '/profile'];
 const SITE_URL = 'https://nestsolution.co.kr';
 const ROOT = process.cwd();
 
@@ -54,6 +54,22 @@ function injectSEO(template, seo, route) {
     /(<meta name="twitter:description" content=")[^"]*/,
     rep(`<meta name="twitter:description" content="${seo.description}`)
   );
+
+  // og:image / twitter:image 교체 (페이지별 이미지가 있을 때만)
+  if (seo.ogImage) {
+    html = html.replace(
+      /(<meta property="og:image" content=")[^"]*/,
+      rep(`<meta property="og:image" content="${seo.ogImage}`)
+    );
+    html = html.replace(
+      /(<meta property="og:image:alt" content=")[^"]*/,
+      rep(`<meta property="og:image:alt" content="${seo.title}`)
+    );
+    html = html.replace(
+      /(<meta name="twitter:image" content=")[^"]*/,
+      rep(`<meta name="twitter:image" content="${seo.ogImage}`)
+    );
+  }
 
   // 페이지별 JSON-LD 추가 (Organization/WebSite 기본 JSON-LD는 유지)
   if (seo.jsonLd) {
