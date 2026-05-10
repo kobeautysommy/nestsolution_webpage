@@ -84,7 +84,7 @@ export function Profile() {
             rel="noopener noreferrer"
           >
             <div className="kakao-icon">
-              <img src="/assets/kakao%20Icon%20(2).svg" alt="kakao" width={14} height={14} />
+              <img src="/assets/check%20Icon.svg" alt="kakao" width={14} height={14} />
             </div>
             <span className="kakao-button-text">카카오톡 1:1 상담하기</span>
           </a>
@@ -112,7 +112,7 @@ export function Profile() {
           <div className="services-section">
             <div className="services-header">
               <div className="services-icon">
-                <img src="/assets/check%20Icon.svg" alt="" width={10} height={10} />
+                <img src="/assets/kakao%20Icon%20(2).svg" alt="" width={10} height={10} />
               </div>
               <span className="services-title">주요 서비스</span>
             </div>
