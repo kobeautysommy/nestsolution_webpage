@@ -18,15 +18,36 @@ const MARQUEE_ITEMS = [...LOGOS, ...LOGOS, ...LOGOS];
 
 const BG = '#EEF5FF';   // light-blue section bg — logos' white areas blend in perfectly
 
+function PartnerSvg({ size, opacity }: { size: number; opacity: number }) {
+  return (
+    <svg viewBox="0 0 19.2 17.8" width={size} height={size} className="partner-svg-deco" aria-hidden="true">
+      <path className="cls-1" d="M0.1,12.8c0,0,8.9-16.6,13.8-4.7C13.9,8.2,11.2-12.7,0.1,12.8z" style={{ opacity }} />
+      <path className="cls-2" d="M12.4,0.1c0,0,10,16-3.3,13.9C9.1,14,28.9,22.5,12.4,0.1z" style={{ opacity }} />
+      <path className="cls-3" d="M7,7C7,7-3.1,17,17.5,16.9C17.5,16.9-10.1,21.2,7,7z" style={{ opacity }} />
+    </svg>
+  );
+}
+
 export function Partners() {
   return (
     <section
       id="associate-vendor"
       className="overflow-hidden"
-      style={{ background: BG, padding: '3rem 0', borderTop: '1px solid rgba(37,99,235,0.08)' }}
+      style={{ background: BG, padding: '3rem 0', borderTop: '1px solid rgba(37,99,235,0.08)', position: 'relative' }}
     >
+      {/* Background deco SVGs — left / center / right */}
+      <div style={{ position: 'absolute', top: '50%', left: '15%', transform: 'translate(-50%, -50%)', pointerEvents: 'none', zIndex: 0 }}>
+        <PartnerSvg size={220} opacity={0.18} />
+      </div>
+      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', pointerEvents: 'none', zIndex: 0 }}>
+        <PartnerSvg size={220} opacity={0.18} />
+      </div>
+      <div style={{ position: 'absolute', top: '50%', left: '85%', transform: 'translate(-50%, -50%)', pointerEvents: 'none', zIndex: 0 }}>
+        <PartnerSvg size={220} opacity={0.18} />
+      </div>
+
       {/* Header */}
-      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 5vw', marginBottom: '2.5rem' }}>
+      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 5vw', marginBottom: '2.5rem', position: 'relative', zIndex: 1 }}>
         <div style={{
           display: 'inline-flex', alignItems: 'center', gap: '0.6rem',
           fontSize: '0.68rem', letterSpacing: '0.22em', textTransform: 'uppercase',
@@ -34,6 +55,7 @@ export function Partners() {
         }}>
           <span style={{ width: 20, height: 1, background: BLUE._500, display: 'inline-block' }} />
           Associate Vendor
+          <PartnerSvg size={28} opacity={1} />
         </div>
         <h2 style={{
           fontFamily: F.sans, fontSize: 'clamp(1.4rem,3vw,2rem)',
@@ -44,7 +66,7 @@ export function Partners() {
       </div>
 
       {/* Marquee */}
-      <div className="relative w-full py-1">
+      <div className="relative w-full py-1" style={{ zIndex: 1 }}>
         {/* Fade edges */}
         <div
           className="absolute left-0 top-0 bottom-0 w-28 z-10 pointer-events-none"

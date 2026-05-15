@@ -14,8 +14,19 @@ export function ServiceShowcase() {
     <section id="trademark" className="py-16 md:py-20" style={{
       background: `linear-gradient(155deg, #1E3A8A 0%, #1E40AF 45%, #2563EB 100%)`,
       position: 'relative',
+      overflow: 'hidden',
     }}>
-      <div className="container mx-auto px-6">
+      {/* animated grid overlay */}
+      <div style={{ position: 'absolute', inset: '-50%', backgroundImage: `linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px)`, backgroundSize: '60px 60px', animation: 'gMove 28s linear infinite', pointerEvents: 'none' }} />
+
+      {/* floating light orbs */}
+      <div style={{ position: 'absolute', width: 600, height: 600, borderRadius: '50%', background: 'radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 65%)', top: '-220px', right: '-120px', animation: 'floatOrbA 16s ease-in-out infinite', pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', width: 420, height: 420, borderRadius: '50%', background: 'radial-gradient(circle, rgba(96,165,250,0.22) 0%, transparent 65%)', bottom: '-160px', left: '-80px', animation: 'floatOrbB 22s ease-in-out infinite', pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', width: 280, height: 280, borderRadius: '50%', background: 'radial-gradient(circle, rgba(191,219,254,0.15) 0%, transparent 65%)', top: '35%', left: '35%', animation: 'floatOrbC 18s ease-in-out infinite', pointerEvents: 'none' }} />
+
+      {/* shimmer sweep */}
+      <div style={{ position: 'absolute', inset: 0, width: '40%', backgroundImage: 'linear-gradient(105deg, transparent 0%, rgba(255,255,255,0.07) 50%, transparent 100%)', animation: 'shimmerSweep 9s ease-in-out 1s infinite', pointerEvents: 'none' }} />
+      <div className="container mx-auto px-6" style={{ position: 'relative', zIndex: 1 }}>
         {/* Section label */}
         <div style={{
           display: 'inline-flex', alignItems: 'center', gap: '0.6rem',
@@ -55,25 +66,35 @@ export function ServiceShowcase() {
 
         {/* 상표등록증 3장 */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
-          {trademarks.map((tm, index) => (
-            <div
-              key={index}
-              style={{
-                overflow: 'hidden', borderRadius: '8px',
-                border: `1px solid rgba(147,197,253,0.2)`,
-                boxShadow: '0 4px 24px rgba(0,0,0,0.25)',
-                transition: 'transform 0.3s, box-shadow 0.3s',
-              }}
-              onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'translateY(-4px)'; el.style.boxShadow = '0 12px 40px rgba(0,0,0,0.35)'; }}
-              onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'none'; el.style.boxShadow = '0 4px 24px rgba(0,0,0,0.25)'; }}
-            >
-              <img
-                src={tm.image}
-                alt={tm.alt}
-                className="w-full h-full object-cover block"
-              />
-            </div>
-          ))}
+          {trademarks.map((tm, index) => {
+            const durations = [3.8, 4.6, 4.1];
+            const delays = [0, -1.5, -3.0];
+            return (
+              <div
+                key={index}
+                style={{
+                  animation: `floatCard ${durations[index]}s ease-in-out ${delays[index]}s infinite`,
+                }}
+              >
+                <div
+                  style={{
+                    overflow: 'hidden', borderRadius: '8px',
+                    border: `1px solid rgba(147,197,253,0.2)`,
+                    boxShadow: '0 4px 24px rgba(0,0,0,0.25)',
+                    transition: 'transform 0.3s, box-shadow 0.3s, border-color 0.3s',
+                  }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'translateY(-6px) scale(1.02)'; el.style.boxShadow = '0 16px 48px rgba(0,0,0,0.4)'; el.style.borderColor = 'rgba(147,197,253,0.5)'; }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ''; el.style.boxShadow = '0 4px 24px rgba(0,0,0,0.25)'; el.style.borderColor = 'rgba(147,197,253,0.2)'; }}
+                >
+                  <img
+                    src={tm.image}
+                    alt={tm.alt}
+                    className="w-full h-full object-cover block"
+                  />
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

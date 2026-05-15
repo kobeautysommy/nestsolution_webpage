@@ -10,11 +10,16 @@ const whyCards = [
 
 export function WhyMini() {
   return (
-    <section style={{ background: LIGHT.bg1, padding: '6rem 5vw' }}>
+    <section className="bg-slide" style={{
+      padding: '6rem 5vw',
+      position: 'relative',
+      backgroundImage: `linear-gradient(rgba(4,9,15,0.72), rgba(4,9,15,0.72)),
+        url(https://blog.udemy.com/wp-content/uploads/2014/04/shutterstock_100422550.jpg)`,
+    }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
         <div className="fu" style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <SecLabel center onLight>Why NestSolution</SecLabel>
-          <h2 style={{ fontFamily: F.serif, fontSize: 'clamp(1.6rem,3vw,2.5rem)', fontWeight: 700, color: TEXT.onLight }}>왜 네스트솔루션인가?</h2>
+          <SecLabel center>Why NestSolution</SecLabel>
+          <h2 style={{ fontFamily: F.serif, fontSize: 'clamp(1.6rem,3vw,2.5rem)', fontWeight: 700, color: TEXT.onDark }}>왜 네스트솔루션인가?</h2>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(260px,1fr))', gap: '1.5rem' }}>
           {whyCards.map((c, i) => (
@@ -35,7 +40,7 @@ export function WhyMini() {
           ))}
         </div>
         <div className="fu" style={{ textAlign: 'center', marginTop: '2rem' }}>
-          <BtnOutline to="/about" onLight>대표 소개 보기 →</BtnOutline>
+          <BtnOutline to="/about">대표 소개 보기 →</BtnOutline>
         </div>
       </div>
     </section>

@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { BLUE, TEXT, BORDER, LIGHT, F } from '../utils/colors';
+import { useState, useEffect, useRef } from 'react';
+import * as THREE from 'three';
+import { BLUE, TEXT, BORDER, DARK, LIGHT, F } from '../utils/colors';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { SecLabel } from '../components/shared/SecLabel';
 import { PageBanner } from '../components/shared/PageBanner';
@@ -28,6 +29,89 @@ const faqs = [
   { q: '컨설팅 후 효과가 언제부터 나타나나요?', a: 'CS 교육의 경우 2~4주 내에 변화를 체감하고, 마케팅은 1~2개월 후, 경영 개선의 수익 효과는 3개월 이후 본격적으로 나타납니다.' },
 ];
 
+function StepsBgAnimation() {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = ref.current;
+    if (!container) return;
+
+    const W = container.clientWidth || window.innerWidth;
+    const H = container.clientHeight || 500;
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(W, H);
+    renderer.setClearColor(0x000000, 0);
+    container.appendChild(renderer.domElement);
+
+    const camera = new THREE.PerspectiveCamera(45, W / H, 0.1, 10000);
+    camera.position.set(0, 400, -200);
+    camera.lookAt(new THREE.Vector3(0, 300, -1000));
+
+    const scene = new THREE.Scene();
+    const sph = new THREE.SphereGeometry(10, 16, 16);
+    const particles: THREE.Object3D[] = [];
+    const xCount = Math.round(W / 60);
+
+    for (let i = 1; i < 75; i++) {
+      const row = new THREE.Object3D();
+      const mat = new THREE.MeshLambertMaterial({
+        color: '#ffffff', transparent: true,
+        opacity: Math.max(0, 1 - i / 40),
+      });
+      for (let j = -xCount; j < xCount; j++) {
+        const mesh = new THREE.Mesh(sph, mat);
+        mesh.position.x = 300 * j;
+        mesh.position.z = -300 * i;
+        row.add(mesh);
+      }
+      scene.add(row);
+      particles[i] = row;
+    }
+
+    const light = new THREE.HemisphereLight(0xffffff, 0x000000, 1);
+    light.position.set(2, 100, 2000);
+    scene.add(light);
+
+    const startTime = Date.now();
+    let animId: number;
+
+    const tick = () => {
+      animId = requestAnimationFrame(tick);
+      const t = (Date.now() - startTime) / 1000;
+      for (let i = 1; i < 75; i++) {
+        const row = particles[i];
+        if (!row) continue;
+        const amplitude = Math.sin(i / 25) * 300 + 100;
+        row.position.y = amplitude * 0.5 * (1 + Math.sin(Math.PI * (t - i * 0.1) * 0.5));
+      }
+      renderer.render(scene, camera);
+    };
+    tick();
+
+    const onResize = () => {
+      const w = container.clientWidth;
+      const h = container.clientHeight;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    };
+    window.addEventListener('resize', onResize);
+
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener('resize', onResize);
+      renderer.dispose();
+      sph.dispose();
+      if (container.contains(renderer.domElement)) container.removeChild(renderer.domElement);
+    };
+  }, []);
+
+  return (
+    <div ref={ref} style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none', zIndex: 0 }} />
+  );
+}
+
 export function Process() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   useScrollAnimation();
@@ -40,69 +124,85 @@ export function Process() {
         desc="체계적인 단계별 접근으로 확실한 변화를 만들어냅니다. 진단부터 실행, 모니터링까지 함께합니다."
       />
 
-      <section style={{ background: LIGHT.bg0, padding: '6rem 5vw' }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+      <section style={{ background: 'linear-gradient(180deg,#021126 0%,#0064AF 70%,#021126 100%)', padding: '6rem 5vw', position: 'relative', overflow: 'hidden' }}>
+        <StepsBgAnimation />
+        <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 1 }}>
           <div className="fu" style={{ textAlign: 'center', marginBottom: '3rem' }}>
             <SecLabel center>Step Overview</SecLabel>
-            <h2 style={{ fontFamily: F.serif, fontSize: 'clamp(1.6rem,3vw,2.5rem)', fontWeight: 700, color: TEXT.onLight }}>4단계 컨설팅 프로세스</h2>
+            <h2 style={{ fontFamily: F.serif, fontSize: 'clamp(1.6rem,3vw,2.5rem)', fontWeight: 700, color: '#FFFFFF' }}>4단계 컨설팅 프로세스</h2>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: '1.5rem' }}>
             {steps.map((s, i) => (
               <div key={i} className={`fu d${i + 1}`} style={{
-                background: '#FFFFFF', border: `1px solid ${BORDER.light}`, padding: '2.5rem 1.8rem',
+                background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)',
+                padding: '2.5rem 1.8rem', backdropFilter: 'blur(10px)',
                 textAlign: 'center', position: 'relative', overflow: 'hidden', borderRadius: '8px',
-                transition: 'all 0.3s', boxShadow: '0 2px 8px rgba(37,99,235,0.05)',
+                transition: 'all 0.3s', boxShadow: '0 2px 16px rgba(0,0,0,0.3)',
               }}
-                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = BLUE._400; el.style.boxShadow = '0 12px 36px rgba(37,99,235,0.14)'; el.style.transform = 'translateY(-4px)'; }}
-                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = BORDER.light; el.style.boxShadow = '0 2px 8px rgba(37,99,235,0.05)'; el.style.transform = 'none'; }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(255,255,255,0.4)'; el.style.boxShadow = '0 12px 36px rgba(0,0,0,0.5)'; el.style.transform = 'translateY(-4px)'; el.style.background = 'rgba(255,255,255,0.14)'; }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(255,255,255,0.15)'; el.style.boxShadow = '0 2px 16px rgba(0,0,0,0.3)'; el.style.transform = 'none'; el.style.background = 'rgba(255,255,255,0.08)'; }}
               >
-                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: `linear-gradient(90deg,${BLUE._500},${BLUE._300})` }} />
-                <div className="text-grad" style={{ fontFamily: F.bebas, fontSize: '3rem', lineHeight: 1, marginBottom: '0.8rem' }}>{s.n}</div>
-                <h3 style={{ fontSize: '0.97rem', fontWeight: 700, marginBottom: '0.6rem', color: TEXT.onLight, fontFamily: F.sans }}>{s.t}</h3>
-                <p style={{ color: TEXT.mutedLight, fontSize: '0.82rem', lineHeight: 1.7, fontFamily: F.sans }}>{s.d}</p>
+                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: `linear-gradient(90deg,${BLUE._300},#FFFFFF)` }} />
+                <div className="text-grad-dark" style={{ fontFamily: F.bebas, fontSize: '3rem', lineHeight: 1, marginBottom: '0.8rem' }}>{s.n}</div>
+                <h3 style={{ fontSize: '0.97rem', fontWeight: 700, marginBottom: '0.6rem', color: '#FFFFFF', fontFamily: F.sans }}>{s.t}</h3>
+                <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: '0.82rem', lineHeight: 1.7, fontFamily: F.sans }}>{s.d}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section style={{ background: LIGHT.bg1, padding: '6rem 5vw' }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+      <section style={{ background: DARK.bg0, padding: '6rem 5vw', position: 'relative', overflow: 'hidden' }}>
+        {/* animated grid */}
+        <div style={{ position: 'absolute', inset: '-50%', backgroundImage: `linear-gradient(rgba(59,130,246,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.04) 1px,transparent 1px)`, backgroundSize: '70px 70px', animation: 'gMove 30s linear infinite', pointerEvents: 'none' }} />
+        {/* floating orbs */}
+        <div style={{ position: 'absolute', width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(circle,rgba(37,99,235,0.13) 0%,transparent 70%)', top: '-100px', left: '-80px', animation: 'floatOrbA 20s ease-in-out infinite', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', width: 380, height: 380, borderRadius: '50%', background: 'radial-gradient(circle,rgba(96,165,250,0.11) 0%,transparent 70%)', bottom: '-80px', right: '-60px', animation: 'floatOrbB 24s ease-in-out infinite', pointerEvents: 'none' }} />
+
+        <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 1 }}>
           <div className="fu" style={{ textAlign: 'center', marginBottom: '4rem' }}>
             <SecLabel center>Detail Process</SecLabel>
-            <h2 style={{ fontFamily: F.serif, fontSize: 'clamp(1.6rem,3vw,2.5rem)', fontWeight: 700, color: TEXT.onLight }}>단계별 세부 진행 내용</h2>
+            <h2 style={{ fontFamily: F.serif, fontSize: 'clamp(1.6rem,3vw,2.5rem)', fontWeight: 700, color: '#FFFFFF' }}>단계별 세부 진행 내용</h2>
           </div>
           <div style={{ position: 'relative', maxWidth: 860, margin: '0 auto' }}>
-            <div style={{ position: 'absolute', left: '50%', top: 0, bottom: 0, width: 1, background: BORDER.light, transform: 'translateX(-50%)' }} className="hidden md:block" />
+            <div style={{ position: 'absolute', left: '50%', top: 0, bottom: 0, width: 1, background: 'rgba(59,130,246,0.3)', transform: 'translateX(-50%)' }} className="hidden md:block" />
             {timeline.map((t, i) => (
               <div key={i} className={`fu d${(i % 3) + 1}`}>
+                {/* mobile */}
                 <div className="md:hidden" style={{ marginBottom: '2rem' }}>
                   <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '0.8rem' }}>
-                    <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#FFFFFF', border: `2px solid ${BLUE._500}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: F.bebas, fontSize: '1rem', color: BLUE._500, boxShadow: `0 0 0 4px ${BLUE.dim}`, flexShrink: 0 }}>{t.n}</div>
-                    <div style={{ flex: 1, background: '#FFFFFF', border: `1px solid ${BORDER.light}`, padding: '1.2rem', borderLeft: `3px solid ${BLUE._500}`, borderRadius: '6px', boxShadow: '0 2px 8px rgba(37,99,235,0.06)' }}>
-                      <div style={{ fontSize: '0.67rem', letterSpacing: '0.08em', color: BLUE._400, marginBottom: '0.5rem', textTransform: 'uppercase', fontFamily: F.sans }}>{t.tag}</div>
-                      <h4 style={{ fontSize: '0.92rem', fontWeight: 700, marginBottom: '0.4rem', color: BLUE._500, fontFamily: F.sans }}>{t.title}</h4>
-                      <p style={{ color: TEXT.mutedLight, fontSize: '0.81rem', lineHeight: 1.7, fontFamily: F.sans }}>{t.desc}</p>
+                    <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'rgba(6,14,26,0.8)', border: `2px solid ${BLUE._400}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: F.bebas, fontSize: '1rem', color: BLUE._300, boxShadow: `0 0 0 4px rgba(37,99,235,0.15)`, flexShrink: 0 }}>{t.n}</div>
+                    <div style={{ flex: 1, background: 'rgba(6,14,26,0.7)', backdropFilter: 'blur(10px)', border: `1px solid rgba(59,130,246,0.2)`, padding: '1.2rem', borderLeft: `3px solid ${BLUE._400}`, borderRadius: '6px', boxShadow: '0 2px 12px rgba(0,0,0,0.3)', transition: 'all 0.25s' }}>
+                      <div style={{ fontSize: '0.67rem', letterSpacing: '0.08em', color: BLUE._300, marginBottom: '0.5rem', textTransform: 'uppercase', fontFamily: F.sans }}>{t.tag}</div>
+                      <h4 style={{ fontSize: '0.92rem', fontWeight: 700, marginBottom: '0.4rem', color: '#FFFFFF', fontFamily: F.sans }}>{t.title}</h4>
+                      <p style={{ color: 'rgba(255,255,255,0.68)', fontSize: '0.81rem', lineHeight: 1.7, fontFamily: F.sans }}>{t.desc}</p>
                     </div>
                   </div>
                 </div>
+                {/* desktop */}
                 <div className="hidden md:grid" style={{ gridTemplateColumns: '1fr 52px 1fr', alignItems: 'start', marginBottom: '2.5rem' }}>
                   <div style={{ paddingRight: '2.5rem', textAlign: 'right' }}>
                     {t.side === 'L' && (
-                      <div style={{ background: '#FFFFFF', border: `1px solid ${BORDER.light}`, padding: '1.6rem', borderRight: `3px solid ${BLUE._500}`, borderRadius: '6px', boxShadow: '0 2px 8px rgba(37,99,235,0.06)' }}>
-                        <div style={{ fontSize: '0.67rem', letterSpacing: '0.08em', color: BLUE._400, marginBottom: '0.5rem', textTransform: 'uppercase', fontFamily: F.sans }}>{t.tag}</div>
-                        <h4 style={{ fontSize: '0.92rem', fontWeight: 700, marginBottom: '0.4rem', color: BLUE._500, fontFamily: F.sans }}>{t.title}</h4>
-                        <p style={{ color: TEXT.mutedLight, fontSize: '0.81rem', lineHeight: 1.7, fontFamily: F.sans }}>{t.desc}</p>
+                      <div style={{ background: 'rgba(6,14,26,0.7)', backdropFilter: 'blur(10px)', border: `1px solid rgba(59,130,246,0.2)`, padding: '1.6rem', borderRight: `3px solid ${BLUE._400}`, borderRadius: '6px', boxShadow: '0 2px 12px rgba(0,0,0,0.3)', transition: 'all 0.25s' }}
+                        onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = BLUE._300; el.style.background = 'rgba(6,14,26,0.88)'; el.style.transform = 'translateX(-4px)'; el.style.boxShadow = `0 8px 32px rgba(37,99,235,0.18)`; }}
+                        onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(59,130,246,0.2)'; el.style.background = 'rgba(6,14,26,0.7)'; el.style.transform = 'none'; el.style.boxShadow = '0 2px 12px rgba(0,0,0,0.3)'; }}
+                      >
+                        <div style={{ fontSize: '0.67rem', letterSpacing: '0.08em', color: BLUE._300, marginBottom: '0.5rem', textTransform: 'uppercase', fontFamily: F.sans }}>{t.tag}</div>
+                        <h4 style={{ fontSize: '0.92rem', fontWeight: 700, marginBottom: '0.4rem', color: '#FFFFFF', fontFamily: F.sans }}>{t.title}</h4>
+                        <p style={{ color: 'rgba(255,255,255,0.68)', fontSize: '0.81rem', lineHeight: 1.7, fontFamily: F.sans }}>{t.desc}</p>
                       </div>
                     )}
                   </div>
-                  <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#FFFFFF', border: `2px solid ${BLUE._500}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: F.bebas, fontSize: '1rem', color: BLUE._500, margin: '0 auto', position: 'relative', zIndex: 1, boxShadow: `0 0 0 4px ${BLUE.dim}` }}>{t.n}</div>
+                  <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'rgba(6,14,26,0.9)', border: `2px solid ${BLUE._400}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: F.bebas, fontSize: '1rem', color: BLUE._300, margin: '0 auto', position: 'relative', zIndex: 1, boxShadow: `0 0 0 4px rgba(37,99,235,0.2), 0 0 20px rgba(59,130,246,0.3)` }}>{t.n}</div>
                   <div style={{ paddingLeft: '2.5rem' }}>
                     {t.side === 'R' && (
-                      <div style={{ background: '#FFFFFF', border: `1px solid ${BORDER.light}`, padding: '1.6rem', borderLeft: `3px solid ${BLUE._400}`, borderRadius: '6px', boxShadow: '0 2px 8px rgba(37,99,235,0.06)' }}>
-                        <div style={{ fontSize: '0.67rem', letterSpacing: '0.08em', color: BLUE._400, marginBottom: '0.5rem', textTransform: 'uppercase', fontFamily: F.sans }}>{t.tag}</div>
-                        <h4 style={{ fontSize: '0.92rem', fontWeight: 700, marginBottom: '0.4rem', color: BLUE._500, fontFamily: F.sans }}>{t.title}</h4>
-                        <p style={{ color: TEXT.mutedLight, fontSize: '0.81rem', lineHeight: 1.7, fontFamily: F.sans }}>{t.desc}</p>
+                      <div style={{ background: 'rgba(6,14,26,0.7)', backdropFilter: 'blur(10px)', border: `1px solid rgba(59,130,246,0.2)`, padding: '1.6rem', borderLeft: `3px solid ${BLUE._400}`, borderRadius: '6px', boxShadow: '0 2px 12px rgba(0,0,0,0.3)', transition: 'all 0.25s' }}
+                        onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = BLUE._300; el.style.background = 'rgba(6,14,26,0.88)'; el.style.transform = 'translateX(4px)'; el.style.boxShadow = `0 8px 32px rgba(37,99,235,0.18)`; }}
+                        onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(59,130,246,0.2)'; el.style.background = 'rgba(6,14,26,0.7)'; el.style.transform = 'none'; el.style.boxShadow = '0 2px 12px rgba(0,0,0,0.3)'; }}
+                      >
+                        <div style={{ fontSize: '0.67rem', letterSpacing: '0.08em', color: BLUE._300, marginBottom: '0.5rem', textTransform: 'uppercase', fontFamily: F.sans }}>{t.tag}</div>
+                        <h4 style={{ fontSize: '0.92rem', fontWeight: 700, marginBottom: '0.4rem', color: '#FFFFFF', fontFamily: F.sans }}>{t.title}</h4>
+                        <p style={{ color: 'rgba(255,255,255,0.68)', fontSize: '0.81rem', lineHeight: 1.7, fontFamily: F.sans }}>{t.desc}</p>
                       </div>
                     )}
                   </div>
@@ -113,15 +213,24 @@ export function Process() {
         </div>
       </section>
 
-      <section style={{ background: LIGHT.bg0, padding: '6rem 5vw' }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+      <div style={{ height: 120, background: `linear-gradient(to bottom, ${DARK.bg0}, ${LIGHT.bg0})` }} />
+
+      <section style={{ background: LIGHT.bg0, padding: '6rem 5vw', position: 'relative', overflow: 'hidden' }}>
+        {/* animated grid */}
+        <div style={{ position: 'absolute', inset: '-50%', backgroundImage: `linear-gradient(rgba(37,99,235,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,0.05) 1px,transparent 1px)`, backgroundSize: '70px 70px', animation: 'gMove 35s linear infinite', pointerEvents: 'none' }} />
+        {/* orb */}
+        <div style={{ position: 'absolute', width: 600, height: 600, borderRadius: '50%', background: 'radial-gradient(circle,rgba(37,99,235,0.06) 0%,transparent 70%)', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', pointerEvents: 'none' }} />
+        <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 1 }}>
           <div className="fu" style={{ textAlign: 'center', marginBottom: '3rem' }}>
             <SecLabel center>FAQ</SecLabel>
             <h2 style={{ fontFamily: F.serif, fontSize: 'clamp(1.6rem,3vw,2.5rem)', fontWeight: 700, color: TEXT.onLight }}>자주 묻는 질문</h2>
           </div>
           <div className="fu" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', maxWidth: 800, margin: '0 auto' }}>
             {faqs.map((f, i) => (
-              <div key={i} style={{ background: '#FFFFFF', border: `1px solid ${openFaq === i ? BLUE._400 : BORDER.light}`, borderRadius: '8px', overflow: 'hidden', boxShadow: openFaq === i ? '0 4px 20px rgba(37,99,235,0.1)' : '0 1px 4px rgba(37,99,235,0.04)', transition: 'all 0.2s' }}>
+              <div key={i} style={{ background: '#FFFFFF', border: `1px solid ${openFaq === i ? BLUE._400 : BORDER.light}`, borderRadius: '8px', overflow: 'hidden', boxShadow: openFaq === i ? '0 4px 20px rgba(37,99,235,0.1)' : '0 1px 4px rgba(37,99,235,0.04)', transition: 'all 0.25s', cursor: 'pointer' }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'scale(1.018)'; el.style.boxShadow = '0 8px 28px rgba(37,99,235,0.13)'; el.style.borderColor = BLUE._400; }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'none'; el.style.boxShadow = openFaq === i ? '0 4px 20px rgba(37,99,235,0.1)' : '0 1px 4px rgba(37,99,235,0.04)'; el.style.borderColor = openFaq === i ? BLUE._400 : BORDER.light; }}
+              >
                 <button onClick={() => setOpenFaq(openFaq === i ? null : i)} style={{
                   width: '100%', textAlign: 'left', background: 'none', border: 'none',
                   padding: '1.4rem 1.8rem', fontFamily: F.sans, fontSize: '0.95rem', fontWeight: 600,
@@ -140,7 +249,11 @@ export function Process() {
         </div>
       </section>
 
-      <CtaBand title="지금 시작하세요" desc="상담은 항상 무료입니다. 부담 없이 연락주세요." />
+      <CtaBand
+        title="지금 시작하세요"
+        desc="상담은 항상 무료입니다. 부담 없이 연락주세요."
+        bgImage="https://internwise.s3.eu-west-2.amazonaws.com/uploads/230905090356898660.jpg"
+      />
     </div>
   );
 }

@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm show *)",
+      "Bash(npm install *)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(d.get\\('main',''\\), d.get\\('module',''\\), d.get\\('type',''\\)\\)\")",
+      "Bash(npm uninstall *)",
+      "Bash(node -e \"const pkg = require\\('./node_modules/animejs/package.json'\\); console.log\\(pkg.version, pkg.main, pkg.module\\)\")",
+      "Bash(node -e \"import\\('./node_modules/animejs/dist/modules/index.js'\\).then\\(m => console.log\\(Object.keys\\(m\\).slice\\(0,20\\)\\)\\)\")",
+      "Bash(node -e \"import\\('./node_modules/animejs/dist/modules/index.js'\\).then\\(m => console.log\\(Object.keys\\(m\\)\\)\\)\")",
+      "Bash(node -e \"import\\('./node_modules/animejs/dist/modules/index.js'\\).then\\(m => { const s = m.stagger; console.log\\(typeof s, s.toString\\(\\).slice\\(0,300\\)\\); }\\)\")",
+      "Bash(node -e \"import\\('./node_modules/animejs/dist/modules/index.js'\\).then\\(m => { console.log\\(m.stagger.toString\\(\\).slice\\(0,800\\)\\); }\\)\")",
+      "Bash(node -e \"import\\('./node_modules/animejs/dist/modules/index.js'\\).then\\(m => { const a = m.animate; console.log\\(typeof a\\); const dummy = {}; try { const ret = a\\([], {translateY: 0}\\); console.log\\('Methods:', Object.getOwnPropertyNames\\(Object.getPrototypeOf\\(ret\\)\\).filter\\(k => typeof ret[k]==='function'\\)\\); } catch\\(e\\) { console.log\\('err:', e.message\\); } }\\)\")",
+      "Bash(node -e \"import\\('./node_modules/animejs/dist/modules/index.js'\\).then\\(m => { const doc = {createElement: \\(\\)=>\\({style:{}, setAttribute:\\(\\)=>{}}\\)}; const el = {style:{transform:'', opacity:''}, setAttribute:\\(\\)=>{}}; try { const ret = m.animate\\([el], {translateY: [-10,10], duration:1000, loop:true}\\); console.log\\('All keys:', Object.keys\\(ret\\)\\); } catch\\(e\\) { console.log\\('err:', e.message, e.stack?.split\\('\\\\n'\\)[1]\\); } }\\)\")",
+      "Bash(node -e \"const p = require\\('./node_modules/three/package.json'\\); console.log\\(p.version\\)\")",
+      "Bash(node -e \"import\\('./node_modules/animejs/dist/modules/index.js'\\).then\\(m => { console.log\\('svg:', typeof m.svg, Object.keys\\(m.svg || {}\\)\\); console.log\\('utils:', typeof m.utils, Object.keys\\(m.utils || {}\\).slice\\(0,8\\)\\); console.log\\('createTimeline:', typeof m.createTimeline\\); }\\)\")",
+      "Bash(node -e \"import\\('./node_modules/animejs/dist/modules/index.js'\\).then\\(m => { console.log\\('utils keys:', Object.keys\\(m.utils\\)\\); console.log\\('random:', typeof m.random\\); }\\)\")",
+      "Bash(npx tsc *)",
+      "Bash(node -e \"const p=require\\('./package.json'\\); const deps={...p.dependencies,...p.devDependencies}; ['three','animejs','@react-three/fiber','@react-three/drei','gsap'].forEach\\(k=>console.log\\(k,deps[k]||'NOT INSTALLED'\\)\\)\")"
+    ]
+  }
+}

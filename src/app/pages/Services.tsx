@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { createTimeline, svg, utils, stagger } from 'animejs';
 import { BLUE, TEXT, BORDER, DARK, LIGHT, F } from '../utils/colors';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { ServiceShowcase } from '../components/ServiceShowcase';
@@ -7,6 +8,103 @@ import { CtaBand } from '../components/shared/CtaBand';
 import { FaqAccordion } from '../components/shared/FaqAccordion';
 import { PageBanner } from '../components/shared/PageBanner';
 import { serviceFaq } from '../data/faq';
+
+function ServicesBgAnimation() {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = ref.current;
+    if (!container) return;
+
+    const ns = 'http://www.w3.org/2000/svg';
+    const W = 1100, H = 1100;
+
+    // ── Vertical lines SVG ────────────────────────
+    const NL = 70;
+    const margin = 50;
+    const spacing = (W - margin * 2) / (NL - 1);
+
+    const linesSvg = document.createElementNS(ns, 'svg');
+    linesSvg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    linesSvg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
+    Object.assign(linesSvg.style, { position: 'absolute', inset: '0', width: '100%', height: '100%' });
+
+    const lG = document.createElementNS(ns, 'g');
+    lG.setAttribute('fill', 'none');
+    for (let i = 0; i < NL; i++) {
+      const x = margin + i * spacing;
+      const line = document.createElementNS(ns, 'line');
+      line.classList.add('svc-bg-line');
+      line.setAttribute('x1', String(x)); line.setAttribute('y1', String(margin));
+      line.setAttribute('x2', String(x)); line.setAttribute('y2', String(H - margin));
+      line.setAttribute('stroke', 'rgba(59,130,246,0.12)');
+      line.setAttribute('stroke-linecap', 'round');
+      line.setAttribute('stroke-width', '3');
+      lG.appendChild(line);
+    }
+    linesSvg.appendChild(lG);
+    container.appendChild(linesSvg);
+
+    // ── Concentric circles SVG ────────────────────
+    const NC = 38;
+    const maxR = 520;
+
+    const circlesSvg = document.createElementNS(ns, 'svg');
+    circlesSvg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    circlesSvg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
+    Object.assign(circlesSvg.style, { position: 'absolute', inset: '0', width: '100%', height: '100%' });
+
+    const cG = document.createElementNS(ns, 'g');
+    cG.setAttribute('fill', 'none');
+    for (let i = 0; i < NC; i++) {
+      const r = ((i + 1) * maxR) / NC;
+      const circle = document.createElementNS(ns, 'circle');
+      circle.classList.add('svc-bg-circle');
+      circle.setAttribute('cx', String(W / 2)); circle.setAttribute('cy', String(H / 2));
+      circle.setAttribute('r', String(r));
+      circle.setAttribute('stroke', 'rgba(96,165,250,0.1)');
+      circle.setAttribute('stroke-width', '2');
+      cG.appendChild(circle);
+    }
+    circlesSvg.appendChild(cG);
+    container.appendChild(circlesSvg);
+
+    // ── Anime.js timeline ─────────────────────────
+    const tl = createTimeline({
+      playbackEase: 'out(4)',
+      defaults: { ease: 'inOut(4)', duration: 10000, loop: true },
+    })
+    .add(svg.createDrawable('.svc-bg-line'), {
+      draw: [
+        '.5 .5',
+        () => { const l = utils.random(.05, .45, 2); return `${.5 - l} ${.5 + l}`; },
+        '0.5 0.5',
+      ],
+      stroke: 'rgba(147,197,253,0.65)',
+    }, stagger([0, 8000], { start: 0, from: 'first' }))
+    .add(svg.createDrawable('.svc-bg-circle'), {
+      draw: [
+        () => { const v = utils.random(-1, -.5, 2); return `${v} ${v}`; },
+        () => `${utils.random(0, .25, 2)} ${utils.random(.5, .75, 2)}`,
+        () => { const v = utils.random(1, 1.5, 2); return `${v} ${v}`; },
+      ],
+      stroke: 'rgba(59,130,246,0.55)',
+    }, stagger([0, 8000], { start: 0 }))
+    .init();
+
+    return () => {
+      tl.revert();
+      container.innerHTML = '';
+    };
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none', zIndex: 0, opacity: 0.5 }}
+    />
+  );
+}
 
 const services = [
   {
@@ -100,73 +198,105 @@ export function Services() {
         desc="CS 관리부터 마케팅, 경영 개선, 인력 관리까지 — 병·의원 운영의 모든 영역을 커버하는 종합 솔루션으로 실질적인 성과를 만들어냅니다."
       />
 
-      <section style={{ padding: '6rem 5vw', background: LIGHT.bg0 }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-          <div className="fu" style={{ display: 'flex', gap: 0, borderBottom: `2px solid ${BORDER.light}`, marginBottom: '3.5rem', flexWrap: 'wrap' }}>
+      {/* ── Main service section — dark theme ── */}
+      <section style={{ padding: '6rem 5vw', background: DARK.bg0, position: 'relative', overflow: 'hidden' }}>
+        <ServicesBgAnimation />
+        {/* animated grid */}
+        <div style={{ position: 'absolute', inset: '-50%', backgroundImage: `linear-gradient(rgba(59,130,246,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.04) 1px,transparent 1px)`, backgroundSize: '70px 70px', animation: 'gMove 30s linear infinite', pointerEvents: 'none' }} />
+        {/* floating orbs */}
+        <div style={{ position: 'absolute', width: 600, height: 600, borderRadius: '50%', background: 'radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 70%)', top: '-180px', right: '-150px', animation: 'floatOrbA 18s ease-in-out infinite', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(96,165,250,0.12) 0%, transparent 70%)', bottom: '-120px', left: '-80px', animation: 'floatOrbB 22s ease-in-out infinite', pointerEvents: 'none' }} />
+
+        <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 1 }}>
+
+          {/* ── Tab bar ── */}
+          <div className="fu" style={{ display: 'flex', gap: 0, borderBottom: `1px solid ${BORDER.dark}`, marginBottom: '3.5rem', flexWrap: 'wrap' }}>
             {services.map(s => (
               <button key={s.id} onClick={() => setActive(s.id)} style={{
                 padding: '0.9rem 1.8rem', fontSize: '0.82rem', letterSpacing: '0.05em',
                 background: 'none', border: 'none',
-                color: active === s.id ? BLUE._500 : TEXT.mutedLight,
+                color: active === s.id ? BLUE._300 : 'rgba(255,255,255,0.6)',
                 cursor: 'pointer',
-                borderBottom: `3px solid ${active === s.id ? BLUE._500 : 'transparent'}`,
-                marginBottom: -2, transition: 'all 0.25s', fontFamily: F.sans, fontWeight: active === s.id ? 700 : 400,
-              }}>{s.label}</button>
+                borderBottom: `2px solid ${active === s.id ? BLUE._300 : 'transparent'}`,
+                marginBottom: -1, transition: 'color 0.25s, border-color 0.25s',
+                fontFamily: F.sans, fontWeight: active === s.id ? 700 : 400,
+              }}
+                onMouseEnter={e => { if (active !== s.id) (e.currentTarget as HTMLElement).style.color = '#FFFFFF'; }}
+                onMouseLeave={e => { if (active !== s.id) (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.6)'; }}
+              >{s.label}</button>
             ))}
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(320px,1fr))', gap: '4rem', alignItems: 'start' }}>
+
+            {/* Left — detail cards */}
             <div className="fu">
               <SecLabel>{svc.secLabel}</SecLabel>
-              <h3 style={{ fontFamily: F.serif, fontSize: 'clamp(1.4rem,2.5vw,2rem)', fontWeight: 700, lineHeight: 1.4, marginBottom: '0.8rem', color: TEXT.onLight }}>
+              <h3 style={{ fontFamily: F.serif, fontSize: 'clamp(1.4rem,2.5vw,2rem)', fontWeight: 700, lineHeight: 1.4, marginBottom: '0.8rem', color: '#FFFFFF' }}>
                 {svc.title.split('\n').map((line, i) => <span key={i}>{line}{i === 0 && <br />}</span>)}
               </h3>
-              <p style={{ color: BLUE._400, fontSize: '0.87rem', letterSpacing: '0.04em', marginBottom: '1.3rem', fontFamily: F.serif, fontStyle: 'italic' }}>{svc.sub}</p>
-              <p style={{ color: TEXT.mutedLight, fontSize: '0.88rem', lineHeight: 1.75, marginBottom: '2rem', fontFamily: F.sans }}>{svc.desc}</p>
+              <p style={{ color: BLUE._300, fontSize: '0.87rem', letterSpacing: '0.04em', marginBottom: '1.3rem', fontFamily: F.serif, fontStyle: 'italic' }}>{svc.sub}</p>
+              <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: '0.88rem', lineHeight: 1.75, marginBottom: '2rem', fontFamily: F.sans }}>{svc.desc}</p>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
                 {svc.details.map((d, i) => (
                   <div key={i}
-                    style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', background: BLUE.dim, border: `1px solid ${BORDER.light}`, padding: '1rem 1.1rem', borderLeft: `3px solid ${BLUE._500}`, borderRadius: '4px', cursor: 'default', transition: 'all 0.25s', position: 'relative', overflow: 'hidden' }}
-                    onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = BLUE._400; el.style.background = '#EBF2FF'; el.style.boxShadow = '0 4px 16px rgba(37,99,235,0.1)'; const hint = el.querySelector('.detail-hint') as HTMLElement; if (hint) hint.style.maxHeight = '4rem'; }}
-                    onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = BORDER.light; el.style.background = BLUE.dim; el.style.boxShadow = 'none'; const hint = el.querySelector('.detail-hint') as HTMLElement; if (hint) hint.style.maxHeight = '0'; }}
+                    style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', background: 'rgba(59,130,246,0.07)', border: `1px solid ${BORDER.dark}`, padding: '1rem 1.1rem', borderLeft: `3px solid ${BLUE._500}`, borderRadius: '6px', cursor: 'default', transition: 'all 0.25s', position: 'relative', overflow: 'hidden' }}
+                    onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = BLUE._400; el.style.background = 'rgba(59,130,246,0.14)'; el.style.boxShadow = '0 4px 20px rgba(37,99,235,0.2)'; el.style.transform = 'translateY(-2px)'; const hint = el.querySelector('.detail-hint') as HTMLElement; if (hint) hint.style.maxHeight = '4rem'; }}
+                    onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = BORDER.dark; el.style.background = 'rgba(59,130,246,0.07)'; el.style.boxShadow = 'none'; el.style.transform = 'none'; const hint = el.querySelector('.detail-hint') as HTMLElement; if (hint) hint.style.maxHeight = '0'; }}
                   >
-                    <strong style={{ fontSize: '0.82rem', color: TEXT.onLight, fontFamily: F.sans, lineHeight: 1.3, whiteSpace: 'pre-line' }}>{d.t}</strong>
-                    <p className="detail-hint" style={{ color: TEXT.mutedLight, fontSize: '0.75rem', lineHeight: 1.55, fontFamily: F.sans, maxHeight: 0, overflow: 'hidden', transition: 'max-height 0.3s ease', margin: 0 }}>{d.d}</p>
+                    <strong style={{ fontSize: '0.82rem', color: '#FFFFFF', fontFamily: F.sans, lineHeight: 1.3, whiteSpace: 'pre-line' }}>{d.t}</strong>
+                    <p className="detail-hint" style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.75rem', lineHeight: 1.55, fontFamily: F.sans, maxHeight: 0, overflow: 'hidden', transition: 'max-height 0.3s ease', margin: 0 }}>{d.d}</p>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="fu d2" style={{ background: '#FFFFFF', border: `1px solid ${BORDER.light}`, padding: '2.5rem', position: 'sticky', top: '7rem', borderRadius: '8px', boxShadow: '0 4px 24px rgba(37,99,235,0.08)' }}>
-              <div style={{ fontSize: '0.68rem', color: BLUE._500, letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1.5rem', fontFamily: F.sans, fontWeight: 700 }}>
+            {/* Right — sticky process panel */}
+            <div className="fu d2" style={{
+              background: 'rgba(6,14,26,0.80)', backdropFilter: 'blur(14px)',
+              border: `1px solid ${BORDER.dark}`, padding: '2.5rem',
+              position: 'sticky', top: '7rem', borderRadius: '10px',
+              boxShadow: '0 8px 40px rgba(0,0,0,0.4)',
+            }}>
+              <div style={{ fontSize: '0.68rem', color: BLUE._300, letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1.5rem', fontFamily: F.sans, fontWeight: 700 }}>
                 {active === 'cs' ? 'CS 개선 프로세스' : active === 'mkt' ? '마케팅 실행 프로세스' : active === 'mgmt' ? '경영 개선 프로세스' : '인력 관리 프로세스'}
               </div>
               {svc.steps.map((s, i) => (
-                <div key={i} style={{ display: 'flex', gap: '1rem', padding: '1rem 0', borderBottom: i < svc.steps.length - 1 ? `1px solid ${BORDER.light}` : 'none', alignItems: 'flex-start' }}>
-                  <div style={{ fontFamily: F.bebas, fontSize: '1.3rem', color: BLUE._500, width: 30, flexShrink: 0, lineHeight: 1.2 }}>{s.n}</div>
+                <div key={i} style={{ display: 'flex', gap: '1rem', padding: '1rem 0', borderBottom: i < svc.steps.length - 1 ? `1px solid ${BORDER.dark}` : 'none', alignItems: 'flex-start' }}>
+                  <div style={{ fontFamily: F.bebas, fontSize: '1.3rem', color: BLUE._300, width: 30, flexShrink: 0, lineHeight: 1.2 }}>{s.n}</div>
                   <div>
-                    <strong style={{ display: 'block', fontSize: '0.87rem', color: TEXT.onLight, fontFamily: F.sans }}>{s.t}</strong>
-                    <span style={{ color: TEXT.grayDark, fontSize: '0.76rem', lineHeight: 1.5, fontFamily: F.sans }}>{s.d}</span>
+                    <strong style={{ display: 'block', fontSize: '0.87rem', color: '#FFFFFF', fontFamily: F.sans }}>{s.t}</strong>
+                    <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.76rem', lineHeight: 1.5, fontFamily: F.sans }}>{s.d}</span>
                   </div>
                 </div>
               ))}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.8rem', marginTop: '2rem' }}>
                 {svc.results.map(r => (
-                  <div key={r.l} style={{ background: LIGHT.bg1, padding: '1.1rem', textAlign: 'center', borderRadius: '6px', border: `1px solid ${BORDER.light}` }}>
-                    <strong className="text-grad" style={{ display: 'block', fontFamily: F.sans, fontSize: '1.9rem', lineHeight: 1, fontWeight: 700 }}>{r.v}</strong>
-                    <span style={{ fontSize: '0.69rem', color: TEXT.mutedLight, letterSpacing: '0.05em', fontFamily: F.sans }}>{r.l}</span>
+                  <div key={r.l} style={{
+                    background: 'rgba(59,130,246,0.1)', padding: '1.1rem', textAlign: 'center',
+                    borderRadius: '8px', border: `1px solid ${BORDER.dark}`,
+                    transition: 'background 0.2s, transform 0.2s',
+                  }}
+                    onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = 'rgba(59,130,246,0.2)'; el.style.transform = 'translateY(-2px)'; }}
+                    onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background = 'rgba(59,130,246,0.1)'; el.style.transform = 'none'; }}
+                  >
+                    <strong className="text-grad-dark" style={{ display: 'block', fontFamily: F.sans, fontSize: '1.9rem', lineHeight: 1, fontWeight: 700 }}>{r.v}</strong>
+                    <span style={{ fontSize: '0.69rem', color: 'rgba(255,255,255,0.7)', letterSpacing: '0.05em', fontFamily: F.sans }}>{r.l}</span>
                   </div>
                 ))}
               </div>
             </div>
+
           </div>
         </div>
       </section>
 
       <ServiceShowcase />
 
-      <section style={{ background: LIGHT.bg0, padding: '6rem 5vw' }}>
-        <div style={{ maxWidth: 760, margin: '0 auto' }}>
+      {/* ── FAQ — light bg + animated grid ── */}
+      <section style={{ background: LIGHT.bg0, padding: '6rem 5vw', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', inset: '-50%', backgroundImage: `linear-gradient(rgba(37,99,235,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,0.04) 1px,transparent 1px)`, backgroundSize: '70px 70px', animation: 'gMove 32s linear infinite', pointerEvents: 'none' }} />
+        <div style={{ maxWidth: 760, margin: '0 auto', position: 'relative', zIndex: 1 }}>
           <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
             <SecLabel center>FAQ</SecLabel>
             <h2 style={{ fontFamily: F.serif, fontSize: 'clamp(1.4rem,3vw,2rem)', fontWeight: 700, color: TEXT.onLight }}>자주 묻는 질문</h2>
@@ -175,7 +305,11 @@ export function Services() {
         </div>
       </section>
 
-      <CtaBand title="어떤 서비스가 필요하신가요?" desc="무료 상담을 통해 우리 병원에 맞는 서비스를 찾아드립니다." />
+      <CtaBand
+        title="어떤 서비스가 필요하신가요?"
+        desc="무료 상담을 통해 우리 병원에 맞는 서비스를 찾아드립니다."
+        bgImage="https://blog.udemy.com/wp-content/uploads/2014/04/shutterstock_100422550.jpg"
+      />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
 import { BLUE, TEXT, BORDER, DARK, LIGHT, F } from '../utils/colors';
+import { CtaBand } from '../components/shared/CtaBand';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { useBreakpoint } from '../hooks/useBreakpoint';
 import { SecLabel } from '../components/shared/SecLabel';
@@ -37,38 +38,40 @@ function TeamCard({ t, delay }: { t: typeof team[0]; delay: number }) {
         <div style={{
           position: 'absolute', width: '100%', height: '100%',
           backfaceVisibility: 'hidden',
-          background: '#FFFFFF', border: `1px solid ${BORDER.light}`,
+          background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.15)',
+          backdropFilter: 'blur(12px)',
           padding: '1.8rem', textAlign: 'center', borderRadius: '10px',
-          boxShadow: '0 2px 8px rgba(37,99,235,0.05)',
+          boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
           display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
           boxSizing: 'border-box',
         }}>
           <div style={{
             width: 64, height: 64, borderRadius: '50%',
-            background: `linear-gradient(135deg,${BLUE.dim},rgba(59,130,246,0.05))`,
-            border: `2px solid ${BORDER.light}`,
+            background: 'rgba(59,130,246,0.15)',
+            border: '2px solid rgba(147,197,253,0.3)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             fontSize: '1.6rem', margin: '0 auto 1rem', flexShrink: 0,
           }}>{t.emoji}</div>
-          <h4 style={{ fontSize: '0.92rem', fontWeight: 700, marginBottom: '0.25rem', color: TEXT.onLight, fontFamily: F.sans }}>{t.name}</h4>
-          <div style={{ color: BLUE._500, fontSize: '0.68rem', letterSpacing: '0.06em', textTransform: 'uppercase', fontFamily: F.sans, lineHeight: 1.4 }}>{t.role}</div>
-          <div style={{ marginTop: '0.8rem', fontSize: '0.65rem', color: TEXT.mutedLight, fontFamily: F.sans }}>탭하여 자세히 보기</div>
+          <h4 style={{ fontSize: '0.92rem', fontWeight: 700, marginBottom: '0.25rem', color: '#FFFFFF', fontFamily: F.sans }}>{t.name}</h4>
+          <div style={{ color: BLUE._300, fontSize: '0.68rem', letterSpacing: '0.06em', textTransform: 'uppercase', fontFamily: F.sans, lineHeight: 1.4 }}>{t.role}</div>
+          <div style={{ marginTop: '0.8rem', fontSize: '0.65rem', color: 'rgba(255,255,255,0.45)', fontFamily: F.sans }}>탭하여 자세히 보기</div>
         </div>
         {/* Back */}
         <div style={{
           position: 'absolute', width: '100%', height: '100%',
           backfaceVisibility: 'hidden',
-          background: '#FFFFFF', border: `1px solid ${BLUE._400}`,
+          background: 'rgba(13,46,106,0.85)', border: `1px solid ${BLUE._400}`,
+          backdropFilter: 'blur(12px)',
           padding: '1.8rem', textAlign: 'center', borderRadius: '10px',
-          boxShadow: '0 12px 32px rgba(37,99,235,0.24)',
+          boxShadow: `0 12px 32px rgba(37,99,235,0.35)`,
           display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
           transform: 'rotateY(180deg)',
           boxSizing: 'border-box',
           overflow: 'hidden',
         }}>
           <div style={{ fontSize: '1.8rem', marginBottom: '0.6rem', flexShrink: 0 }}>{t.emoji}</div>
-          <h4 style={{ fontSize: '0.9rem', fontWeight: 700, marginBottom: '0.6rem', color: TEXT.onLight, fontFamily: F.sans, flexShrink: 0 }}>{t.name}</h4>
-          <p style={{ color: TEXT.mutedLight, fontSize: '0.78rem', lineHeight: 1.65, fontFamily: F.sans, overflow: 'hidden' }}>{t.desc}</p>
+          <h4 style={{ fontSize: '0.9rem', fontWeight: 700, marginBottom: '0.6rem', color: '#FFFFFF', fontFamily: F.sans, flexShrink: 0 }}>{t.name}</h4>
+          <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.78rem', lineHeight: 1.65, fontFamily: F.sans, overflow: 'hidden' }}>{t.desc}</p>
         </div>
       </div>
     </div>
@@ -84,7 +87,7 @@ export function About() {
   const cardPad    = isMobile ? '1.5rem' : '2.5rem';
 
   return (
-    <div style={{ background: LIGHT.bg0 }}>
+    <div style={{ background: 'linear-gradient(155deg,#071D3F,#0D2E6A)' }}>
 
       {/* ── Banner: Leadership ────────────────────────────────────────── */}
       <div style={{
@@ -115,7 +118,7 @@ export function About() {
       </div>
 
       {/* ── CEO ────────────────────────────────────────────────────────── */}
-      <section style={{ background: LIGHT.bg0, padding: sectionPad }}>
+      <section style={{ background: 'linear-gradient(155deg,#071D3F 0%,#0D2E6A 100%)', padding: sectionPad }}>
         <div style={{
           maxWidth: 1280, margin: '0 auto',
           display: 'grid',
@@ -129,12 +132,13 @@ export function About() {
           <div className="fu">
             <div style={{
               position: 'relative',
-              background: '#FFFFFF',
-              border: `1px solid ${BORDER.light}`,
+              background: 'rgba(255,255,255,0.07)',
+              border: '1px solid rgba(255,255,255,0.15)',
+              backdropFilter: 'blur(12px)',
               padding: cardPad,
               textAlign: 'center',
               borderRadius: '12px',
-              boxShadow: '0 4px 24px rgba(37,99,235,0.08)',
+              boxShadow: '0 4px 24px rgba(0,0,0,0.35)',
             }}>
               {/* 상단 포인트 바 */}
               <div style={{
@@ -173,16 +177,16 @@ export function About() {
                 />
               )}
 
-              <div style={{ fontFamily: F.serif, fontSize: '1.4rem', fontWeight: 700, marginBottom: '0.25rem', color: TEXT.onLight }}>김상연</div>
-              <div style={{ color: BLUE._500, fontSize: '0.72rem', letterSpacing: '0.12em', textTransform: 'uppercase', fontFamily: F.sans }}>대표 · Medical Consultant</div>
+              <div style={{ fontFamily: F.serif, fontSize: '1.4rem', fontWeight: 700, marginBottom: '0.25rem', color: '#FFFFFF' }}>김상연</div>
+              <div style={{ color: BLUE._300, fontSize: '0.72rem', letterSpacing: '0.12em', textTransform: 'uppercase', fontFamily: F.sans }}>대표 · Medical Consultant</div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', justifyContent: 'center', marginTop: '1rem' }}>
                 {['물리치료사', '임상 17년+', '경영 컨설턴트'].map(b => (
                   <span key={b} style={{
                     fontSize: '0.68rem', letterSpacing: '0.03em',
-                    border: `1.5px solid ${BLUE._500}`, color: BLUE._500,
+                    border: `1.5px solid ${BLUE._300}`, color: BLUE._300,
                     padding: '0.2rem 0.75rem', borderRadius: '20px',
                     fontFamily: F.sans,
-                    whiteSpace: 'nowrap',   /* ← 배지 텍스트 줄바꿈 방지 */
+                    whiteSpace: 'nowrap',
                   }}>{b}</span>
                 ))}
               </div>
@@ -194,13 +198,13 @@ export function About() {
 
             {/* Quote */}
             <div style={{
-              background: BLUE.dim,
-              border: `1px solid ${BORDER.light}`,
-              borderLeft: `4px solid ${BLUE._500}`,
+              background: 'rgba(59,130,246,0.1)',
+              border: '1px solid rgba(147,197,253,0.2)',
+              borderLeft: `4px solid ${BLUE._400}`,
               padding: isMobile ? '1.2rem 1.4rem' : '1.6rem 1.8rem',
               fontFamily: F.serif,
               fontSize: isMobile ? '0.9rem' : '1.05rem',
-              lineHeight: 1.85, color: TEXT.onLight, fontStyle: 'italic',
+              lineHeight: 1.85, color: 'rgba(255,255,255,0.9)', fontStyle: 'italic',
               marginBottom: '2rem', borderRadius: '0 8px 8px 0',
             }}>
               "환자 중심 의료 서비스가 병·의원의 진정한 경쟁력이다.
@@ -217,7 +221,7 @@ export function About() {
                   fontFamily: F.sans, fontWeight: 700,
                 }}>
                   {text}
-                  <span style={{ flex: 1, height: 1, background: BORDER.light, display: 'inline-block', minWidth: 20 }} />
+                  <span style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.15)', display: 'inline-block', minWidth: 20 }} />
                 </div>
               );
 
@@ -226,7 +230,7 @@ export function About() {
                   {/* 대표 철학 */}
                   <div style={{ marginBottom: '2rem' }}>
                     {sectionLabel('대표 철학')}
-                    <p className="speakable" style={{ color: TEXT.mutedLight, fontSize: '0.88rem', lineHeight: 1.9, fontFamily: F.sans }}>
+                    <p className="speakable" style={{ color: 'rgba(255,255,255,0.72)', fontSize: '0.88rem', lineHeight: 1.9, fontFamily: F.sans }}>
                       물리치료사로 17년 이상 의료 현장 최전선에서 일하며 깨달은 것이 있습니다.
                       좋은 진료를 하는 병원이 반드시 잘 되는 게 아니라는 것.
                       환자가 느끼는 병원의 가치는 진료실 밖에서도 만들어진다는 것입니다.
@@ -246,7 +250,7 @@ export function About() {
                       <div key={i} style={{
                         display: 'flex', gap: '1.2rem',
                         padding: '1.2rem 0',
-                        borderBottom: `1px solid ${BORDER.light}`,
+                        borderBottom: '1px solid rgba(255,255,255,0.1)',
                         alignItems: 'flex-start',
                       }}>
                         <div style={{
@@ -256,8 +260,8 @@ export function About() {
                           lineHeight: 1.4, paddingTop: '0.1rem',
                         }}>{c.year}</div>
                         <div>
-                          <h4 style={{ fontSize: '0.88rem', fontWeight: 700, marginBottom: '0.25rem', color: TEXT.onLight, fontFamily: F.sans }}>{c.t}</h4>
-                          <p style={{ color: TEXT.mutedLight, fontSize: '0.82rem', lineHeight: 1.6, fontFamily: F.sans }}>{c.d}</p>
+                          <h4 style={{ fontSize: '0.88rem', fontWeight: 700, marginBottom: '0.25rem', color: '#FFFFFF', fontFamily: F.sans }}>{c.t}</h4>
+                          <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '0.82rem', lineHeight: 1.6, fontFamily: F.sans }}>{c.d}</p>
                         </div>
                       </div>
                     ))}
@@ -278,11 +282,11 @@ export function About() {
                         { t: '브랜드 인지도 확장', d: '지역 내 온·오프라인 통합 브랜드 포지셔닝 강화' },
                       ].map((a, i) => (
                         <div key={i} style={{
-                          background: LIGHT.bg1, border: `1px solid ${BORDER.light}`,
+                          background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)',
                           padding: '1rem 1.1rem', borderRadius: '8px',
                         }}>
-                          <strong style={{ display: 'block', fontSize: '0.78rem', color: BLUE._500, marginBottom: '0.25rem', fontFamily: F.sans }}>{a.t}</strong>
-                          <p style={{ color: TEXT.mutedLight, fontSize: '0.78rem', lineHeight: 1.55, fontFamily: F.sans }}>{a.d}</p>
+                          <strong style={{ display: 'block', fontSize: '0.78rem', color: BLUE._300, marginBottom: '0.25rem', fontFamily: F.sans }}>{a.t}</strong>
+                          <p style={{ color: 'rgba(255,255,255,0.62)', fontSize: '0.78rem', lineHeight: 1.55, fontFamily: F.sans }}>{a.d}</p>
                         </div>
                       ))}
                     </div>
@@ -294,18 +298,21 @@ export function About() {
         </div>
       </section>
 
+      {/* bridge CEO → Our Team */}
+      <div style={{ height: 80, background: 'linear-gradient(to bottom,#0D2E6A,#091A38)' }} />
+
       {/* ── Our Team ────────────────────────────────────────────────────── */}
-      <section style={{ background: LIGHT.bg1, padding: sectionPad }}>
+      <section style={{ background: 'linear-gradient(155deg,#091A38 0%,#0C2558 100%)', padding: sectionPad }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
           <div className="fu" style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
             <SecLabel center>Our Team</SecLabel>
-            <h2 style={{ fontFamily: F.serif, fontSize: 'clamp(1.5rem, 3vw, 2.4rem)', fontWeight: 700, color: TEXT.onLight }}>
+            <h2 style={{ fontFamily: F.serif, fontSize: 'clamp(1.5rem, 3vw, 2.4rem)', fontWeight: 700, color: '#FFFFFF' }}>
               함께하는 전문가 팀
             </h2>
-            <p style={{ color: TEXT.mutedLight, fontSize: '0.88rem', marginTop: '0.4rem', maxWidth: 520, margin: '0.4rem auto 0', fontFamily: F.sans }}>
+            <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '0.88rem', marginTop: '0.4rem', maxWidth: 520, margin: '0.4rem auto 0', fontFamily: F.sans }}>
               의원급 현장에서 실제로 일해온 전문가들이 상시 대기합니다
             </p>
-            <p style={{ fontSize: '0.7rem', color: TEXT.mutedLight, marginTop: '0.4rem', fontFamily: F.sans }}>
+            <p style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.45)', marginTop: '0.4rem', fontFamily: F.sans }}>
               카드를 {isMobile ? '탭' : '클릭 또는 마우스 오버'}하여 자세히 보세요
             </p>
           </div>
@@ -326,40 +333,11 @@ export function About() {
       </section>
 
       {/* ── CTA ─────────────────────────────────────────────────────────── */}
-      <div style={{
-        padding: sectionPad,
-        background: `linear-gradient(135deg,${BLUE.ctaBg},#1E40AF)`,
-        textAlign: 'center',
-        position: 'relative', overflow: 'hidden',
-      }}>
-        <div style={{
-          position: 'absolute', inset: 0,
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px)`,
-          backgroundSize: '60px 60px',
-        }} />
-        <div style={{ position: 'relative', maxWidth: 1280, margin: '0 auto' }}>
-          <h2 className="fu" style={{
-            fontFamily: F.serif,
-            fontSize: isMobile ? '1.5rem' : 'clamp(1.5rem, 3.2vw, 2.8rem)',
-            fontWeight: 700, marginBottom: '0.8rem', color: '#FFFFFF',
-          }}>
-            원장님의 든든한 파트너가 되겠습니다
-          </h2>
-          <p className="fu" style={{ color: 'rgba(255,255,255,0.75)', marginBottom: '2rem', fontSize: '0.9rem', fontFamily: F.sans }}>
-            상담은 항상 무료입니다. 부담 없이 연락주세요.
-          </p>
-          <div className="fu">
-            <Link to="/contact" style={{
-              display: 'inline-flex',
-              background: '#FFFFFF', color: BLUE._500,
-              padding: '0.85rem 2rem', fontWeight: 700, fontSize: '0.87rem',
-              textDecoration: 'none', borderRadius: '4px', fontFamily: F.sans,
-            }}>
-              무료 상담 신청 →
-            </Link>
-          </div>
-        </div>
-      </div>
+      <CtaBand
+        title="원장님의 든든한 파트너가 되겠습니다"
+        desc="상담은 항상 무료입니다. 부담 없이 연락주세요."
+        bgImage="https://internwise.s3.eu-west-2.amazonaws.com/uploads/230905090356898660.jpg"
+      />
 
     </div>
   );
