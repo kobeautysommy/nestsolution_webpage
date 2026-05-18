@@ -35,17 +35,6 @@ export function Partners() {
       className="overflow-hidden"
       style={{ background: BG, padding: '3rem 0', borderTop: '1px solid rgba(37,99,235,0.08)', position: 'relative' }}
     >
-      {/* Background deco SVGs — left / center / right */}
-      <div style={{ position: 'absolute', top: '50%', left: '15%', transform: 'translate(-50%, -50%)', pointerEvents: 'none', zIndex: 0 }}>
-        <PartnerSvg size={220} opacity={0.18} />
-      </div>
-      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', pointerEvents: 'none', zIndex: 0 }}>
-        <PartnerSvg size={220} opacity={0.18} />
-      </div>
-      <div style={{ position: 'absolute', top: '50%', left: '85%', transform: 'translate(-50%, -50%)', pointerEvents: 'none', zIndex: 0 }}>
-        <PartnerSvg size={220} opacity={0.18} />
-      </div>
-
       {/* Header */}
       <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 5vw', marginBottom: '2.5rem', position: 'relative', zIndex: 1 }}>
         <div style={{

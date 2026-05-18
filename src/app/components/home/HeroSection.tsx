@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router';
 import { BLUE, TEXT, F } from '../../utils/colors';
-import heroVideo from '../../../assets/seoulgijibae.mp4';
+import heroVideo from '../../../assets/hero_video.mp4';
 
 function StatCard({ big, lbl, delay }: { big: string; lbl: string; delay: number }) {
   const match = big.match(/^(\d+)(.*)$/);
