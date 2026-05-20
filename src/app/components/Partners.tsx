@@ -1,8 +1,8 @@
-import topMarketing from 'figma:asset/83d97b515ada656ce423490e57780f5b84db4c75.png';
-import medifull     from 'figma:asset/d4ddb9ac650bf4021ddd533cab8973635e1a12e0.png';
-import ktNasmedia   from 'figma:asset/ee28ad20ebc8914cbd524a2092668505ddf17a68.png';
-import hanilMedipia from 'figma:asset/98dbe47a4902728c9da76e84a2e0dc87a844096b.png';
-import seegene      from 'figma:asset/46b491807a790178a3ecbad8c4493c7218c7d0cf.png';
+import topMarketing from 'figma:asset/톱마케팅.webp';
+import medifull     from 'figma:asset/씨젠.webp';
+import ktNasmedia   from 'figma:asset/케이티.png';
+import hanilMedipia from 'figma:asset/한일.webp';
+import seegene      from 'figma:asset/메디풀.png';
 
 import { BLUE, TEXT, F } from '../utils/colors';
 

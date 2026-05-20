@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router';
 import { BLUE, TEXT, BORDER, F, DARK } from '../utils/colors';
 import { Menu, X } from 'lucide-react';
-import logoImg from 'figma:asset/e62d0c0eb70f7e416137072101b312f32e6e19db.png';
+import logoImg from 'figma:asset/네스트.png';
 
 /* ─── Brand Mark ───────────────────────────────────────────────────────── */
 function Logo() {

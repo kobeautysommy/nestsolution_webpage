@@ -1,7 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router';
 import { BLUE, TEXT, F } from '../../utils/colors';
+import { useBreakpoint } from '../../hooks/useBreakpoint';
 import heroVideo from '../../../assets/hero_video.mp4';
+import heroVideoMobile from '../../../assets/hero_mobile.mp4';
 
 function StatCard({ big, lbl, delay }: { big: string; lbl: string; delay: number }) {
   const match = big.match(/^(\d+)(.*)$/);
@@ -52,6 +54,7 @@ function StatCard({ big, lbl, delay }: { big: string; lbl: string; delay: number
 }
 
 export function HeroSection() {
+  const { isMobile } = useBreakpoint();
   return (
     <section style={{
       minHeight: 'auto', display: 'flex', alignItems: 'center',
@@ -59,14 +62,14 @@ export function HeroSection() {
     }}>
       {/* video background */}
       <video
-        autoPlay muted loop playsInline
+        autoPlay muted loop playsInline preload="metadata"
         style={{
           position: 'absolute', inset: 0,
           width: '100%', height: '100%',
           objectFit: 'cover', zIndex: 0,
         }}
       >
-        <source src={heroVideo} type="video/mp4" />
+        <source src={isMobile ? heroVideoMobile : heroVideo} type="video/mp4" />
       </video>
       {/* dark overlay for readability */}
       <div style={{

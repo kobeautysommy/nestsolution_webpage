@@ -16,7 +16,8 @@
       "Bash(node -e \"import\\('./node_modules/animejs/dist/modules/index.js'\\).then\\(m => { console.log\\('svg:', typeof m.svg, Object.keys\\(m.svg || {}\\)\\); console.log\\('utils:', typeof m.utils, Object.keys\\(m.utils || {}\\).slice\\(0,8\\)\\); console.log\\('createTimeline:', typeof m.createTimeline\\); }\\)\")",
       "Bash(node -e \"import\\('./node_modules/animejs/dist/modules/index.js'\\).then\\(m => { console.log\\('utils keys:', Object.keys\\(m.utils\\)\\); console.log\\('random:', typeof m.random\\); }\\)\")",
       "Bash(npx tsc *)",
-      "Bash(node -e \"const p=require\\('./package.json'\\); const deps={...p.dependencies,...p.devDependencies}; ['three','animejs','@react-three/fiber','@react-three/drei','gsap'].forEach\\(k=>console.log\\(k,deps[k]||'NOT INSTALLED'\\)\\)\")"
+      "Bash(node -e \"const p=require\\('./package.json'\\); const deps={...p.dependencies,...p.devDependencies}; ['three','animejs','@react-three/fiber','@react-three/drei','gsap'].forEach\\(k=>console.log\\(k,deps[k]||'NOT INSTALLED'\\)\\)\")",
+      "Bash(npm run *)"
     ]
   }
 }

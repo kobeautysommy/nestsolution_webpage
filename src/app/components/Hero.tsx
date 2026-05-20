@@ -1,4 +1,4 @@
-import exampleImage from 'figma:asset/4e4b0b211954adb752c7f14689f3a5c716f53933.png';
+import exampleImage from 'figma:asset/데스크.webp';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
 export function Hero() {
@@ -13,6 +13,7 @@ export function Hero() {
           src={exampleImage}
           alt="Workspace"
           className="w-full h-full object-cover"
+          loading="eager"
         />
       </div>
       <div className="relative z-10 text-center px-6 py-20 md:py-0">

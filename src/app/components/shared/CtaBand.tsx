@@ -19,6 +19,7 @@ export function CtaBand({ title, desc, label, secondaryCta, bgImage }: CtaBandPr
         backgroundImage: bgImage
           ? `linear-gradient(rgba(4,9,15,0.78), rgba(4,9,15,0.78)), url(${bgImage})`
           : `linear-gradient(135deg,${BLUE.ctaBg},${BLUE._600})`,
+        backgroundSize: 'cover', backgroundPosition: 'center',
         textAlign: 'center', position: 'relative', overflow: 'hidden',
       }}
     >

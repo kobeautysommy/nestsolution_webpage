@@ -15,7 +15,7 @@ export function Profile() {
         <div className="profile-header">
           <div className="profile-image-container">
             <div className="profile-image">
-              <img src="/assets/Image%20(Profile).png" alt="김상연 대표" />
+              <img src="/assets/Image%20(Profile).png" alt="김상연 대표" loading="eager" />
             </div>
           </div>
 
@@ -135,7 +135,7 @@ export function Profile() {
 
         {/* ── 비디오 섹션 ─────────────────────────────────────── */}
         <div className="video-section">
-          <img src="/assets/Video.png" alt="네스트솔루션 소개" />
+          <img src="/assets/Video.png" alt="네스트솔루션 소개" loading="lazy" />
         </div>
 
       </div>

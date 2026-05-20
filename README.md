@@ -19,15 +19,15 @@ npm run build     # 프로덕션 빌드
 
 ## 페이지 구조
 
-| 경로 | 페이지 | 설명 |
-|---|---|---|
-| `/` | 홈 | 메인 랜딩 페이지 |
-| `/pain` | 병원 경영 고민 | 원장님 고민 공감 + CTA |
-| `/services` | 컨설팅 서비스 | CS관리·마케팅·경영개선·인력관리 4대 서비스 |
-| `/process` | 컨설팅 과정 | 단계별 컨설팅 프로세스 |
-| `/cases` | 성공 사례 | 실제 컨설팅 성과 사례 |
-| `/about` | 대표 소개 | CEO 프로필 및 전문성 |
-| `/contact` | 무료 상담 신청 | 상담 신청 폼 |
+| 경로        | 페이지         | 설명                                       |
+| ----------- | -------------- | ------------------------------------------ |
+| `/`         | 홈             | 메인 랜딩 페이지                           |
+| `/pain`     | 병원 경영 고민 | 원장님 고민 공감 + CTA                     |
+| `/services` | 컨설팅 서비스  | CS관리·마케팅·경영개선·인력관리 4대 서비스 |
+| `/process`  | 컨설팅 과정    | 단계별 컨설팅 프로세스                     |
+| `/cases`    | 성공 사례      | 실제 컨설팅 성과 사례                      |
+| `/about`    | 대표 소개      | CEO 프로필 및 전문성                       |
+| `/contact`  | 무료 상담 신청 | 상담 신청 폼                               |
 
 ---
 
@@ -70,19 +70,20 @@ npm run build     # 프로덕션 빌드
 ### 6. 구조화 데이터 (JSON-LD)
 
 `index.html` (정적):
+
 - `Organization` + `LocalBusiness` + `WebSite` 스키마
 
 페이지별 (동적):
 
-| 페이지 | 구조화 데이터 |
-|---|---|
-| 홈 | WebPage, BreadcrumbList |
-| 서비스 | WebPage, BreadcrumbList, Service × 4 |
-| 컨설팅 과정 | WebPage, BreadcrumbList, HowTo |
-| 성공 사례 | WebPage, BreadcrumbList |
-| 대표 소개 | WebPage, BreadcrumbList, ProfilePage, Person |
-| 무료 상담 | WebPage, BreadcrumbList, ContactPage |
-| 고민 | WebPage, BreadcrumbList |
+| 페이지      | 구조화 데이터                                |
+| ----------- | -------------------------------------------- |
+| 홈          | WebPage, BreadcrumbList                      |
+| 서비스      | WebPage, BreadcrumbList, Service × 4         |
+| 컨설팅 과정 | WebPage, BreadcrumbList, HowTo               |
+| 성공 사례   | WebPage, BreadcrumbList                      |
+| 대표 소개   | WebPage, BreadcrumbList, ProfilePage, Person |
+| 무료 상담   | WebPage, BreadcrumbList, ContactPage         |
+| 고민        | WebPage, BreadcrumbList                      |
 
 ### 7. 국제 SEO / hreflang
 
@@ -106,8 +107,6 @@ npm run build     # 프로덕션 빌드
 - 전문성 뱃지 추가 ("17년+ 임상 현장 경험", "병·의원 전문 컨설팅", "1:1 맞춤 솔루션")
 - 각 페이지 JSON-LD에 `knowsAbout`, `worksFor`, `founder` 전문성 신호 삽입
 - 외부 링크에 `rel="noreferrer noopener"` 보안 속성 추가
-
----
 
 ## 배포 전 체크리스트
 

@@ -222,7 +222,7 @@
   100% { background-position: left center; }
 }
 .bg-slide {
-  background-size: 150% auto;
+  background-size: 150% 150%;
   background-repeat: no-repeat;
   animation: bgSlide 40s ease infinite;
 }

@@ -308,7 +308,7 @@ export function Services() {
       <CtaBand
         title="어떤 서비스가 필요하신가요?"
         desc="무료 상담을 통해 우리 병원에 맞는 서비스를 찾아드립니다."
-        bgImage="https://blog.udemy.com/wp-content/uploads/2014/04/shutterstock_100422550.jpg"
+        bgImage="https://internwise.s3.eu-west-2.amazonaws.com/uploads/230905090356898660.jpg"
       />
     </div>
   );

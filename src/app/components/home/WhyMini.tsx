@@ -1,4 +1,5 @@
-import { BLUE, TEXT, BORDER, LIGHT, F } from '../../utils/colors';
+import { BLUE, TEXT, BORDER, F } from '../../utils/colors';
+import deskImg from '../../../assets/데스크.webp';
 import { SecLabel } from '../shared/SecLabel';
 import { BtnOutline } from '../shared/Buttons';
 
@@ -13,8 +14,7 @@ export function WhyMini() {
     <section className="bg-slide" style={{
       padding: '6rem 5vw',
       position: 'relative',
-      backgroundImage: `linear-gradient(rgba(4,9,15,0.72), rgba(4,9,15,0.72)),
-        url(https://blog.udemy.com/wp-content/uploads/2014/04/shutterstock_100422550.jpg)`,
+      backgroundImage: `linear-gradient(rgba(4,9,15,0.72), rgba(4,9,15,0.72)), url(${deskImg})`,
     }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
         <div className="fu" style={{ textAlign: 'center', marginBottom: '3rem' }}>

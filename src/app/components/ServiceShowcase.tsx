@@ -1,6 +1,6 @@
-import cert1 from 'figma:asset/3bd0a03e11b99ab2ea2d0436d2d7384c6f8bb5e0.png';
-import cert2 from 'figma:asset/ee6505bc6cbdee7ad9b9267467459e8b7a0668e7.png';
-import cert3 from 'figma:asset/ab287181c90bf9dbd8b7d858a0c931a495fdf0d8.png';
+import cert1 from 'figma:asset/상표등록증1.webp';
+import cert2 from 'figma:asset/상표등록증3.webp';
+import cert3 from 'figma:asset/상표등록증2.webp';
 import { BLUE, TEXT, BORDER, F } from '../utils/colors';
 
 const trademarks = [
