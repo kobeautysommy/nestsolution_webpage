@@ -5,7 +5,9 @@
 
   const container = document.getElementById("root")!;
   if (container.children.length > 0) {
-    hydrateRoot(container, <App />);
+    hydrateRoot(container, <App />, {
+      onRecoverableError: () => {},
+    });
   } else {
     createRoot(container).render(<App />);
   }
