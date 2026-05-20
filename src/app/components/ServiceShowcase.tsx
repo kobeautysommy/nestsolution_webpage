@@ -1,6 +1,6 @@
-import cert1 from 'figma:asset/상표등록증1.webp';
-import cert2 from 'figma:asset/상표등록증3.webp';
-import cert3 from 'figma:asset/상표등록증2.webp';
+import cert1 from '../../assets/sertificate1.webp';
+import cert2 from '../../assets/sertificate2.webp';
+import cert3 from '../../assets/sertificate3.webp';
 import { BLUE, TEXT, BORDER, F } from '../utils/colors';
 
 const trademarks = [

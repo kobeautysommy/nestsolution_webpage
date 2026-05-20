@@ -6,7 +6,7 @@ import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { useBreakpoint } from '../hooks/useBreakpoint';
 import { SecLabel } from '../components/shared/SecLabel';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
-import ceoImage from 'figma:asset/대표이미지.webp';
+import ceoImage from '../../assets/ceo_image.webp';
 
 const team = [
   { emoji: '💼', name: '행정 청구 전문가',  role: 'Admin & Billing Specialist',    desc: '병·의원 행정 및 운영 관리 전문가. 의료보험 청구·수익 최적화, 병원 마케팅 전략 수립 및 실행 경험 보유. "체계적인 운영이 곧 의료 서비스의 질을 결정한다."' },

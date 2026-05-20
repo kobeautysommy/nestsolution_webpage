@@ -16,7 +16,6 @@ function CtaBand() {
     <div className="bg-slide" style={{
       padding: '6rem 5vw', textAlign: 'center', position: 'relative', overflow: 'hidden',
       backgroundImage: `linear-gradient(rgba(10,20,60,0.78),rgba(10,20,60,0.78)), url(https://internwise.s3.eu-west-2.amazonaws.com/uploads/230905090356898660.jpg)`,
-      backgroundSize: 'cover', backgroundPosition: 'center',
     }}>
       {/* grid overlay */}
       <div style={{ position: 'absolute', inset: 0, backgroundImage: `linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px)`, backgroundSize: '60px 60px', pointerEvents: 'none' }} />

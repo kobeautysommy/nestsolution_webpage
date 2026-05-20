@@ -1,8 +1,8 @@
-import topMarketing from 'figma:asset/톱마케팅.webp';
-import medifull     from 'figma:asset/씨젠.webp';
-import ktNasmedia   from 'figma:asset/케이티.png';
-import hanilMedipia from 'figma:asset/한일.webp';
-import seegene      from 'figma:asset/메디풀.png';
+import topMarketing from '../../assets/top_marketing.webp';
+import medifull     from '../../assets/medifull.png';
+import ktNasmedia   from '../../assets/kt.png';
+import hanilMedipia from '../../assets/hanil.webp';
+import seegene      from '../../assets/seegene.webp';
 
 import { BLUE, TEXT, F } from '../utils/colors';
 

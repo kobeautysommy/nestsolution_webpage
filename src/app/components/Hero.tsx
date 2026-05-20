@@ -1,4 +1,4 @@
-import exampleImage from 'figma:asset/데스크.webp';
+import exampleImage from '../../assets/desk.webp';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
 export function Hero() {

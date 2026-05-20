@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { BLUE, TEXT, BORDER, DARK, F } from '../../utils/colors';
+import { useBreakpoint } from '../../hooks/useBreakpoint';
 import { SecLabel } from '../shared/SecLabel';
 import { BtnPrimary } from '../shared/Buttons';
 
@@ -88,6 +89,7 @@ function usePulseAnim(
 }
 
 export function Overview() {
+  const { isMobile } = useBreakpoint();
   const svgRef   = useRef<SVGSVGElement>(null);
   const pulseRef = useRef<SVGPathElement>(null);
   usePulseAnim(svgRef, pulseRef);
@@ -95,8 +97,8 @@ export function Overview() {
   return (
     <section style={{ background: '#001919', padding: '6rem 5vw', position: 'relative', overflow: 'hidden' }}>
 
-      {/* ── ECG full-section background ── */}
-      <svg
+      {/* ── ECG full-section background (desktop only) ── */}
+      {!isMobile && <svg
         ref={svgRef}
         viewBox="0 0 600 600"
         preserveAspectRatio="xMidYMid slice"
@@ -125,7 +127,7 @@ export function Overview() {
           strokeMiterlimit="10"
           d={PULSE_D}
         />
-      </svg>
+      </svg>}
 
       {/* ── Content ── */}
       <div style={{ maxWidth: 1280, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(320px,1fr))', gap: '5rem', alignItems: 'center', position: 'relative', zIndex: 1 }}>

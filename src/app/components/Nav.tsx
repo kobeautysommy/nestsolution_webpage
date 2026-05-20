@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router';
 import { BLUE, TEXT, BORDER, F, DARK } from '../utils/colors';
 import { Menu, X } from 'lucide-react';
-import logoImg from 'figma:asset/네스트.png';
+import logoImg from '../../assets/nest_logo.png';
 
 /* ─── Brand Mark ───────────────────────────────────────────────────────── */
 function Logo() {
@@ -11,7 +11,7 @@ function Logo() {
       <img
         src={logoImg}
         alt="NestSolution 병원 컨설팅 마케팅"
-        style={{ height: '40px', width: 'auto', display: 'block' }}
+        style={{ height: '52px', width: 'auto', display: 'block' }}
       />
     </Link>
   );

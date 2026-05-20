@@ -1,5 +1,5 @@
 import { BLUE, TEXT, BORDER, F } from '../../utils/colors';
-import deskImg from '../../../assets/데스크.webp';
+import deskImg from '../../../assets/desk.webp';
 import { SecLabel } from '../shared/SecLabel';
 import { BtnOutline } from '../shared/Buttons';
 
