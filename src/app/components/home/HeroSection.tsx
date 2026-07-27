@@ -77,7 +77,7 @@ export function HeroSection() {
         background: 'linear-gradient(155deg, rgba(6,13,31,0.72) 0%, rgba(11,26,58,0.62) 50%, rgba(17,34,82,0.55) 100%)',
       }} />
 
-      <div style={{ position: 'relative', zIndex: 2, maxWidth: 740 }}>
+      <div style={{ position: 'relative', zIndex: 2, maxWidth: 920 }}>
         <div style={{
           display: 'inline-flex', alignItems: 'center', gap: '0.7rem',
           fontSize: '0.7rem', letterSpacing: '0.22em', textTransform: 'uppercase',
@@ -87,8 +87,9 @@ export function HeroSection() {
           병·의원 컨설팅 전문 기업 · 임상경험 17년+
         </div>
         <h1 style={{
-          fontFamily: F.serif, fontSize: 'clamp(2.4rem,5vw,4.8rem)',
+          fontFamily: F.sans, fontSize: 'clamp(2.4rem,5vw,4.8rem)',
           fontWeight: 700, lineHeight: 1.2, marginBottom: '0.7rem', color: '#FFFFFF',
+          wordBreak: 'keep-all',
         }}>
           원장님은 <span className="text-grad-dark">연기자</span>,<br />
           저희는 <span className="text-grad-dark">연출자</span>입니다

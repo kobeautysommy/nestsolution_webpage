@@ -64,7 +64,7 @@ export function PainMini() {
       <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 1 }}>
         <div className="fu" style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
           <SecLabel center>Pain Point</SecLabel>
-          <h2 style={{ fontFamily: F.serif, fontSize: 'clamp(1.6rem,3vw,2.5rem)', fontWeight: 700, color: '#FFFFFF' }}>원장님, 이런 고민 있으신가요?</h2>
+          <h2 style={{ fontFamily: F.sans, fontSize: 'clamp(1.6rem,3vw,2.5rem)', fontWeight: 700, color: '#FFFFFF' }}>원장님, 이런 고민 있으신가요?</h2>
         </div>
         <div className="pain-marquee-wrap" style={{ overflow: 'hidden', padding: '0.5rem 0 1rem' }}>
           <div className="pain-marquee-track">

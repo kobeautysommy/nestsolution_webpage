@@ -7,10 +7,6 @@
     {
       "source": "/blog/:path*",
       "destination": "https://nestsolu.jp4.fcomet.com/blog/:path*"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
     }
   ]
 }

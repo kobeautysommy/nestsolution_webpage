@@ -128,6 +128,29 @@ async function main() {
     console.log('✓');
   }
 
+  // 404 페이지 (Vercel이 매칭되지 않는 경로에 404 상태와 함께 서빙)
+  process.stdout.write('  /404 ... ');
+  let notFoundAppHtml = '';
+  try {
+    notFoundAppHtml = await render('/__not_found__');
+  } catch {
+    // 렌더 실패 시 빈 HTML
+  }
+  let html404 = template.replace('<!--app-html-->', notFoundAppHtml);
+  html404 = injectSEO(html404, {
+    title: '페이지를 찾을 수 없습니다 | 네스트솔루션',
+    description: '요청하신 페이지를 찾을 수 없습니다. 네스트솔루션 홈으로 이동해 주세요.',
+  }, '/404');
+  html404 = html404
+    .replace(/(<meta name="robots" content=")[^"]*/, rep('<meta name="robots" content="noindex, nofollow'))
+    .replace(/(<meta name="googlebot" content=")[^"]*/, rep('<meta name="googlebot" content="noindex'))
+    .replace(/(<meta name="Yeti" content=")[^"]*/, rep('<meta name="Yeti" content="noindex'))
+    .replace(/\s*<link rel="canonical"[^>]*\/>/, rep(''))
+    .replace(/\s*<link rel="alternate" hreflang="ko"[^>]*\/>/, rep(''))
+    .replace(/\s*<link rel="alternate" hreflang="x-default"[^>]*\/>/, rep(''));
+  writeFileSync(join(ROOT, 'dist', '404.html'), html404);
+  console.log('✓');
+
   console.log('\n✅ 프리렌더링 완료. dist/ 디렉토리에 정적 HTML 생성됨.');
 }
 

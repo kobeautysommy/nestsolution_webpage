@@ -69,7 +69,8 @@ export function Contact() {
           </div>
 
           {/* Right */}
-          <div className="fu d2" style={{ flex: '1 1 400px', minWidth: 300, background: '#FFFFFF', border: `1px solid ${BORDER.light}`, padding: '2.5rem', borderRadius: '10px', boxShadow: '0 4px 24px rgba(37,99,235,0.08)', position: 'relative' }}>
+          <div className="fu d2" style={{ flex: '1 1 400px', minWidth: 300 }}>
+          <div style={{ background: '#FFFFFF', border: `1px solid ${BORDER.light}`, padding: '2.5rem', borderRadius: '10px', boxShadow: '0 4px 24px rgba(37,99,235,0.08)', position: 'relative' }}>
             <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 4, background: `linear-gradient(90deg,${BLUE._500},${BLUE._300})`, borderRadius: '10px 10px 0 0' }} />
             <SecLabel>자주 선택하는 상담 주제</SecLabel>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', marginBottom: '2rem' }}>
@@ -89,6 +90,28 @@ export function Contact() {
                 위 항목을 선택하신 후 카카오톡이나 전화로 연락주시면 더 빠르고 정확한 상담이 가능합니다. 어떤 고민이든 환영합니다.
               </p>
             </div>
+          </div>
+
+            {/* Manual PDF download */}
+            <a href="/nest-solution-manual.pdf" download style={{
+              display: 'flex', alignItems: 'center', gap: '1.2rem',
+              marginTop: '1.5rem', padding: '1.8rem',
+              background: '#FFFFFF', border: `1px solid ${BORDER.light}`,
+              borderRadius: '10px', textDecoration: 'none', transition: 'all 0.2s',
+              boxShadow: '0 4px 24px rgba(37,99,235,0.08)',
+            }}
+              onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = BLUE._400; el.style.boxShadow = '0 4px 16px rgba(37,99,235,0.12)'; }}
+              onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = BORDER.light; el.style.boxShadow = '0 4px 24px rgba(37,99,235,0.08)'; }}
+            >
+              <span className="hidden lg:inline" style={{ fontSize: '2rem' }}>📄</span>
+              <strong style={{ flex: 1, fontSize: '0.95rem', color: TEXT.onLight, fontFamily: F.sans }}>한눈에 보는 서비스 & 비용 (PDF)</strong>
+              <span style={{
+                display: 'inline-flex', alignItems: 'center', gap: '0.4rem', flexShrink: 0,
+                background: `linear-gradient(135deg,${BLUE._500},${BLUE._400})`, color: '#fff',
+                padding: '0.55rem 1.1rem', fontSize: '0.8rem', fontWeight: 700,
+                letterSpacing: '0.03em', borderRadius: '8px', fontFamily: F.sans,
+              }}>다운로드 ↓</span>
+            </a>
           </div>
         </div>
       </section>

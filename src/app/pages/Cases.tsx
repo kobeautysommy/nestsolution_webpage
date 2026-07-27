@@ -165,6 +165,7 @@ function CaseChartBg() {
     ];
     curves.forEach(c => {
       const xStep = W / (c.pts.length - 1);
+      
       let d = `M 0,${H * c.pts[0]}`;
       for (let i = 1; i < c.pts.length; i++) {
         const cx = (i - 0.5) * xStep;
