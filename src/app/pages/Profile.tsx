@@ -15,7 +15,7 @@ export function Profile() {
         <div className="profile-header">
           <div className="profile-image-container">
             <div className="profile-image">
-              <img src="/assets/Image%20(Profile).png" alt="김상연 대표" loading="eager" />
+              <img src="/assets/profile-photo.png" alt="김상연 대표" loading="eager" />
             </div>
           </div>
 
