@@ -127,6 +127,9 @@ export function SEOHead({ seo }: { seo: PageSEO }) {
     // 네이버 인증
     setMeta({ name: 'naver-site-verification', content: '930311f2339c80c19127df25b854460858d85e27' });
 
+    // 구글 인증
+    setMeta({ name: 'google-site-verification', content: 'E0qcXXCjrfthPxBTef6o5SqS11_JDOiFt7EI5nLylus' });
+
     // 지역
     setMeta({ name: 'geo.region', content: 'KR' });
     setMeta({ name: 'geo.placename', content: '대한민국' });
