@@ -14,6 +14,7 @@ const Contact  = lazy(() => import('./pages/Contact').then(m => ({ default: m.Co
 const Cases    = lazy(() => import('./pages/Cases').then(m => ({ default: m.Cases })));
 const Profile  = lazy(() => import('./pages/Profile').then(m => ({ default: m.Profile })));
 const Blog     = lazy(() => import('./pages/Blog').then(m => ({ default: m.Blog })));
+const BlogPost = lazy(() => import('./pages/BlogPost').then(m => ({ default: m.BlogPost })));
 
 /* ─── 페이지별 SEO 설정 ──────────────────────────────────────────────────── */
 
@@ -334,20 +335,20 @@ export const SEO_MAP: Record<string, PageSEO> = {
     ],
   },
 
-  // 블로그 글이 없는 동안 검색 노출 제외
   '/blog': {
     title: '블로그 | 네스트솔루션',
-    description: '네스트솔루션 블로그 — 병원 경영·마케팅·CS 인사이트를 준비 중입니다.',
-    keywords: '네스트솔루션 블로그, 병원 컨설팅 블로그',
+    description: '네스트솔루션 블로그 — 병원 경영·마케팅·CS 현장의 인사이트를 전해드립니다.',
+    keywords: '네스트솔루션 블로그, 병원 컨설팅 블로그, 병원 마케팅, 병원 경영',
     canonical: `${SITE_URL}/blog`,
-    noindex: true,
   },
 };
 
 /* ─── Root Layout ────────────────────────────────────────────────────────── */
 function Root() {
   const { pathname } = useLocation();
-  const seo = SEO_MAP[pathname] ?? SEO_MAP['/'];
+  const seo = SEO_MAP[pathname]
+    // 블로그 글: 제목은 BlogPost에서 글 로드 후 갱신
+    ?? (pathname.startsWith('/blog/') ? { ...SEO_MAP['/blog'], canonical: `${SITE_URL}${pathname}` } : SEO_MAP['/']);
 
   useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
 
@@ -389,6 +390,7 @@ export const routeDefs = [
       { path: 'cases',       Component: Cases },
       { path: 'profile',     Component: Profile },
       { path: 'blog',        Component: Blog },
+      { path: 'blog/:slug',  Component: BlogPost },
       { path: '*',           Component: NotFound },
     ],
   },

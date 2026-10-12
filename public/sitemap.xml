@@ -75,4 +75,13 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://nestsolution.co.kr/profile"/>
   </url>
 
+  <!-- 블로그 -->
+  <url>
+    <loc>https://nestsolution.co.kr/blog</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://nestsolution.co.kr/blog"/>
+  </url>
+
 </urlset>
