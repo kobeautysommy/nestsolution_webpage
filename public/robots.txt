@@ -41,4 +41,3 @@ Crawl-delay: 2
 
 # 사이트맵
 Sitemap: https://nestsolution.co.kr/sitemap.xml
-Sitemap: https://nestsolution.co.kr/blog/sitemap_index.xml

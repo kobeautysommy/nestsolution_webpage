@@ -3,7 +3,7 @@ import { readFileSync, mkdirSync, writeFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-const ROUTES = ['/', '/pain', '/services', '/process', '/about', '/contact', '/cases', '/profile'];
+const ROUTES = ['/', '/pain', '/services', '/process', '/about', '/contact', '/cases', '/profile', '/blog'];
 const SITE_URL = 'https://nestsolution.co.kr';
 const ROOT = process.cwd();
 
@@ -78,6 +78,13 @@ function injectSEO(template, seo, route) {
       : seo.jsonLd;
     const script = `  <script type="application/ld+json" id="jsonld-page">${JSON.stringify(data)}</script>`;
     html = html.replace('</head>', `${script}\n  </head>`);
+  }
+
+  if (seo.noindex) {
+    html = html
+      .replace(/(<meta name="robots" content=")[^"]*/, rep('<meta name="robots" content="noindex, nofollow'))
+      .replace(/(<meta name="googlebot" content=")[^"]*/, rep('<meta name="googlebot" content="noindex'))
+      .replace(/(<meta name="Yeti" content=")[^"]*/, rep('<meta name="Yeti" content="noindex'));
   }
 
   return html;

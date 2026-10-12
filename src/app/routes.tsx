@@ -13,6 +13,7 @@ const About    = lazy(() => import('./pages/About').then(m => ({ default: m.Abou
 const Contact  = lazy(() => import('./pages/Contact').then(m => ({ default: m.Contact })));
 const Cases    = lazy(() => import('./pages/Cases').then(m => ({ default: m.Cases })));
 const Profile  = lazy(() => import('./pages/Profile').then(m => ({ default: m.Profile })));
+const Blog     = lazy(() => import('./pages/Blog').then(m => ({ default: m.Blog })));
 
 /* ─── 페이지별 SEO 설정 ──────────────────────────────────────────────────── */
 
@@ -332,6 +333,15 @@ export const SEO_MAP: Record<string, PageSEO> = {
       },
     ],
   },
+
+  // 블로그 글이 없는 동안 검색 노출 제외
+  '/blog': {
+    title: '블로그 | 네스트솔루션',
+    description: '네스트솔루션 블로그 — 병원 경영·마케팅·CS 인사이트를 준비 중입니다.',
+    keywords: '네스트솔루션 블로그, 병원 컨설팅 블로그',
+    canonical: `${SITE_URL}/blog`,
+    noindex: true,
+  },
 };
 
 /* ─── Root Layout ────────────────────────────────────────────────────────── */
@@ -378,6 +388,7 @@ export const routeDefs = [
       { path: 'contact',     Component: Contact },
       { path: 'cases',       Component: Cases },
       { path: 'profile',     Component: Profile },
+      { path: 'blog',        Component: Blog },
       { path: '*',           Component: NotFound },
     ],
   },
