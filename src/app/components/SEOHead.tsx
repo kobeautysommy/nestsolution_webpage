@@ -130,6 +130,9 @@ export function SEOHead({ seo }: { seo: PageSEO }) {
     // 구글 인증
     setMeta({ name: 'google-site-verification', content: 'E0qcXXCjrfthPxBTef6o5SqS11_JDOiFt7EI5nLylus' });
 
+    // Bing 인증
+    setMeta({ name: 'msvalidate.01', content: '72EB0FAA900C7AD845483440C86E64A3' });
+
     // 지역
     setMeta({ name: 'geo.region', content: 'KR' });
     setMeta({ name: 'geo.placename', content: '대한민국' });
