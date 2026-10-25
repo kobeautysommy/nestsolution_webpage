@@ -1,6 +1,8 @@
 // 상담 신청 → 텔레그램 알림 (Vercel Serverless Function)
 // 필요한 환경변수: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID (Vercel 프로젝트 설정 > Environment Variables)
 // TELEGRAM_CHAT_ID는 쉼표나 줄바꿈으로 여러 개 넣으면 모두에게 보내요. 예: -5375464270,6630447578
+// 봇에서 /start 를 누른 사람(구독자)에게도 함께 보내요. → api/telegram.js
+import { listSubscribers, removeSubscriber } from './_subscribers.js';
 
 const clean = (v, max) => String(v ?? '').replace(/[<>]/g, '').trim().slice(0, max);
 
@@ -26,7 +28,9 @@ export default async function handler(req, res) {
   }
 
   const token = process.env.TELEGRAM_BOT_TOKEN;
-  const chatIds = (process.env.TELEGRAM_CHAT_ID || '').split(/[\s,]+/).filter(Boolean);
+  const fixed = (process.env.TELEGRAM_CHAT_ID || '').split(/[\s,]+/).filter(Boolean);
+  const subs = await listSubscribers().catch((e) => (console.error(e), []));
+  const chatIds = [...new Set([...fixed, ...subs])];
   if (!token || !chatIds.length) {
     return res.status(500).json({ ok: false, error: 'not_configured' });
   }
@@ -52,7 +56,11 @@ export default async function handler(req, res) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ chat_id, text }),
       });
-      if (!r.ok) throw new Error(`telegram ${r.status} (${chat_id}): ${await r.text()}`);
+      if (!r.ok) {
+        // 봇을 차단했거나 그룹에서 내보낸 경우 구독 목록에서 정리
+        if (r.status === 403 && subs.includes(chat_id)) await removeSubscriber(chat_id).catch(() => {});
+        throw new Error(`telegram ${r.status} (${chat_id}): ${await r.text()}`);
+      }
     }),
   );
   results.filter((x) => x.status === 'rejected').forEach((x) => console.error(x.reason));
