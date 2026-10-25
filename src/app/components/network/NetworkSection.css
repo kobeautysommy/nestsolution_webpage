@@ -1,0 +1,105 @@
+/* 네트워크(지점) 섹션 — 모든 클래스가 .ns- 로 시작해서 기존 스타일과 안 겹쳐요. */
+.ns-network {
+  --ns-bg: #0a1430;
+  --ns-bg-2: #0e1b3d;
+  --ns-panel: #13234b;
+  --ns-land: #172a57;
+  --ns-land-on: #224089;
+  --ns-land-sel: #2c58c4;
+  --ns-line: rgba(120, 160, 255, 0.18);
+  --ns-ink: #f2f5fb;
+  --ns-muted: #9aa8c7;
+  --ns-blue: #2f6ff0;
+  --ns-blue-hi: #5b93ff;
+  --ns-sky: #a9cdff;
+  --ns-green: #4fe07a;
+  --ns-num: "Barlow Condensed", "Arial Narrow", sans-serif;
+
+  color: var(--ns-ink);
+  word-break: keep-all;
+  line-height: 1.6;
+  padding-block: 96px 104px;
+  background:
+    radial-gradient(900px 420px at 80% 0%, rgba(47, 111, 240, 0.16), transparent 70%),
+    radial-gradient(rgba(120, 160, 255, 0.07) 1px, transparent 1px) 0 0 / 22px 22px,
+    var(--ns-bg);
+}
+.ns-network *, .ns-network *::before, .ns-network *::after { box-sizing: border-box; }
+.ns-network h2, .ns-network h3, .ns-network p { margin: 0; }
+.ns-network button { font: inherit; color: inherit; cursor: pointer; }
+.ns-network button:focus-visible { outline: 2px solid var(--ns-sky); outline-offset: 3px; }
+.ns-wrap { max-width: 1200px; margin: 0 auto; padding-inline: 20px; }
+
+.ns-eyebrow { display: flex; align-items: center; justify-content: center; gap: 12px; color: var(--ns-blue-hi); font-size: 14px; letter-spacing: 0.24em; font-weight: 500; }
+.ns-eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--ns-blue-hi); }
+.ns-title { margin-top: 18px !important; text-align: center; font-size: clamp(30px, 4.6vw, 48px); font-weight: 900; line-height: 1.25; letter-spacing: -0.02em; text-wrap: balance; }
+.ns-title em { font-style: normal; color: var(--ns-sky); }
+.ns-lead { margin: 16px auto 0 !important; max-width: 640px; text-align: center; color: var(--ns-muted); font-size: 16px; }
+
+.ns-tabbar { margin: 44px auto 0; width: fit-content; max-width: 100%; display: flex; gap: 6px; padding: 8px; border-radius: 999px; background: rgba(19, 35, 75, 0.85); border: 1px solid var(--ns-line); box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35); overflow-x: auto; }
+.ns-tab { position: relative; border: 0; background: transparent; border-radius: 999px; padding: 12px 30px; font-size: 17px; font-weight: 700; color: var(--ns-muted) !important; white-space: nowrap; transition: background 0.2s, color 0.2s; }
+.ns-tab em { position: absolute; top: 2px; right: 8px; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 999px; background: rgba(120, 160, 255, 0.2); color: var(--ns-sky); font-style: normal; font-family: var(--ns-num); font-size: 15px; line-height: 22px; text-align: center; }
+.ns-tab.on { background: linear-gradient(135deg, var(--ns-blue-hi), var(--ns-blue)); color: #fff !important; box-shadow: 0 8px 24px rgba(47, 111, 240, 0.45); }
+.ns-tab.on em { background: var(--ns-bg); color: #fff; }
+
+.ns-chips { margin-top: 22px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.ns-chip { border: 1px solid var(--ns-line); background: rgba(19, 35, 75, 0.6); border-radius: 999px; padding: 10px 22px; font-size: 16px; font-weight: 500; transition: border-color 0.2s, background 0.2s, transform 0.2s; }
+.ns-chip small { color: var(--ns-muted); font-size: 12px; margin-left: 4px; }
+.ns-chip:hover { transform: translateY(-2px); border-color: var(--ns-blue-hi); }
+.ns-chip.on { background: var(--ns-blue); border-color: var(--ns-blue); color: #fff; }
+.ns-chip.on small { color: #dbe6ff; }
+
+.ns-board { margin-top: 30px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 22px; align-items: stretch; }
+.ns-mapcard { position: relative; border-radius: 22px; background: linear-gradient(160deg, #13244d, #0b1634); border: 1px solid var(--ns-line); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4); overflow: hidden; min-width: 0; }
+.ns-mapcard svg { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1.02; }
+.ns-prov { fill: var(--ns-land); stroke: var(--ns-bg); stroke-width: 1.2; transition: fill 0.3s; }
+.ns-prov.has { fill: var(--ns-land-on); }
+.ns-prov.sel { fill: var(--ns-land-sel); }
+.ns-muni { fill: none; stroke: rgba(169, 205, 255, 0.22); stroke-width: 0.6; pointer-events: none; opacity: 0; transition: opacity 0.4s; }
+.ns-muni.show { opacity: 1; }
+.ns-badge rect { fill: var(--ns-blue); }
+.ns-badge text { font-weight: 700; fill: #fff; }
+.ns-pin { cursor: pointer; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+.ns-pin.show { opacity: 1; pointer-events: auto; }
+.ns-pin .dot { fill: var(--ns-sky); stroke: var(--ns-bg); }
+.ns-pin .halo { fill: var(--ns-blue-hi); opacity: 0; }
+.ns-pin.on .dot { fill: #fff; }
+.ns-pin.on .halo { opacity: 0.35; animation: ns-ping 1.6s ease-out infinite; transform-box: fill-box; transform-origin: center; }
+.ns-pin text { fill: var(--ns-ink); font-weight: 700; paint-order: stroke; stroke: #0b1634; }
+@keyframes ns-ping { from { transform: scale(1); opacity: 0.4; } to { transform: scale(2.6); opacity: 0; } }
+.ns-maplabel { position: absolute; left: 20px; top: 16px; font-size: 12px; letter-spacing: 0.2em; color: var(--ns-muted); }
+.ns-mapsrc { position: absolute; right: 16px; bottom: 12px; font-size: 10px; color: rgba(154, 168, 199, 0.6); }
+
+.ns-detail { background: var(--ns-panel); border: 1px solid var(--ns-line); border-radius: 22px; padding: 30px; display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.ns-where { font-size: 12px; letter-spacing: 0.2em; color: var(--ns-blue-hi); }
+.ns-detail h3 { font-size: clamp(26px, 3vw, 34px); font-weight: 900; line-height: 1.2; }
+.ns-dept { align-self: flex-start; font-size: 13px; color: var(--ns-sky); border: 1px solid var(--ns-line); border-radius: 999px; padding: 3px 14px; }
+.ns-rank { display: flex; align-items: center; gap: 12px; background: linear-gradient(135deg, rgba(47, 111, 240, 0.35), rgba(14, 27, 61, 0.6)); border-left: 3px solid var(--ns-blue-hi); border-radius: 0 12px 12px 0; padding: 14px 18px; }
+.ns-rank span { font-family: var(--ns-num); font-size: 13px; letter-spacing: 0.2em; color: var(--ns-green); font-weight: 700; }
+.ns-rank b { font-size: 17px; }
+.ns-metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.ns-metric { background: var(--ns-bg-2); border-radius: 12px; padding: 14px 16px; min-width: 0; }
+.ns-metric span { display: block; font-size: 12px; color: var(--ns-muted); }
+.ns-metric b { display: block; margin-top: 2px; font-family: var(--ns-num); font-size: 28px; font-weight: 600; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.ns-metric small { display: block; font-size: 12px; color: var(--ns-sky); }
+.ns-metric.new { background: linear-gradient(135deg, rgba(79, 224, 122, 0.18), var(--ns-bg-2)); }
+.ns-metric.new span { color: var(--ns-green); font-weight: 700; letter-spacing: 0.16em; }
+.ns-pending { color: var(--ns-muted); font-size: 14px; border: 1px dashed var(--ns-line); border-radius: 12px; padding: 16px; text-align: center; }
+.ns-stats { margin-top: auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; border-top: 1px solid var(--ns-line); padding-top: 18px; }
+.ns-stats div { text-align: center; }
+.ns-stats b { display: block; font-family: var(--ns-num); font-size: 40px; line-height: 1; font-weight: 600; }
+.ns-stats span { font-size: 11px; letter-spacing: 0.16em; color: var(--ns-muted); }
+
+.ns-cta { margin-top: 40px; display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap; }
+.ns-cta p { color: var(--ns-muted); }
+.ns-cta a { background: var(--ns-blue); color: #fff; text-decoration: none; font-weight: 700; border-radius: 10px; padding: 14px 26px; }
+.ns-cta a:hover { background: var(--ns-blue-hi); }
+
+@media (max-width: 900px) { .ns-board { grid-template-columns: 1fr; } }
+@media (max-width: 560px) {
+  .ns-tab { padding: 10px 20px; font-size: 15px; }
+  .ns-detail { padding: 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ns-network * { transition: none !important; animation: none !important; }
+}

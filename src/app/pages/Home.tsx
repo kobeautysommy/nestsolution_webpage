@@ -3,6 +3,7 @@ import { BLUE, TEXT, F } from '../utils/colors';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { HeroSection } from '../components/home/HeroSection';
 import { PainMini } from '../components/home/PainMini';
+import NetworkSection from '../components/network/NetworkSection';
 import { Overview } from '../components/home/Overview';
 import { WhyMini } from '../components/home/WhyMini';
 import { CasesPreview } from '../components/home/CasesPreview';
@@ -59,6 +60,7 @@ export function Home() {
   return (
     <div style={{ background: LIGHT.bg0 }}>
       <HeroSection />
+      <NetworkSection />
       <PainMini />
       <Overview />
       <WhyMini />
