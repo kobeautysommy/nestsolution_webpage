@@ -1,5 +1,6 @@
 // 상담 신청 → 텔레그램 알림 (Vercel Serverless Function)
 // 필요한 환경변수: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID (Vercel 프로젝트 설정 > Environment Variables)
+// TELEGRAM_CHAT_ID는 쉼표나 줄바꿈으로 여러 개 넣으면 모두에게 보내요. 예: -5375464270,6630447578
 
 const clean = (v, max) => String(v ?? '').replace(/[<>]/g, '').trim().slice(0, max);
 
@@ -25,8 +26,8 @@ export default async function handler(req, res) {
   }
 
   const token = process.env.TELEGRAM_BOT_TOKEN;
-  const chatId = process.env.TELEGRAM_CHAT_ID;
-  if (!token || !chatId) {
+  const chatIds = (process.env.TELEGRAM_CHAT_ID || '').split(/[\s,]+/).filter(Boolean);
+  if (!token || !chatIds.length) {
     return res.status(500).json({ ok: false, error: 'not_configured' });
   }
 
@@ -43,16 +44,18 @@ export default async function handler(req, res) {
     `접수: ${time}`,
   ].join('\n');
 
-  try {
-    const r = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: chatId, text }),
-    });
-    if (!r.ok) throw new Error(`telegram ${r.status}`);
-    return res.status(200).json({ ok: true });
-  } catch (e) {
-    console.error(e);
-    return res.status(502).json({ ok: false, error: 'send_failed' });
-  }
+  // 한 곳이라도 전달되면 접수 성공으로 처리
+  const results = await Promise.allSettled(
+    chatIds.map(async (chat_id) => {
+      const r = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id, text }),
+      });
+      if (!r.ok) throw new Error(`telegram ${r.status} (${chat_id}): ${await r.text()}`);
+    }),
+  );
+  results.filter((x) => x.status === 'rejected').forEach((x) => console.error(x.reason));
+  if (results.some((x) => x.status === 'fulfilled')) return res.status(200).json({ ok: true });
+  return res.status(502).json({ ok: false, error: 'send_failed' });
 }
