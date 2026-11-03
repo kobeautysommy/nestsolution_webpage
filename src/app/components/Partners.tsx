@@ -96,7 +96,8 @@ export function Partners() {
         </div>
       </div>
 
-      <style>{`
+      {/* dangerouslySetInnerHTML: 서버 렌더가 " 를 &quot; 로 이스케이프해 hydrate 불일치가 나는 것 방지 */}
+      <style dangerouslySetInnerHTML={{ __html: `
         @keyframes partners-marquee {
           0%   { transform: translateX(0); }
           100% { transform: translateX(-33.333%); }
@@ -104,7 +105,7 @@ export function Partners() {
         @media (prefers-reduced-motion: reduce) {
           [style*="partners-marquee"] { animation: none !important; }
         }
-      `}</style>
+      ` }} />
     </section>
   );
 }

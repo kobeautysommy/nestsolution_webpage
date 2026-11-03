@@ -3,6 +3,7 @@ import { createStaticHandler, createStaticRouter, StaticRouterProvider } from 'r
 import { routeDefs } from './app/routes';
 
 export { SEO_MAP } from './app/routes';
+export { fetchPosts, postSEO } from './app/utils/wpBlog';
 
 export async function render(url: string): Promise<string> {
   const handler = createStaticHandler(routeDefs);

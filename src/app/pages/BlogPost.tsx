@@ -1,7 +1,12 @@
-import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router';
+import { Link, useLoaderData, type LoaderFunctionArgs } from 'react-router';
 import { BLUE, TEXT, BORDER, DARK, LIGHT, F } from '../utils/colors';
-import { fetchPost, stripHtml, formatDate, type WpPost } from '../utils/wpBlog';
+import { SEOHead, SITE_URL } from '../components/SEOHead';
+import { fetchPost, postSEO, stripHtml, formatDate, type WpPost } from '../utils/wpBlog';
+
+// 프리렌더 시 글 내용을 HTML에 포함 (브라우저 첫 로드는 hydrate 데이터 재사용)
+export function loader({ params, request }: LoaderFunctionArgs): Promise<WpPost | null> {
+  return fetchPost(params.slug ?? '', request.signal).catch(() => null);
+}
 
 // WP 본문 HTML 기본 타이포그래피
 const contentCss = `
@@ -27,25 +32,18 @@ function BackLink() {
 }
 
 export function BlogPost() {
-  const { slug = '' } = useParams();
-  const [post, setPost] = useState<WpPost | null | undefined>(undefined);
-
-  useEffect(() => {
-    const ctrl = new AbortController();
-    setPost(undefined);
-    fetchPost(slug, ctrl.signal)
-      .then(setPost)
-      .catch(() => { if (!ctrl.signal.aborted) setPost(null); });
-    return () => ctrl.abort();
-  }, [slug]);
-
-  useEffect(() => {
-    if (post) document.title = `${stripHtml(post.title)} | 네스트솔루션 블로그`;
-  }, [post]);
+  const post = useLoaderData() as WpPost | null;
 
   return (
     <div style={{ background: LIGHT.bg0 }}>
-      <style>{contentCss}</style>
+      <SEOHead seo={post ? postSEO(post) : {
+        title: '글을 찾을 수 없습니다 | 네스트솔루션 블로그',
+        description: '요청하신 글을 찾을 수 없습니다.',
+        keywords: '',
+        canonical: `${SITE_URL}/blog`,
+        noindex: true,
+      }} />
+      <style dangerouslySetInnerHTML={{ __html: contentCss }} />
       <div style={{ background: `linear-gradient(155deg,${DARK.bg1},${DARK.bg0})`, padding: '8rem 5vw 4rem' }}>
         <div style={{ maxWidth: 760, margin: '0 auto' }}>
           <Link to="/blog" style={{ fontFamily: F.sans, fontSize: '0.85rem', color: BLUE._300, textDecoration: 'none' }}>
@@ -66,9 +64,6 @@ export function BlogPost() {
       </div>
 
       <article style={{ maxWidth: 760, margin: '0 auto', padding: '3.5rem 5vw 6rem' }}>
-        {post === undefined && (
-          <p style={{ fontFamily: F.sans, color: TEXT.mutedLight }}>불러오는 중…</p>
-        )}
         {post === null && (
           <div style={{ textAlign: 'center', padding: '2rem 0' }}>
             <p style={{ fontFamily: F.sans, color: TEXT.mutedLight, marginBottom: '1.5rem' }}>

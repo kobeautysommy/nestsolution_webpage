@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import { RouterProvider } from 'react-router';
+import { RouterProvider, type createBrowserRouter } from 'react-router';
 import { Toaster } from 'sonner';
-import { router } from './routes';
 
-export default function App() {
+export default function App({ router }: { router: ReturnType<typeof createBrowserRouter> }) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 

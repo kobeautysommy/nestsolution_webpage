@@ -10,7 +10,18 @@ const ROOT = process.cwd();
 // 함수 교체 방식으로 $기호 해석 문제 방지
 const rep = (v) => () => v;
 
-function injectSEO(template, seo, route) {
+// 블로그 글 제목·요약에 " < & 가 들어갈 수 있어 HTML 속성용으로 이스케이프
+const esc = (v) => v && String(v).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+
+function injectSEO(template, rawSeo, route) {
+  const seo = {
+    ...rawSeo,
+    title: esc(rawSeo.title),
+    description: esc(rawSeo.description),
+    keywords: esc(rawSeo.keywords),
+    canonical: esc(rawSeo.canonical),
+    ogImage: esc(rawSeo.ogImage),
+  };
   const canonical = seo.canonical ?? `${SITE_URL}${route}`;
   let html = template;
 
@@ -76,7 +87,7 @@ function injectSEO(template, seo, route) {
     const data = Array.isArray(seo.jsonLd)
       ? { '@context': 'https://schema.org', '@graph': seo.jsonLd }
       : seo.jsonLd;
-    const script = `  <script type="application/ld+json" id="jsonld-page">${JSON.stringify(data)}</script>`;
+    const script = `  <script type="application/ld+json" id="jsonld-page">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>`;
     html = html.replace('</head>', `${script}\n  </head>`);
   }
 
@@ -113,10 +124,22 @@ async function main() {
   console.log('🚀 각 페이지 프리렌더링 중...');
   const template = readFileSync(join(ROOT, 'dist/index.html'), 'utf-8');
   const serverEntryUrl = pathToFileURL(join(ROOT, 'dist/server/entry-server.js')).href;
-  const { render, SEO_MAP } = await import(serverEntryUrl);
+  const { render, SEO_MAP, fetchPosts, postSEO } = await import(serverEntryUrl);
 
-  for (const route of ROUTES) {
-    process.stdout.write(`  ${route} ... `);
+  // WordPress 글 → /blog/<slug> 정적 페이지 (WP가 응답하지 않으면 글 페이지 없이 빌드 계속)
+  let posts = [];
+  try {
+    posts = await fetchPosts();
+  } catch (err) {
+    console.warn(`  ⚠ WordPress 글 목록 불러오기 실패 (${err.message}) — 블로그 글 프리렌더 생략`);
+  }
+  const pages = [
+    ...ROUTES.map((route) => ({ route, seo: SEO_MAP[route] ?? SEO_MAP['/'] })),
+    ...posts.map((post) => ({ route: `/blog/${post.slug}`, seo: postSEO(post) })),
+  ];
+
+  for (const { route, seo } of pages) {
+    process.stdout.write(`  ${decodeURIComponent(route)} ... `);
 
     let appHtml = '';
     try {
@@ -125,14 +148,44 @@ async function main() {
       process.stdout.write(`⚠ 렌더 실패 (${err.message}) — 빈 HTML로 대체\n`);
     }
 
-    const seo = SEO_MAP[route] ?? SEO_MAP['/'];
     let html = template.replace('<!--app-html-->', appHtml);
     html = injectSEO(html, seo, route);
 
-    const outDir = route === '/' ? join(ROOT, 'dist') : join(ROOT, 'dist', route.slice(1));
+    const outDir = route === '/' ? join(ROOT, 'dist') : join(ROOT, 'dist', decodeURIComponent(route.slice(1)));
     if (!existsSync(outDir)) mkdirSync(outDir, { recursive: true });
     writeFileSync(join(outDir, 'index.html'), html);
     console.log('✓');
+  }
+
+  // 빌드 이후 발행된 글용 셸 (vercel.json rewrite) — 브라우저에서 글을 불러와 렌더, 다음 빌드 때 정적 페이지로 대체됨
+  writeFileSync(
+    join(ROOT, 'dist', 'blog', '_post.html'),
+    template
+      .replace(/\s*<link rel="canonical"[^>]*\/>/, rep(''))
+      .replace(/\s*<link rel="alternate" hreflang="ko"[^>]*\/>/, rep('')),
+  );
+
+  // 사이트맵에 블로그 글 추가
+  if (posts.length) {
+    const sitemapPath = join(ROOT, 'dist', 'sitemap.xml');
+    const entries = posts.map((post) => {
+      const loc = `${SITE_URL}/blog/${post.slug}`;
+      return [
+        '  <url>',
+        `    <loc>${loc}</loc>`,
+        `    <lastmod>${post.modified.slice(0, 10)}</lastmod>`,
+        '    <changefreq>monthly</changefreq>',
+        '    <priority>0.7</priority>',
+        `    <xhtml:link rel="alternate" hreflang="ko" href="${loc}"/>`,
+        '  </url>',
+      ].join('\n');
+    }).join('\n\n');
+    const latest = posts.map((p) => p.modified.slice(0, 10)).sort().at(-1);
+    const sitemap = readFileSync(sitemapPath, 'utf-8')
+      .replace(/(<loc>https:\/\/nestsolution\.co\.kr\/blog<\/loc>\s*<lastmod>)[^<]*/, rep(`<loc>${SITE_URL}/blog</loc>\n    <lastmod>${latest}`))
+      .replace('</urlset>', rep(`  <!-- 블로그 글 (빌드 시 WordPress에서 자동 생성) -->\n${entries}\n\n</urlset>`));
+    writeFileSync(sitemapPath, sitemap);
+    console.log(`  sitemap.xml ... 블로그 글 ${posts.length}개 추가 ✓`);
   }
 
   // 404 페이지 (Vercel이 매칭되지 않는 경로에 404 상태와 함께 서빙)

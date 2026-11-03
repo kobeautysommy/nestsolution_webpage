@@ -1,8 +1,12 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useLoaderData, type LoaderFunctionArgs } from 'react-router';
 import { BLUE, TEXT, BORDER, LIGHT, F } from '../utils/colors';
 import { PageBanner } from '../components/shared/PageBanner';
 import { fetchPosts, stripHtml, formatDate, type WpPost } from '../utils/wpBlog';
+
+// 프리렌더 시 글 목록(각 글 링크 포함)을 HTML에 포함
+export function loader({ request }: LoaderFunctionArgs): Promise<WpPost[]> {
+  return fetchPosts(request.signal).catch(() => []);
+}
 
 function ComingSoon() {
   return (
@@ -76,15 +80,7 @@ function PostCard({ post }: { post: WpPost }) {
 }
 
 export function Blog() {
-  const [posts, setPosts] = useState<WpPost[] | null>(null);
-
-  useEffect(() => {
-    const ctrl = new AbortController();
-    fetchPosts(ctrl.signal)
-      .then(setPosts)
-      .catch(() => { if (!ctrl.signal.aborted) setPosts([]); });
-    return () => ctrl.abort();
-  }, []);
+  const posts = useLoaderData() as WpPost[];
 
   return (
     <div>
@@ -95,9 +91,7 @@ export function Blog() {
       />
 
       <section style={{ background: LIGHT.bg1, padding: '6rem 5vw', minHeight: '40vh' }}>
-        {posts === null ? (
-          <p style={{ textAlign: 'center', fontFamily: F.sans, color: TEXT.mutedLight }}>불러오는 중…</p>
-        ) : posts.length === 0 ? (
+        {posts.length === 0 ? (
           <ComingSoon />
         ) : (
           <div style={{

@@ -1,20 +1,9 @@
-import { createBrowserRouter, Outlet, useLocation } from 'react-router';
-import { useEffect, lazy, Suspense } from 'react';
+import { createBrowserRouter, matchRoutes, Outlet, useLocation, type RouteObject } from 'react-router';
+import { useEffect } from 'react';
 import { Nav } from './components/Nav';
 import { Footer } from './components/Footer';
 import { ScrollToTop } from './components/ScrollToTop';
 import { SEOHead, SITE_URL, type PageSEO } from './components/SEOHead';
-
-const Home     = lazy(() => import('./pages/Home').then(m => ({ default: m.Home })));
-const Pain     = lazy(() => import('./pages/Pain').then(m => ({ default: m.Pain })));
-const Services = lazy(() => import('./pages/Services').then(m => ({ default: m.Services })));
-const Process  = lazy(() => import('./pages/Process').then(m => ({ default: m.Process })));
-const About    = lazy(() => import('./pages/About').then(m => ({ default: m.About })));
-const Contact  = lazy(() => import('./pages/Contact').then(m => ({ default: m.Contact })));
-const Cases    = lazy(() => import('./pages/Cases').then(m => ({ default: m.Cases })));
-const Profile  = lazy(() => import('./pages/Profile').then(m => ({ default: m.Profile })));
-const Blog     = lazy(() => import('./pages/Blog').then(m => ({ default: m.Blog })));
-const BlogPost = lazy(() => import('./pages/BlogPost').then(m => ({ default: m.BlogPost })));
 
 /* ─── 페이지별 SEO 설정 ──────────────────────────────────────────────────── */
 
@@ -346,20 +335,18 @@ export const SEO_MAP: Record<string, PageSEO> = {
 /* ─── Root Layout ────────────────────────────────────────────────────────── */
 function Root() {
   const { pathname } = useLocation();
-  const seo = SEO_MAP[pathname]
-    // 블로그 글: 제목은 BlogPost에서 글 로드 후 갱신
-    ?? (pathname.startsWith('/blog/') ? { ...SEO_MAP['/blog'], canonical: `${SITE_URL}${pathname}` } : SEO_MAP['/']);
+  // 블로그 글은 BlogPost가 글별 SEO를 직접 설정
+  const isPost = pathname.startsWith('/blog/');
+  const seo = SEO_MAP[pathname] ?? SEO_MAP['/'];
 
   useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
 
   return (
     <div style={{ minHeight: '100vh', background: '#080f1e' }}>
-      <SEOHead seo={seo} />
+      {!isPost && <SEOHead seo={seo} />}
       <Nav />
       <main style={{ paddingTop: 64 }}>
-        <Suspense fallback={<div style={{ minHeight: '60vh' }} />}>
-          <Outlet />
-        </Suspense>
+        <Outlet />
       </main>
       <Footer />
       <ScrollToTop />
@@ -376,24 +363,33 @@ function NotFound() {
   );
 }
 
-export const routeDefs = [
+// 라우트 lazy: 프리렌더(createStaticHandler)가 렌더 전에 페이지 모듈을 불러오므로 본문이 HTML에 포함됨
+export const routeDefs: RouteObject[] = [
   {
     path: '/',
     Component: Root,
     children: [
-      { index: true,         Component: Home },
-      { path: 'pain',        Component: Pain },
-      { path: 'services',    Component: Services },
-      { path: 'process',     Component: Process },
-      { path: 'about',       Component: About },
-      { path: 'contact',     Component: Contact },
-      { path: 'cases',       Component: Cases },
-      { path: 'profile',     Component: Profile },
-      { path: 'blog',        Component: Blog },
-      { path: 'blog/:slug',  Component: BlogPost },
+      { index: true,         lazy: () => import('./pages/Home').then(m => ({ Component: m.Home })) },
+      { path: 'pain',        lazy: () => import('./pages/Pain').then(m => ({ Component: m.Pain })) },
+      { path: 'services',    lazy: () => import('./pages/Services').then(m => ({ Component: m.Services })) },
+      { path: 'process',     lazy: () => import('./pages/Process').then(m => ({ Component: m.Process })) },
+      { path: 'about',       lazy: () => import('./pages/About').then(m => ({ Component: m.About })) },
+      { path: 'contact',     lazy: () => import('./pages/Contact').then(m => ({ Component: m.Contact })) },
+      { path: 'cases',       lazy: () => import('./pages/Cases').then(m => ({ Component: m.Cases })) },
+      { path: 'profile',     lazy: () => import('./pages/Profile').then(m => ({ Component: m.Profile })) },
+      { path: 'blog',        lazy: () => import('./pages/Blog').then(m => ({ Component: m.Blog, loader: m.loader })) },
+      { path: 'blog/:slug',  lazy: () => import('./pages/BlogPost').then(m => ({ Component: m.BlogPost, loader: m.loader })) },
       { path: '*',           Component: NotFound },
     ],
   },
 ];
 
-export const router = typeof document !== 'undefined' ? createBrowserRouter(routeDefs) : null as any;
+/** 현재 URL의 lazy 페이지를 먼저 불러온 뒤 라우터 생성 — 프리렌더 HTML과 hydrate 결과가 일치하도록 */
+export async function createAppRouter() {
+  const matches = matchRoutes(routeDefs, window.location) ?? [];
+  await Promise.all(matches.map(async ({ route }) => {
+    if (typeof route.lazy !== 'function') return;
+    Object.assign(route, await route.lazy(), { lazy: undefined });
+  }));
+  return createBrowserRouter(routeDefs);
+}
