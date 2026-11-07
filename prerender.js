@@ -169,7 +169,8 @@ async function main() {
     console.warn(`  ⚠ WordPress 글 목록 불러오기 실패 (${err.message}) — 블로그 글 프리렌더 생략`);
   }
   const pages = [
-    ...ROUTES.map((route) => ({ route, seo: SEO_MAP[route] ?? SEO_MAP['/'] })),
+    // SEO_MAP에 등록된 페이지(진료과별 컨설팅 등)도 모두 프리렌더
+    ...[...new Set([...ROUTES, ...Object.keys(SEO_MAP)])].map((route) => ({ route, seo: SEO_MAP[route] ?? SEO_MAP['/'] })),
     ...posts.map((post) => ({ route: `/blog/${post.slug}`, seo: postSEO(post) })),
   ];
 

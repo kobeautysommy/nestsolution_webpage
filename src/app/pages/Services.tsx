@@ -8,6 +8,8 @@ import { CtaBand } from '../components/shared/CtaBand';
 import { FaqAccordion } from '../components/shared/FaqAccordion';
 import { PageBanner } from '../components/shared/PageBanner';
 import { serviceFaq } from '../data/faq';
+import { SPECIALTIES } from '../data/specialties';
+import { Link } from 'react-router';
 
 function ServicesBgAnimation() {
   const ref = useRef<HTMLDivElement>(null);
@@ -292,6 +294,22 @@ export function Services() {
       </section>
 
       <ServiceShowcase />
+
+      {/* ── 진료과별 컨설팅 바로가기 ── */}
+      <section style={{ background: LIGHT.bg1, padding: '5rem 5vw' }}>
+        <div style={{ maxWidth: 1080, margin: '0 auto', textAlign: 'center' }}>
+          <SecLabel center>By Specialty</SecLabel>
+          <h2 style={{ fontFamily: F.serif, fontSize: 'clamp(1.4rem,3vw,2rem)', fontWeight: 700, color: TEXT.onLight, marginBottom: '1.75rem' }}>진료과별 컨설팅</h2>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem', justifyContent: 'center' }}>
+            {SPECIALTIES.map(s => (
+              <Link key={s.slug} to={`/consulting/${s.slug}`} style={{
+                fontFamily: F.sans, fontSize: '0.9rem', fontWeight: 700, color: BLUE._500, textDecoration: 'none',
+                background: '#FFFFFF', border: `1px solid ${BORDER.light}`, borderRadius: 999, padding: '0.6rem 1.25rem',
+              }}>{s.name} 컨설팅</Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ── FAQ — light bg + animated grid ── */}
       <section style={{ background: LIGHT.bg0, padding: '6rem 5vw', position: 'relative', overflow: 'hidden' }}>

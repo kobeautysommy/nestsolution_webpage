@@ -2,6 +2,7 @@ import { Link, useLoaderData, type LoaderFunctionArgs } from 'react-router';
 import { BLUE, TEXT, BORDER, DARK, LIGHT, F } from '../utils/colors';
 import { SEOHead, SITE_URL } from '../components/SEOHead';
 import { fetchPost, postSEO, stripHtml, formatDate, type WpPost } from '../utils/wpBlog';
+import { specialtyForTitle } from '../data/specialties';
 
 // 프리렌더 시 글 내용을 HTML에 포함 (브라우저 첫 로드는 hydrate 데이터 재사용)
 export function loader({ params, request }: LoaderFunctionArgs): Promise<WpPost | null> {
@@ -44,7 +45,8 @@ function AuthorBox() {
   );
 }
 
-function ConsultCta() {
+function ConsultCta({ title }: { title: string }) {
+  const specialty = specialtyForTitle(title);
   return (
     <div style={{
       marginTop: '1.5rem', borderRadius: 12, padding: '2rem 1.5rem', textAlign: 'center',
@@ -61,10 +63,10 @@ function ConsultCta() {
           background: '#FFFFFF', color: BLUE._500, fontWeight: 700, fontSize: '0.88rem',
           padding: '0.8rem 1.6rem', borderRadius: 8, textDecoration: 'none',
         }}>무료 상담 신청 →</Link>
-        <Link to="/services" style={{
+        <Link to={specialty ? `/consulting/${specialty.slug}` : '/services'} style={{
           border: '1.5px solid rgba(255,255,255,0.4)', color: '#FFFFFF', fontSize: '0.88rem',
           padding: '0.8rem 1.6rem', borderRadius: 8, textDecoration: 'none',
-        }}>서비스 보기</Link>
+        }}>{specialty ? `${specialty.name} 컨설팅 보기` : '서비스 보기'}</Link>
       </div>
     </div>
   );
@@ -129,7 +131,7 @@ export function BlogPost() {
             )}
             <div className="wp-content" dangerouslySetInnerHTML={{ __html: post.content }} />
             <AuthorBox />
-            <ConsultCta />
+            <ConsultCta title={stripHtml(post.title)} />
             <div style={{ marginTop: '3rem', paddingTop: '2rem', borderTop: `1px solid ${BORDER.light}` }}>
               <BackLink />
             </div>

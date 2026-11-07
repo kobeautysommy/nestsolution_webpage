@@ -129,6 +129,9 @@ export function Footer() {
               <p><span style={{ color: BLUE._300 }}>사업자</span>{' '}
                 <span itemProp="taxID">850-87-01502</span>
               </p>
+              <p><span style={{ color: BLUE._300 }}>주소</span>{' '}
+                <span itemProp="address">서울 서초구 서운로 13 지하1층 126-라8호</span>
+              </p>
             </address>
           </div>
 
@@ -139,6 +142,7 @@ export function Footer() {
               {[
                 { label: '병원 경영 고민', to: '/pain' },
                 { label: '컨설팅 서비스', to: '/services' },
+                { label: '진료과별 컨설팅', to: '/consulting' },
                 { label: '컨설팅 과정',   to: '/process' },
                 { label: '성공 사례',     to: '/cases' },
                 { label: '대표 소개',     to: '/about' },

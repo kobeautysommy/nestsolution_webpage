@@ -14,7 +14,18 @@ NestSolution (nestsolution.co.kr) is a South Korean hospital/clinic consulting f
 - Phone: 010-3129-8248 / 010-9470-8248
 - KakaoTalk: http://pf.kakao.com/_HStBn
 - Business registration: 850-87-01502
+- Address: 서울특별시 서초구 서운로 13 지하1층 126-라8호
 - Country: Republic of Korea
+
+## 진료과별 컨설팅 (Consulting by Specialty)
+- 전체: https://nestsolution.co.kr/consulting
+- 정형외과: https://nestsolution.co.kr/consulting/orthopedics
+- 내과: https://nestsolution.co.kr/consulting/internal-medicine
+- 치과: https://nestsolution.co.kr/consulting/dental
+- 피부과: https://nestsolution.co.kr/consulting/dermatology
+- 성형외과: https://nestsolution.co.kr/consulting/plastic-surgery
+- 한의원: https://nestsolution.co.kr/consulting/korean-medicine
+- 동물병원: https://nestsolution.co.kr/consulting/veterinary
 
 ## Description
 네스트솔루션은 18년 이상의 임상 경험을 바탕으로 대한민국 병·의원(클리닉)의 경영을 종합 지원하는 병원 컨설팅 전문 기업입니다.

@@ -4,6 +4,7 @@ import { Nav } from './components/Nav';
 import { Footer } from './components/Footer';
 import { ScrollToTop } from './components/ScrollToTop';
 import { SEOHead, SITE_URL, type PageSEO } from './components/SEOHead';
+import { SPECIALTIES, type Specialty } from './data/specialties';
 
 /* ─── 페이지별 SEO 설정 ──────────────────────────────────────────────────── */
 
@@ -330,7 +331,79 @@ export const SEO_MAP: Record<string, PageSEO> = {
     keywords: '네스트솔루션 블로그, 병원 컨설팅 블로그, 병원 마케팅, 병원 경영',
     canonical: `${SITE_URL}/blog`,
   },
+
+  '/consulting': {
+    title: '진료과별 병원 컨설팅 | 네스트솔루션',
+    description: '정형외과, 내과, 치과, 피부과, 성형외과, 한의원, 동물병원까지. 진료과마다 다른 경영 과제에 맞춰 18년 병원 현장 경험의 네스트솔루션이 CS·마케팅·경영·인력 관리를 설계합니다.',
+    keywords: '진료과별 병원 컨설팅, 정형외과 컨설팅, 내과 컨설팅, 치과 컨설팅, 피부과 컨설팅, 성형외과 컨설팅, 한의원 컨설팅, 동물병원 컨설팅',
+    canonical: `${SITE_URL}/consulting`,
+    jsonLd: [
+      {
+        '@type': 'CollectionPage',
+        '@id': `${SITE_URL}/consulting#webpage`,
+        url: `${SITE_URL}/consulting`,
+        name: '진료과별 병원 컨설팅',
+        inLanguage: 'ko-KR',
+        isPartOf: { '@id': `${SITE_URL}/#website` },
+        hasPart: SPECIALTIES.map((s) => ({ '@id': `${SITE_URL}/consulting/${s.slug}#service` })),
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE_URL}/` },
+          { '@type': 'ListItem', position: 2, name: '진료과별 컨설팅', item: `${SITE_URL}/consulting` },
+        ],
+      },
+    ],
+  },
+
+  ...Object.fromEntries(SPECIALTIES.map((s) => [`/consulting/${s.slug}`, specialtySEO(s)])),
 };
+
+function specialtySEO(s: Specialty): PageSEO {
+  const url = `${SITE_URL}/consulting/${s.slug}`;
+  return {
+    title: s.title,
+    description: s.description,
+    keywords: `${s.name} 컨설팅, ${s.name} 경영 컨설팅, ${s.name} 마케팅, ${s.name} 개원, 병원 컨설팅, 네스트솔루션`,
+    canonical: url,
+    jsonLd: [
+      {
+        '@type': 'WebPage',
+        '@id': `${url}#webpage`,
+        url,
+        name: s.title,
+        description: s.description,
+        inLanguage: 'ko-KR',
+        isPartOf: { '@id': `${SITE_URL}/#website` },
+        speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', '.speakable'] },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE_URL}/` },
+          { '@type': 'ListItem', position: 2, name: '진료과별 컨설팅', item: `${SITE_URL}/consulting` },
+          { '@type': 'ListItem', position: 3, name: `${s.name} 컨설팅`, item: url },
+        ],
+      },
+      {
+        '@type': 'Service',
+        '@id': `${url}#service`,
+        serviceType: `${s.name} 컨설팅`,
+        name: `${s.name} 병원 컨설팅`,
+        description: s.intro,
+        provider: { '@id': `${SITE_URL}/#organization` },
+        areaServed: { '@type': 'Country', name: '대한민국' },
+        audience: { '@type': 'Audience', audienceType: `${s.name} 원장` },
+      },
+      {
+        '@type': 'FAQPage',
+        '@id': `${url}#faqpage`,
+        mainEntity: s.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+      },
+    ],
+  };
+}
 
 /* ─── Root Layout ────────────────────────────────────────────────────────── */
 function Root() {
@@ -377,6 +450,8 @@ export const routeDefs: RouteObject[] = [
       { path: 'contact',     lazy: () => import('./pages/Contact').then(m => ({ Component: m.Contact })) },
       { path: 'cases',       lazy: () => import('./pages/Cases').then(m => ({ Component: m.Cases })) },
       { path: 'profile',     lazy: () => import('./pages/Profile').then(m => ({ Component: m.Profile })) },
+      { path: 'consulting',  lazy: () => import('./pages/Consulting').then(m => ({ Component: m.Consulting })) },
+      { path: 'consulting/:slug', lazy: () => import('./pages/ConsultingDetail').then(m => ({ Component: m.ConsultingDetail, loader: m.loader })) },
       { path: 'blog',        lazy: () => import('./pages/Blog').then(m => ({ Component: m.Blog, loader: m.loader })) },
       { path: 'blog/:slug',  lazy: () => import('./pages/BlogPost').then(m => ({ Component: m.BlogPost, loader: m.loader })) },
       { path: '*',           Component: NotFound },
