@@ -326,7 +326,7 @@ export const SEO_MAP: Record<string, PageSEO> = {
 
   '/blog': {
     title: '블로그 | 네스트솔루션',
-    description: '네스트솔루션 블로그 — 병원 경영·마케팅·CS 현장의 인사이트를 전해드립니다.',
+    description: '병원 개원·경영·마케팅·세무·인력 관리까지, 17년 병원 현장 경험의 네스트솔루션이 원장님께 필요한 실전 컨설팅 정보를 정리합니다.',
     keywords: '네스트솔루션 블로그, 병원 컨설팅 블로그, 병원 마케팅, 병원 경영',
     canonical: `${SITE_URL}/blog`,
   },

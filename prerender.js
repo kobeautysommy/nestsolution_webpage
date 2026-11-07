@@ -6,9 +6,39 @@ import { pathToFileURL } from 'node:url';
 const ROUTES = ['/', '/pain', '/services', '/process', '/about', '/contact', '/cases', '/profile', '/blog'];
 const SITE_URL = 'https://nestsolution.co.kr';
 const ROOT = process.cwd();
+// IndexNow 키 — public/<key>.txt 와 같아야 함 (Bing·네이버 등에 변경 URL 즉시 알림)
+const INDEXNOW_KEY = '7a1c5d13b1f9812cef14a1a33d2dc506';
 
 // 함수 교체 방식으로 $기호 해석 문제 방지
 const rep = (v) => () => v;
+
+const sitemapEntries = (xml) => Object.fromEntries(
+  [...xml.matchAll(/<loc>([^<]+)<\/loc>\s*(?:<lastmod>([^<]*)<\/lastmod>)?/g)].map((m) => [m[1], m[2] ?? '']),
+);
+
+/** 프로덕션 빌드에서만: 라이브 사이트맵과 비교해 새로 생기거나 바뀌거나 사라진 URL을 IndexNow로 알림 */
+async function pingIndexNow(sitemapXml) {
+  if (process.env.VERCEL_ENV !== 'production') return;
+  try {
+    const keyLive = await fetch(`${SITE_URL}/${INDEXNOW_KEY}.txt`).then((r) => r.ok).catch(() => false);
+    const live = keyLive ? sitemapEntries(await fetch(`${SITE_URL}/sitemap.xml`).then((r) => r.text())) : {};
+    const next = sitemapEntries(sitemapXml);
+    // 키가 아직 배포 전이면(첫 연동) 전체 URL 제출
+    const urlList = [
+      ...Object.keys(next).filter((u) => !keyLive || live[u] !== next[u]),
+      ...Object.keys(live).filter((u) => !(u in next)),
+    ];
+    if (!urlList.length) return console.log('  IndexNow ... 변경된 URL 없음');
+    const res = await fetch('https://api.indexnow.org/indexnow', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json; charset=utf-8' },
+      body: JSON.stringify({ host: 'nestsolution.co.kr', key: INDEXNOW_KEY, keyLocation: `${SITE_URL}/${INDEXNOW_KEY}.txt`, urlList }),
+    });
+    console.log(`  IndexNow ... ${urlList.length}개 URL 제출 (HTTP ${res.status})`);
+  } catch (err) {
+    console.warn(`  ⚠ IndexNow 실패 (${err.message}) — 빌드는 계속`);
+  }
+}
 
 // 블로그 글 제목·요약에 " < & 가 들어갈 수 있어 HTML 속성용으로 이스케이프
 const esc = (v) => v && String(v).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
@@ -173,20 +203,35 @@ async function main() {
       return [
         '  <url>',
         `    <loc>${loc}</loc>`,
-        `    <lastmod>${post.modified.slice(0, 10)}</lastmod>`,
+        `    <lastmod>${post.modified}</lastmod>`,
         '    <changefreq>monthly</changefreq>',
         '    <priority>0.7</priority>',
         `    <xhtml:link rel="alternate" hreflang="ko" href="${loc}"/>`,
         '  </url>',
       ].join('\n');
     }).join('\n\n');
-    const latest = posts.map((p) => p.modified.slice(0, 10)).sort().at(-1);
+    const latest = posts.map((p) => p.modified).sort().at(-1);
     const sitemap = readFileSync(sitemapPath, 'utf-8')
       .replace(/(<loc>https:\/\/nestsolution\.co\.kr\/blog<\/loc>\s*<lastmod>)[^<]*/, rep(`<loc>${SITE_URL}/blog</loc>\n    <lastmod>${latest}`))
       .replace('</urlset>', rep(`  <!-- 블로그 글 (빌드 시 WordPress에서 자동 생성) -->\n${entries}\n\n</urlset>`));
     writeFileSync(sitemapPath, sitemap);
     console.log(`  sitemap.xml ... 블로그 글 ${posts.length}개 추가 ✓`);
+
+    // llms.txt(AI용 회사 요약)에 블로그 글 목록 추가
+    const llmsPath = join(ROOT, 'dist', 'llms.txt');
+    const articles = posts.map((post) => {
+      const { description } = postSEO(post);
+      const title = postSEO(post).jsonLd[0].headline;
+      return `- [${title}](${SITE_URL}/blog/${post.slug}) (${post.date.slice(0, 10)}): ${description}`;
+    }).join('\n');
+    const llms = readFileSync(llmsPath, 'utf-8')
+      .replace(/updated \d{4}-\d{2}-\d{2}/, rep(`updated ${latest.slice(0, 10)}`))
+      .trimEnd();
+    writeFileSync(llmsPath, `${llms}\n\n## Blog Articles (병원 컨설팅 칼럼, 글쓴이: 김상연 대표)\n${articles}\n`);
+    console.log(`  llms.txt ... 블로그 글 ${posts.length}개 추가 ✓`);
   }
+
+  await pingIndexNow(readFileSync(join(ROOT, 'dist', 'sitemap.xml'), 'utf-8'));
 
   // 404 페이지 (Vercel이 매칭되지 않는 경로에 404 상태와 함께 서빙)
   process.stdout.write('  /404 ... ');
