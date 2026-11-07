@@ -104,7 +104,7 @@ export function SEOHead({ seo }: { seo: PageSEO }) {
 
     // hreflang
     setHreflang('ko', canonicalUrl);
-    setHreflang('x-default', `${SITE_URL}/`);
+    setHreflang('x-default', canonicalUrl);
 
     // Open Graph
     setMeta({ property: 'og:type', content: 'website' });

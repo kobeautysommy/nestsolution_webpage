@@ -336,7 +336,7 @@ export function About() {
       <CtaBand
         title="원장님의 든든한 파트너가 되겠습니다"
         desc="상담은 항상 무료입니다. 부담 없이 연락주세요."
-        bgImage="https://internwise.s3.eu-west-2.amazonaws.com/uploads/230905090356898660.jpg"
+        bgImage="/assets/cta-bg.webp"
       />
 
     </div>

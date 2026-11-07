@@ -75,6 +75,11 @@ function injectSEO(template, rawSeo, route) {
     /(<link rel="alternate" hreflang="ko" href=")[^"]*/,
     rep(`<link rel="alternate" hreflang="ko" href="${canonical}`)
   );
+  // 한국어 단일 사이트 — x-default도 페이지 자신 (홈으로 고정하면 모든 페이지가 홈을 대표로 선언하는 꼴)
+  html = html.replace(
+    /(<link rel="alternate" hreflang="x-default" href=")[^"]*/,
+    rep(`<link rel="alternate" hreflang="x-default" href="${canonical}`)
+  );
   html = html.replace(
     /(<meta property="og:title" content=")[^"]*/,
     rep(`<meta property="og:title" content="${seo.title}`)

@@ -275,7 +275,7 @@ export function Pain() {
         title="지금 바로 해결할 수 있습니다"
         desc="상담은 항상 무료입니다. 원장님의 고민을 들려주세요."
         secondaryCta={{ label: '서비스 보기', to: '/services' }}
-        bgImage="https://internwise.s3.eu-west-2.amazonaws.com/uploads/230905090356898660.jpg"
+        bgImage="/assets/cta-bg.webp"
       />
     </div>
   );

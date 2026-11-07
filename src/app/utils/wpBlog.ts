@@ -95,7 +95,8 @@ export function postSEO(post: WpPost): PageSEO {
         mainEntityOfPage: url,
         datePublished: post.date,
         dateModified: post.modified,
-        ...(post.image && { image: post.image }),
+        // 구글 Article 리치 결과는 image 필수 — 대표 이미지가 없으면 사이트 기본 이미지
+        image: post.image ?? `${SITE_URL}/og-image.png`,
         author: {
           '@type': 'Person',
           '@id': `${SITE_URL}/#founder`,

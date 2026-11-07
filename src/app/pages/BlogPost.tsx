@@ -37,7 +37,7 @@ function AuthorBox() {
         <div style={{ fontWeight: 700, color: TEXT.onLight, marginBottom: '0.35rem' }}>김상연 · 네스트솔루션 대표</div>
         <p style={{ fontSize: '0.85rem', lineHeight: 1.7, color: TEXT.mutedLight, margin: 0 }}>
           물리치료사 출신으로 18년 이상 병원 현장을 경험했습니다. 병·의원의 CS 관리, 마케팅, 경영 개선, 인력 관리를 현장 실행 방식으로 돕고 있습니다.{' '}
-          <Link to="/about" style={{ color: BLUE._500 }}>대표 소개</Link> · <Link to="/cases" style={{ color: BLUE._500 }}>성공 사례</Link>
+          <Link to="/about" style={{ color: BLUE._500, textDecoration: 'underline' }}>대표 소개</Link> · <Link to="/cases" style={{ color: BLUE._500, textDecoration: 'underline' }}>성공 사례</Link>
         </p>
       </div>
     </div>
@@ -102,9 +102,12 @@ export function BlogPost() {
                 fontFamily: F.serif, fontSize: 'clamp(1.6rem,3.5vw,2.6rem)', fontWeight: 700,
                 color: TEXT.onDark, lineHeight: 1.35, margin: '1.25rem 0 1rem',
               }}>{stripHtml(post.title)}</h1>
-              <time dateTime={post.date} style={{ fontFamily: F.sans, fontSize: '0.85rem', color: TEXT.mutedDark }}>
-                {formatDate(post.date)}
-              </time>
+              <div style={{ fontFamily: F.sans, fontSize: '0.85rem', color: TEXT.mutedDark }}>
+                글 김상연 대표 · <time dateTime={post.date}>{formatDate(post.date)}</time>
+                {formatDate(post.modified) !== formatDate(post.date) && (
+                  <> · 수정 <time dateTime={post.modified}>{formatDate(post.modified)}</time></>
+                )}
+              </div>
             </>
           )}
         </div>

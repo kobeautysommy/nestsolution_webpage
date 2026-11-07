@@ -252,7 +252,7 @@ export function Process() {
       <CtaBand
         title="지금 시작하세요"
         desc="상담은 항상 무료입니다. 부담 없이 연락주세요."
-        bgImage="https://internwise.s3.eu-west-2.amazonaws.com/uploads/230905090356898660.jpg"
+        bgImage="/assets/cta-bg.webp"
       />
     </div>
   );

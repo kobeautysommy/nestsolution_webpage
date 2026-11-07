@@ -1,43 +1,14 @@
 # NestSolution - 병원 컨설팅 마케팅 전문 기업
 # https://nestsolution.co.kr
+#
+# 검색엔진(Google·Naver·Bing 등)과 AI 검색 크롤러(GPTBot, OAI-SearchBot,
+# ClaudeBot, PerplexityBot 등) 모두 허용합니다.
 
 User-agent: *
 Allow: /
+Disallow: /api/
 Disallow: /404
+Disallow: /blog/_post.html
 Disallow: /*?*
-Disallow: /blog/wp-admin/
-Disallow: /blog/wp-login.php
-Allow: /blog/wp-admin/admin-ajax.php
-Crawl-delay: 1
 
-# Google 검색 봇
-User-agent: Googlebot
-Allow: /
-Disallow: /404
-Disallow: /blog/wp-admin/
-Disallow: /blog/wp-login.php
-Allow: /blog/wp-admin/admin-ajax.php
-
-# Google 이미지 봇
-User-agent: Googlebot-Image
-Allow: /
-
-# 네이버 크롤러 (Yeti)
-User-agent: Yeti
-Allow: /
-Disallow: /404
-Disallow: /blog/wp-admin/
-Disallow: /blog/wp-login.php
-Allow: /blog/wp-admin/admin-ajax.php
-Crawl-delay: 1
-
-# Bing 봇
-User-agent: Bingbot
-Allow: /
-Disallow: /blog/wp-admin/
-Disallow: /blog/wp-login.php
-Allow: /blog/wp-admin/admin-ajax.php
-Crawl-delay: 2
-
-# 사이트맵
 Sitemap: https://nestsolution.co.kr/sitemap.xml

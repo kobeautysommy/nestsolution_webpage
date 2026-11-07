@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router';
 import { BLUE, TEXT, F } from '../../utils/colors';
-import { useBreakpoint } from '../../hooks/useBreakpoint';
 import heroVideo from '../../../assets/hero_video.mp4';
 import heroVideoMobile from '../../../assets/hero_mobile.mp4';
 
@@ -10,7 +9,8 @@ function StatCard({ big, lbl, delay }: { big: string; lbl: string; delay: number
   const target = match ? parseInt(match[1]) : 0;
   const suffix = match ? match[2] : '';
 
-  const [count, setCount] = useState(0);
+  // 초기값은 최종 숫자 — 프리렌더 HTML(검색엔진·AI가 읽는 값)에 "0+"가 아닌 실제 수치가 들어가도록
+  const [count, setCount] = useState(target);
   const elRef = useRef<HTMLDivElement>(null);
   const started = useRef(false);
 
@@ -26,6 +26,7 @@ function StatCard({ big, lbl, delay }: { big: string; lbl: string; delay: number
       const intervalMs = 1200 / speed;
       const inc = target / speed;
       let current = 0;
+      setCount(0);
 
       const tick = () => {
         current = Math.min(current + inc, target);
@@ -53,8 +54,23 @@ function StatCard({ big, lbl, delay }: { big: string; lbl: string; delay: number
   );
 }
 
+// 영상은 페이지 로드가 끝난 뒤에 화면 크기에 맞는 것 하나만 불러옴 (첫 화면 표시·LCP를 막지 않도록)
+function useDeferredHeroVideo() {
+  const [src, setSrc] = useState<string>();
+  useEffect(() => {
+    if ((navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData) return;
+    const pick = () => setSrc(window.matchMedia('(max-width: 767px)').matches ? heroVideoMobile : heroVideo);
+    if (document.readyState === 'complete') pick();
+    else {
+      window.addEventListener('load', pick, { once: true });
+      return () => window.removeEventListener('load', pick);
+    }
+  }, []);
+  return src;
+}
+
 export function HeroSection() {
-  const { isMobile } = useBreakpoint();
+  const videoSrc = useDeferredHeroVideo();
   return (
     <section style={{
       minHeight: 'auto', display: 'flex', alignItems: 'center',
@@ -62,15 +78,15 @@ export function HeroSection() {
     }}>
       {/* video background */}
       <video
-        autoPlay muted loop playsInline preload="metadata"
+        autoPlay muted loop playsInline preload="none"
+        poster="/assets/hero-poster.webp"
+        src={videoSrc}
         style={{
           position: 'absolute', inset: 0,
           width: '100%', height: '100%',
           objectFit: 'cover', zIndex: 0,
         }}
-      >
-        <source src={isMobile ? heroVideoMobile : heroVideo} type="video/mp4" />
-      </video>
+      />
       {/* dark overlay for readability */}
       <div style={{
         position: 'absolute', inset: 0, zIndex: 1,

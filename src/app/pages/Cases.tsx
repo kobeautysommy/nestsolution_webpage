@@ -511,7 +511,7 @@ export function Cases() {
         label="Next Story"
         title={<>다음 성공 사례의<br />주인공이 되세요</>}
         desc="진료과목, 규모 관계없이 성장시킵니다. 상담은 항상 무료입니다."
-        bgImage="https://internwise.s3.eu-west-2.amazonaws.com/uploads/230905090356898660.jpg"
+        bgImage="/assets/cta-bg.webp"
       />
     </div>
   );
