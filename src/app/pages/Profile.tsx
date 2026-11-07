@@ -28,7 +28,7 @@ export function Profile() {
           <div className="profile-overlay">
             <div className="profile-info">
               <h1 className="profile-name">김상연</h1>
-              <p className="profile-experience">17년 임상 경력</p>
+              <p className="profile-experience">18년 임상 경력</p>
               <p className="profile-company">네스트솔루션</p>
             </div>
             <div className="button-group">

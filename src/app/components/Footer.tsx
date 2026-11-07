@@ -94,10 +94,10 @@ export function Footer() {
           <div itemScope itemType="https://schema.org/Organization">
             <Logo />
             <p style={{ color: '#fff', fontSize: '0.78rem', marginTop: '0.8rem', lineHeight: 1.7 }}>
-              <span itemProp="description">병·의원 컨설팅 전문 기업<br />17년+ 임상 경험 기반 솔루션</span>
+              <span itemProp="description">병·의원 컨설팅 전문 기업<br />18년+ 임상 경험 기반 솔루션</span>
             </p>
             <div style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
-              {['✔ 17년+ 임상 현장 경험', '✔ 병·의원 전문 컨설팅', '✔ 1:1 맞춤 솔루션'].map(t => (
+              {['✔ 18년+ 임상 현장 경험', '✔ 병·의원 전문 컨설팅', '✔ 1:1 맞춤 솔루션'].map(t => (
                 <span key={t} style={{ fontSize: '0.72rem', color: BLUE._400 }}>{t}</span>
               ))}
             </div>

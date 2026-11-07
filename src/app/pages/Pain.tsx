@@ -154,7 +154,7 @@ export function Pain() {
       <PageBanner
         label="Pain Point"
         title={<>원장님,<br />이런 <span className="text-grad">고민</span> 있으신가요?</>}
-        desc="혼자 해결하려 하지 마세요. 네스트솔루션이 함께 고민하고 함께 해결합니다. 17년 임상 경험으로 쌓은 현장의 지혜로, 원장님의 문제를 정확히 이해합니다."
+        desc="혼자 해결하려 하지 마세요. 네스트솔루션이 함께 고민하고 함께 해결합니다. 18년 임상 경험으로 쌓은 현장의 지혜로, 원장님의 문제를 정확히 이해합니다."
       />
 
       {/* ── Pain cards — dark bg + floating orbs ── */}

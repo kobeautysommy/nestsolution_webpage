@@ -84,7 +84,7 @@ export function HeroSection() {
           color: '#FFFFFF', marginBottom: '1rem',
         }}>
           <span style={{ width: 28, height: 1, background: '#FFFFFF', display: 'inline-block' }} />
-          병·의원 컨설팅 전문 기업 · 임상경험 17년+
+          병·의원 컨설팅 전문 기업 · 임상경험 18년+
         </div>
         <h1 style={{
           fontFamily: F.sans, fontSize: 'clamp(2.4rem,5vw,4.8rem)',
@@ -99,7 +99,7 @@ export function HeroSection() {
         </p>
         <p className="speakable" style={{ color: '#FFFFFF', lineHeight: 1.9, fontSize: '0.92rem', maxWidth: 510, marginBottom: '1.6rem', fontFamily: F.sans }}>
           CS 관리부터 마케팅, 경영 개선, 인력 관리까지
-          — 이론이 아닌 17년 임상 실전으로 원장님의 병원을 함께 설계합니다.
+          — 이론이 아닌 18년 임상 실전으로 원장님의 병원을 함께 설계합니다.
         </p>
         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
           <Link to="/contact" className="hero-btn-primary" style={{
@@ -128,7 +128,7 @@ export function HeroSection() {
         position: 'absolute', right: '5vw', top: '50%', transform: 'translateY(-50%)',
         zIndex: 2, flexDirection: 'column', gap: '1rem',
       }}>
-        <StatCard big="17+" lbl="Years Clinical Exp." delay={0} />
+        <StatCard big="18+" lbl="Years Clinical Exp." delay={0} />
         <StatCard big="4+"  lbl="Core Services"       delay={150} />
         <StatCard big="100%" lbl="Customized"         delay={300} />
       </div>

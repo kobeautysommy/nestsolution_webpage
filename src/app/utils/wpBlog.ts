@@ -101,7 +101,7 @@ export function postSEO(post: WpPost): PageSEO {
           '@id': `${SITE_URL}/#founder`,
           name: '김상연',
           jobTitle: '네스트솔루션 대표',
-          description: '물리치료사 출신, 17년 이상 병원 현장 경험의 병원 컨설턴트',
+          description: '물리치료사 출신, 18년 이상 병원 현장 경험의 병원 컨설턴트',
           url: `${SITE_URL}/about`,
         },
         publisher: { '@id': `${SITE_URL}/#organization` },

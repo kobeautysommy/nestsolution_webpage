@@ -111,7 +111,7 @@ export function About() {
             전문 컨설턴트{isMobile ? ' ' : <br />}<span className="text-grad">소개</span>
           </h1>
           <p style={{ color: TEXT.mutedDark, fontSize: isMobile ? '0.88rem' : '0.95rem', lineHeight: 1.8, maxWidth: 560, fontFamily: F.sans }}>
-            17년 이상의 임상 경험과 실제 병원 경영 현장에서 쌓은 노하우로,
+            18년 이상의 임상 경험과 실제 병원 경영 현장에서 쌓은 노하우로,
             {isMobile ? ' ' : <br />}원장님의 병원을 함께 성장시킵니다.
           </p>
         </div>
@@ -180,7 +180,7 @@ export function About() {
               <div style={{ fontFamily: F.serif, fontSize: '1.4rem', fontWeight: 700, marginBottom: '0.25rem', color: '#FFFFFF' }}>김상연</div>
               <div style={{ color: BLUE._300, fontSize: '0.72rem', letterSpacing: '0.12em', textTransform: 'uppercase', fontFamily: F.sans }}>대표 · Medical Consultant</div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', justifyContent: 'center', marginTop: '1rem' }}>
-                {['물리치료사', '임상 17년+', '경영 컨설턴트'].map(b => (
+                {['물리치료사', '임상 18년+', '경영 컨설턴트'].map(b => (
                   <span key={b} style={{
                     fontSize: '0.68rem', letterSpacing: '0.03em',
                     border: `1.5px solid ${BLUE._300}`, color: BLUE._300,
@@ -231,7 +231,7 @@ export function About() {
                   <div style={{ marginBottom: '2rem' }}>
                     {sectionLabel('대표 철학')}
                     <p className="speakable" style={{ color: 'rgba(255,255,255,0.72)', fontSize: '0.88rem', lineHeight: 1.9, fontFamily: F.sans }}>
-                      물리치료사로 17년 이상 의료 현장 최전선에서 일하며 깨달은 것이 있습니다.
+                      물리치료사로 18년 이상 의료 현장 최전선에서 일하며 깨달은 것이 있습니다.
                       좋은 진료를 하는 병원이 반드시 잘 되는 게 아니라는 것.
                       환자가 느끼는 병원의 가치는 진료실 밖에서도 만들어진다는 것입니다.
                       네스트솔루션은 단순히 컨설팅 보고서를 납품하는 회사가 아닙니다.
@@ -243,7 +243,7 @@ export function About() {
                   <div style={{ marginBottom: '2rem' }}>
                     {sectionLabel('경력')}
                     {[
-                      { year: '17년+', t: '물리치료사 임상 경력', d: '의료 현장 최전선에서 환자와 직접 소통하며 쌓은 실전 경험. 환자 심리와 의료 서비스의 본질을 깊이 이해합니다.' },
+                      { year: '18년+', t: '물리치료사 임상 경력', d: '의료 현장 최전선에서 환자와 직접 소통하며 쌓은 실전 경험. 환자 심리와 의료 서비스의 본질을 깊이 이해합니다.' },
                       { year: '실적',  t: '전국 네트워크 지점 성장 주도', d: 'CS 강화, 동선 최적화, 마케팅 전략 개선을 통해 내원 환자 및 재방문율 증가, 직원 교육 시스템 구축을 실현했습니다.' },
                       { year: '현재',  t: 'NestSolution 대표 · 병·의원 경영 컨설턴트', d: 'CS 관리, 마케팅, 경영 개선, 인력 관리 전 영역에서 병·의원의 운영 최적화를 지원합니다.' },
                     ].map((c, i) => (

@@ -65,7 +65,7 @@ export function Contact() {
       <PageBanner
         label="Contact"
         title={<>무료 상담<br /><span className="text-grad">신청하기</span></>}
-        desc="원장님의 고민을 들려주세요. 17년 임상 경험으로 함께 해결책을 찾겠습니다. 상담은 항상 무료입니다."
+        desc="원장님의 고민을 들려주세요. 18년 임상 경험으로 함께 해결책을 찾겠습니다. 상담은 항상 무료입니다."
         theme="light"
       />
 

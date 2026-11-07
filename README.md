@@ -1,6 +1,6 @@
 # NestSolution — 병원 컨설팅 마케팅 전문 기업
 
-큐렛 주식회사의 공식 웹사이트. 17년 임상 경험 기반의 병·의원 컨설팅 전문 기업 NestSolution의 서비스 소개, 성공 사례, 대표 소개, 무료 상담 신청을 제공합니다.
+큐렛 주식회사의 공식 웹사이트. 18년 임상 경험 기반의 병·의원 컨설팅 전문 기업 NestSolution의 서비스 소개, 성공 사례, 대표 소개, 무료 상담 신청을 제공합니다.
 
 ## 기술 스택
 
@@ -104,7 +104,7 @@ npm run build     # 프로덕션 빌드
 
 - `Footer.tsx`: Schema.org microdata (`Organization`, `Person`, `address`) 적용
 - 사업자등록번호를 `taxID` itemProp으로 마크업
-- 전문성 뱃지 추가 ("17년+ 임상 현장 경험", "병·의원 전문 컨설팅", "1:1 맞춤 솔루션")
+- 전문성 뱃지 추가 ("18년+ 임상 현장 경험", "병·의원 전문 컨설팅", "1:1 맞춤 솔루션")
 - 각 페이지 JSON-LD에 `knowsAbout`, `worksFor`, `founder` 전문성 신호 삽입
 - 외부 링크에 `rel="noreferrer noopener"` 보안 속성 추가
 

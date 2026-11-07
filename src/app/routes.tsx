@@ -10,7 +10,7 @@ import { SEOHead, SITE_URL, type PageSEO } from './components/SEOHead';
 export const SEO_MAP: Record<string, PageSEO> = {
   '/': {
     title: '병원 컨설팅·의원 컨설팅 전문 | 네스트솔루션',
-    description: '개원·병원컨설팅·의원컨설팅 전문 기업 네스트솔루션. 17년 임상 경험 기반 마케팅·경영전략·CS·CRM.',
+    description: '병원컨설팅·의원컨설팅·개원컨설팅 전문 네스트솔루션. 물리치료사 출신 대표가 18년 현장 경험으로 CS·마케팅·경영 개선·인력 관리를 직접 실행합니다. 정형외과 월 매출 +185% 사례, 초기 상담 무료.',
     keywords: '병원컨설팅, 의원컨설팅, 개원컨설팅, 네스트솔루션, 병원마케팅, 병원경영전략, 병원CS, 병원CRM컨설팅, 병원인사조직관리, NestSolution',
     canonical: `${SITE_URL}/`,
     jsonLd: [
@@ -19,7 +19,7 @@ export const SEO_MAP: Record<string, PageSEO> = {
         '@id': `${SITE_URL}/#webpage`,
         url: `${SITE_URL}/`,
         name: '네스트솔루션 | 병원 컨설팅 마케팅 전문 기업',
-        description: '네스트솔루션은 17년 임상 경험을 바탕으로 병·의원 마케팅, CS 관리, 경영 개선, 인력 관리를 지원하는 병원 컨설팅 전문 기업입니다.',
+        description: '네스트솔루션은 18년 임상 경험을 바탕으로 병·의원 마케팅, CS 관리, 경영 개선, 인력 관리를 지원하는 병원 컨설팅 전문 기업입니다.',
         publisher: { '@id': `${SITE_URL}/#organization` },
         inLanguage: 'ko-KR',
         isPartOf: { '@id': `${SITE_URL}/#website` },
@@ -40,7 +40,7 @@ export const SEO_MAP: Record<string, PageSEO> = {
 
   '/pain': {
     title: '병원 경영 고민 해결 | 네스트솔루션 병원 컨설팅',
-    description: '환자 감소·직원 이직·매출 정체, 병·의원 고민을 17년 경험으로 해결합니다. 무료 상담 신청.',
+    description: '환자는 줄고 직원은 자주 바뀌고 매출은 제자리라면? 병·의원 원장님들이 가장 많이 겪는 경영 고민과 원인을 18년 현장 경험으로 짚어드립니다. 우리 병원 상황은 무료 상담으로 진단받으세요.',
     keywords: '병원 경영 고민, 병원 매출 감소, 병원 직원 관리, 의원 운영 어려움, 병원 컨설팅 필요, 병원 마케팅 어려움',
     canonical: `${SITE_URL}/pain`,
     jsonLd: [
@@ -76,7 +76,7 @@ export const SEO_MAP: Record<string, PageSEO> = {
 
   '/services': {
     title: '병원 컨설팅 서비스 | CS관리·마케팅·경영개선·인력관리 | 네스트솔루션',
-    description: '개원컨설팅·병원컨설팅·병원마케팅·경영전략·인사조직관리·병원CS·CRM. 17년 임상 경험 기반.',
+    description: '병원 CS 관리, 병원 마케팅(네이버 플레이스·블로그·광고), 경영 개선(수익 구조·청구 누락 분석), 인력 관리(채용·교육·SOP)까지. 의원급 병원을 위한 네스트솔루션의 현장 실행형 컨설팅 서비스입니다.',
     keywords: '개원컨설팅, 병원컨설팅, 병원마케팅, 병원경영전략, 병원인사조직관리, 병원CS, 병원CRM컨설팅, 의원컨설팅, 네스트솔루션',
     canonical: `${SITE_URL}/services`,
     jsonLd: [
@@ -147,7 +147,7 @@ export const SEO_MAP: Record<string, PageSEO> = {
 
   '/process': {
     title: '병원 컨설팅 과정 | 네스트솔루션 컨설팅 프로세스',
-    description: '네스트솔루션의 체계적인 병원 컨설팅 프로세스를 확인하세요. 진단 → 전략 수립 → 실행 → 성과 측정까지 단계별로 함께합니다.',
+    description: '무료 상담부터 현장 진단, 전략 수립, 실행, 성과 측정까지. 보고서만 남기고 떠나는 컨설팅이 아니라 네스트솔루션이 병원 현장에서 함께 실행하는 단계별 컨설팅 과정을 소개합니다.',
     keywords: '병원 컨설팅 과정, 병원 컨설팅 절차, 의원 컨설팅 프로세스, 병원 컨설팅 단계, 컨설팅 방법론',
     canonical: `${SITE_URL}/process`,
     jsonLd: [
@@ -183,7 +183,7 @@ export const SEO_MAP: Record<string, PageSEO> = {
 
   '/cases': {
     title: '병원 컨설팅 성공 사례 | 네스트솔루션 실적',
-    description: '실제 병·의원 컨설팅 성공 사례를 확인하세요. 네스트솔루션과 함께 매출 향상, 환자 증가, 운영 효율화를 이룬 병원들의 이야기.',
+    description: '정형외과 월 매출 +185%, 신규 환자 +89%, 내과의원 재방문율 +55%. 네스트솔루션과 함께 매출·환자 수·직원 이직률을 개선한 병·의원의 실제 컨설팅 성과를 확인하세요.',
     keywords: '병원 컨설팅 성공 사례, 병원 매출 향상 사례, 의원 경영 개선 사례, 병원 마케팅 성과, 컨설팅 효과',
     canonical: `${SITE_URL}/cases`,
     jsonLd: [
@@ -220,8 +220,8 @@ export const SEO_MAP: Record<string, PageSEO> = {
 
   '/about': {
     title: '대표 소개 | 네스트솔루션 병원 컨설팅 전문가',
-    description: '17년 임상 경험 병원 컨설팅 전문가 김상연 대표. 현장 지식 기반 실질적 컨설팅을 제공합니다.',
-    keywords: '네스트솔루션 대표, 병원 컨설턴트, 병원 경영 전문가, 김상연 대표, 17년 임상 경험, 병원 컨설팅 전문가',
+    description: '물리치료사 출신, 18년 병원 현장 경험의 김상연 대표. 진료실과 접수대를 직접 겪어본 경험을 바탕으로 이론이 아닌 현장 실행 중심의 병원 컨설팅을 제공합니다.',
+    keywords: '네스트솔루션 대표, 병원 컨설턴트, 병원 경영 전문가, 김상연 대표, 18년 임상 경험, 병원 컨설팅 전문가',
     canonical: `${SITE_URL}/about`,
     jsonLd: [
       {
@@ -250,7 +250,7 @@ export const SEO_MAP: Record<string, PageSEO> = {
           name: '김상연',
           jobTitle: '대표이사',
           worksFor: { '@id': `${SITE_URL}/#organization` },
-          description: '17년 임상 경험을 바탕으로 병·의원 컨설팅을 전문으로 하는 네스트솔루션 대표이사',
+          description: '18년 임상 경험을 바탕으로 병·의원 컨설팅을 전문으로 하는 네스트솔루션 대표이사',
           knowsAbout: ['병원 컨설팅', '병원 마케팅', '의원 경영', 'CS 관리'],
         },
       },
@@ -259,7 +259,7 @@ export const SEO_MAP: Record<string, PageSEO> = {
 
   '/profile': {
     title: '김상연 대표 프로필 | 네스트솔루션 병원 컨설팅',
-    description: '18년 임상 경력의 네스트솔루션 대표 김상연. CS·마케팅·경영개선·인력관리 전문 병원 컨설턴트 프로필.',
+    description: '네스트솔루션 김상연 대표 프로필. 물리치료사 출신 18년 임상 경력, CS·마케팅·경영 개선·인력 관리 전문 병원 컨설턴트. 경력, 자격, 상담 연락처를 한눈에 확인하세요.',
     keywords: '김상연, 네스트솔루션 대표, 병원 컨설턴트, 병원 컨설팅 전문가, 18년 임상 경력, 병원 CS 마케팅',
     canonical: `${SITE_URL}/profile`,
     ogImage: `${SITE_URL}/assets/OG-IMAGE.png`,
@@ -294,7 +294,7 @@ export const SEO_MAP: Record<string, PageSEO> = {
 
   '/contact': {
     title: '병원 컨설팅 무료 상담 신청 | 네스트솔루션',
-    description: '네스트솔루션 병원 컨설팅 무료 상담 신청. 17년 임상 경험 전문가가 마케팅·CS·경영 개선을 진단합니다.',
+    description: '병원 컨설팅 무료 상담 신청. 병원 상황을 남겨주시면 18년 현장 경험의 전문가가 마케팅·CS·경영·인력 문제를 진단하고 개선 방향을 안내해 드립니다. 평일 09:00–20:00.',
     keywords: '네스트솔루션 상담, 병원 컨설팅 상담, 무료 컨설팅 신청, 병원 마케팅 상담, 의원 컨설팅 문의',
     canonical: `${SITE_URL}/contact`,
     jsonLd: [
@@ -326,7 +326,7 @@ export const SEO_MAP: Record<string, PageSEO> = {
 
   '/blog': {
     title: '블로그 | 네스트솔루션',
-    description: '병원 개원·경영·마케팅·세무·인력 관리까지, 17년 병원 현장 경험의 네스트솔루션이 원장님께 필요한 실전 컨설팅 정보를 정리합니다.',
+    description: '병원 개원·경영·마케팅·세무·인력 관리까지, 18년 병원 현장 경험의 네스트솔루션이 원장님께 필요한 실전 컨설팅 정보를 정리합니다.',
     keywords: '네스트솔루션 블로그, 병원 컨설팅 블로그, 병원 마케팅, 병원 경영',
     canonical: `${SITE_URL}/blog`,
   },

@@ -24,7 +24,7 @@ function CtaBand() {
         <SecLabel center>Contact</SecLabel>
         <h2 className="fu" style={{ fontFamily: F.serif, fontSize: 'clamp(1.7rem,3.2vw,2.8rem)', fontWeight: 700, marginBottom: '0.9rem', color: '#FFFFFF' }}>상담은 항상 무료입니다</h2>
         <p className="fu" style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '2.5rem', fontSize: '0.92rem', maxWidth: 500, margin: '0 auto 2.5rem', fontFamily: F.sans }}>
-          원장님의 고민을 들려주세요.<br />17년 임상 경험으로 함께 해결책을 찾겠습니다.
+          원장님의 고민을 들려주세요.<br />18년 임상 경험으로 함께 해결책을 찾겠습니다.
         </p>
         <div className="fu" style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
           <Link to="/contact" className="cta-btn-white" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: '#FFFFFF', color: BLUE._500, padding: '0.85rem 2rem', fontWeight: 700, fontSize: '0.87rem', textDecoration: 'none', borderRadius: '10px', fontFamily: F.sans }}>무료 상담 신청 →</Link>

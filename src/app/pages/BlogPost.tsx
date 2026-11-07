@@ -36,7 +36,7 @@ function AuthorBox() {
         <div style={{ fontSize: '0.75rem', color: BLUE._500, marginBottom: '0.25rem' }}>글쓴이</div>
         <div style={{ fontWeight: 700, color: TEXT.onLight, marginBottom: '0.35rem' }}>김상연 · 네스트솔루션 대표</div>
         <p style={{ fontSize: '0.85rem', lineHeight: 1.7, color: TEXT.mutedLight, margin: 0 }}>
-          물리치료사 출신으로 17년 이상 병원 현장을 경험했습니다. 병·의원의 CS 관리, 마케팅, 경영 개선, 인력 관리를 현장 실행 방식으로 돕고 있습니다.{' '}
+          물리치료사 출신으로 18년 이상 병원 현장을 경험했습니다. 병·의원의 CS 관리, 마케팅, 경영 개선, 인력 관리를 현장 실행 방식으로 돕고 있습니다.{' '}
           <Link to="/about" style={{ color: BLUE._500 }}>대표 소개</Link> · <Link to="/cases" style={{ color: BLUE._500 }}>성공 사례</Link>
         </p>
       </div>
