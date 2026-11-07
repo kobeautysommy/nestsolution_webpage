@@ -80,6 +80,7 @@ export function Partners() {
                 src={logo.src}
                 alt={i < LOGOS.length ? logo.alt : ''}
                 aria-hidden={i >= LOGOS.length}
+                loading="lazy" decoding="async"
                 className="w-full h-full object-contain"
                 style={{
                   mixBlendMode: 'multiply',
