@@ -8,7 +8,7 @@ import { PageBanner } from '../components/shared/PageBanner';
 import { CtaBand } from '../components/shared/CtaBand';
 
 function CountUpStat({ v, className, style }: { v: string; className?: string; style?: React.CSSProperties }) {
-  const match = v.match(/^([↑↓]?)(\d+\.?\d*)(.*)$/);
+  const match = v.match(/^([↑↓+]?)(\d+\.?\d*)(.*)$/);
   const prefix = match?.[1] ?? '';
   const targetStr = match?.[2] ?? '0';
   const suffix = match?.[3] ?? '';
@@ -16,7 +16,8 @@ function CountUpStat({ v, className, style }: { v: string; className?: string; s
   const isDecimal = targetStr.includes('.');
   const decimals = isDecimal ? (targetStr.split('.')[1]?.length ?? 0) : 0;
 
-  const [count, setCount] = useState(0);
+  // 초기값은 최종 수치 — 프리렌더 HTML(검색엔진·AI가 읽는 값)에 "0%"가 아닌 실제 성과가 들어가도록
+  const [count, setCount] = useState(target);
   const ref = useRef<HTMLDivElement>(null);
   const started = useRef(false);
 
