@@ -273,7 +273,7 @@ export function Cases() {
 
           {/* Metrics */}
           <div className="fu" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(120px,1fr))', gap: '1rem', marginBottom: '4rem' }}>
-            {[{ v: '↑185%', l: '월 매출 성장률' }, { v: '↑89%', l: '신규 환자 유입' }, { v: '4.8★', l: '소비자 만족도' }, { v: '↑74%', l: '재방문율' }, { v: '↓71%', l: '직원 이직률' }].map(m => (
+            {[{ v: '↑185%', l: '월 매출 성장률' }, { v: '↑89%', l: '신규 환자 유입' }, { v: '4.8★', l: '소비자 만족도' }, { v: '↑79%', l: '재방문율' }, { v: '↓71%', l: '직원 이직률' }].map(m => (
               <div key={m.l} style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', backdropFilter: 'blur(10px)', padding: '1.8rem 1rem', textAlign: 'center', borderRadius: '8px', boxShadow: '0 2px 16px rgba(0,0,0,0.3)' }}>
                 <CountUpStat v={m.v} className="text-grad-dark" style={{ fontFamily: F.bebas, fontSize: '2.4rem', lineHeight: 1 }} />
                 <div style={{ fontSize: '0.68rem', color: BLUE._300, letterSpacing: '0.08em', textTransform: 'uppercase', marginTop: '0.5rem', fontFamily: F.sans }}>{m.l}</div>
@@ -360,7 +360,7 @@ export function Cases() {
 
           {/* Metrics */}
           <div className="fu" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(120px,1fr))', gap: '1rem', marginBottom: '4rem' }}>
-            {[{ v: '↑165%', l: '월 매출 성장률' }, { v: '↑76%', l: '신규 환자 유입' }, { v: '4.7★', l: '소비자 만족도' }, { v: '↑61%', l: '재방문율' }, { v: '↓58%', l: '직원 이직률' }].map(m => (
+            {[{ v: '↑165%', l: '월 매출 성장률' }, { v: '↑76%', l: '신규 환자 유입' }, { v: '4.7★', l: '소비자 만족도' }, { v: '↑77%', l: '재방문율' }, { v: '↓58%', l: '직원 이직률' }].map(m => (
               <div key={m.l} style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', backdropFilter: 'blur(10px)', padding: '1.8rem 1rem', textAlign: 'center', borderRadius: '8px', boxShadow: '0 2px 16px rgba(0,0,0,0.3)' }}>
                 <CountUpStat v={m.v} className="text-grad-dark" style={{ fontFamily: F.bebas, fontSize: '2.4rem', lineHeight: 1 }} />
                 <div style={{ fontSize: '0.68rem', color: BLUE._300, letterSpacing: '0.08em', textTransform: 'uppercase', marginTop: '0.5rem', fontFamily: F.sans }}>{m.l}</div>
@@ -443,7 +443,7 @@ export function Cases() {
           </div>
 
           <div className="fu" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(120px,1fr))', gap: '1rem', marginBottom: '3rem' }}>
-            {[{ v: '+153%', l: '월 매출 성장' }, { v: '4.9★', l: '소비자 만족도' }, { v: '↓40%', l: '행정 업무량' }, { v: '↑55%', l: '재방문율' }].map(m => (
+            {[{ v: '+153%', l: '월 매출 성장' }, { v: '4.9★', l: '소비자 만족도' }, { v: '↓40%', l: '행정 업무량' }, { v: '↑76%', l: '재방문율' }].map(m => (
               <div key={m.l} style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', backdropFilter: 'blur(10px)', padding: '1.8rem 1rem', textAlign: 'center', borderRadius: '8px', boxShadow: '0 2px 16px rgba(0,0,0,0.3)' }}>
                 <CountUpStat v={m.v} className="text-grad-dark" style={{ fontFamily: F.bebas, fontSize: '2.4rem', lineHeight: 1 }} />
                 <div style={{ fontSize: '0.68rem', color: BLUE._300, letterSpacing: '0.08em', textTransform: 'uppercase', marginTop: '0.5rem', fontFamily: F.sans }}>{m.l}</div>

@@ -184,7 +184,7 @@ export const SEO_MAP: Record<string, PageSEO> = {
 
   '/cases': {
     title: '병원 컨설팅 성공 사례 | 네스트솔루션 실적',
-    description: '정형외과 월 매출 +185%, 신규 환자 +89%, 내과의원 재방문율 +55%. 네스트솔루션과 함께 매출·환자 수·직원 이직률을 개선한 병·의원의 실제 컨설팅 성과를 확인하세요.',
+    description: '정형외과 월 매출 +185%, 신규 환자 +89%, 내과의원 재방문율 +76%. 네스트솔루션과 함께 매출·환자 수·직원 이직률을 개선한 병·의원의 실제 컨설팅 성과를 확인하세요.',
     keywords: '병원 컨설팅 성공 사례, 병원 매출 향상 사례, 의원 경영 개선 사례, 병원 마케팅 성과, 컨설팅 효과',
     canonical: `${SITE_URL}/cases`,
     jsonLd: [
@@ -211,9 +211,9 @@ export const SEO_MAP: Record<string, PageSEO> = {
         description: '실제 병·의원 컨설팅을 통해 달성한 성과 사례 목록',
         numberOfItems: 3,
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: '정형외과 컨설팅 사례 (서울) — 월 매출 185% 성장, 신규 환자 89% 증가, 재방문율 74% 향상', url: `${SITE_URL}/cases#case01` },
-          { '@type': 'ListItem', position: 2, name: '정형외과 컨설팅 사례 (경기도) — 월 매출 165% 성장, 신규 환자 76% 증가, 재방문율 61% 향상', url: `${SITE_URL}/cases#case02` },
-          { '@type': 'ListItem', position: 3, name: '내과의원 컨설팅 사례 (경기도) — 월 매출 153% 성장, 행정 업무량 40% 감소, 재방문율 55% 향상', url: `${SITE_URL}/cases#case03` },
+          { '@type': 'ListItem', position: 1, name: '정형외과 컨설팅 사례 (서울) — 월 매출 185% 성장, 신규 환자 89% 증가, 재방문율 79% 향상', url: `${SITE_URL}/cases#case01` },
+          { '@type': 'ListItem', position: 2, name: '정형외과 컨설팅 사례 (경기도) — 월 매출 165% 성장, 신규 환자 76% 증가, 재방문율 77% 향상', url: `${SITE_URL}/cases#case02` },
+          { '@type': 'ListItem', position: 3, name: '내과의원 컨설팅 사례 (경기도) — 월 매출 153% 성장, 행정 업무량 40% 감소, 재방문율 76% 향상', url: `${SITE_URL}/cases#case03` },
         ],
       },
     ],

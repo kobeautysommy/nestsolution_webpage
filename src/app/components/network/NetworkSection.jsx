@@ -108,7 +108,7 @@ export default function NetworkSection() {
           {visible.map((b) => (
             <button key={b.id} type="button" className={"ns-chip" + (b.id === current ? " on" : "")} onClick={() => pickBranch(b.id)}>
               {b.name}
-              {b.sub && <small>{b.sub}</small>}
+              {(b.sub || b.hospital) && <small>{b.sub || b.hospital}</small>}
             </button>
           ))}
         </div>
@@ -190,7 +190,7 @@ export default function NetworkSection() {
           <div className="ns-detail" aria-live="polite">
             <span className="ns-where">{branch.region === "11" ? "SEOUL" : "GYEONGGI"} · BRANCH</span>
             <h3>반듯한 {branch.name}</h3>
-            <span className="ns-dept">{branch.dept}</span>
+            <span className="ns-dept">{branch.hospital ? `${branch.hospital} · ${branch.dept}` : branch.dept}</span>
 
             {branch.m ? (
               <>
